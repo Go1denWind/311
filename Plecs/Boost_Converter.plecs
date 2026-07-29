@@ -71,7 +71,7 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [203, 31; 1919, 988]
+    Location      [215, 31; 1919, 988]
     ZoomFactor    1.49863
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -86,7 +86,7 @@ Plecs {
       LabelPosition north
       Parameter {
         Variable      "L"
-        Value         "0.001"
+        Value         "47e-6"
         Show          on
       }
       Parameter {
@@ -246,7 +246,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "1"
+        Value         "10"
         Show          on
       }
     }
@@ -259,11 +259,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -20; 15, 20]
-      Location      [945, 105; 1712, 821]
+      Location      [945, 105; 1712, 857]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAIAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAv8AAAKtAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAv8AAALRAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -281,7 +281,7 @@ Plecs {
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "1"
+      Open          "0"
       Ts            "1e-4"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -400,8 +400,8 @@ Plecs {
       }
       Parameter {
         Variable      "f"
-        Value         "1"
-        Show          off
+        Value         "100e3"
+        Show          on
       }
       Parameter {
         Variable      "DutyCycle"
@@ -429,7 +429,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "3"
+        Value         "2.5"
         Show          on
       }
     }
@@ -457,7 +457,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "1"
+        Value         "0.4"
         Show          on
       }
     }
@@ -605,4 +605,4 @@ Plecs {
     }
   }
 }
-DemoSignature "ZgE9EiPtlw4ta505Y81YJvRGGseLuY0qYygY6Ih7o1s="
+DemoSignature "uFTmsv5vXvWLq6PKxUWdxaZjw5/GCufm6SOFIqfuXE0="
