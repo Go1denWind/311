@@ -71,9 +71,9 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [-12, 49; 1908, 1015]
+    Location      [0, 24; 1442, 861]
     ZoomFactor    1.33333
-    SliderPosition [0, 5]
+    SliderPosition [358, 148]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -885,54 +885,10 @@ Plecs {
       }
     }
     Component {
-      Type          Netlist
-      Name          "Netlist2"
-      Show          off
-      Position      [815, 325]
-      Direction     down
-      Flipped       off
-      LabelPosition north
-      Frame         [-30, -15; 30, 15]
-      IconDisplayCommands ""
-      IconDisplayLanguage "2"
-      IconFrame           on
-      IconOpaque          off
-      IconRotates         on
-      Parameter {
-        Variable      "Netlist"
-        Value         ".SUBCKT Q2 c b e\n"
-"     .MODEL PNPmodel PNP (IS=1E-14 BF=180 VAF=100)\n"
-"     Q1 c b e PNPmodel\n"
-"     .ENDS"
-        Show          off
-      }
-      Terminal {
-        Type          Port
-        Position      [-20, -20]
-        Direction     up
-        Name          "c"
-        NetlistName   "c"
-      }
-      Terminal {
-        Type          Port
-        Position      [-20, 20]
-        Direction     down
-        Name          "b"
-        NetlistName   "b"
-      }
-      Terminal {
-        Type          Port
-        Position      [-10, -20]
-        Direction     up
-        Name          "e"
-        NetlistName   "e"
-      }
-    }
-    Component {
       Type          Resistor
       Name          "Rf1"
       Show          on
-      Position      [775, 285]
+      Position      [755, 285]
       Direction     right
       Flipped       on
       LabelPosition southwest
@@ -940,6 +896,122 @@ Plecs {
         Variable      "R"
         Value         "1.4"
         Show          on
+      }
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist2"
+      Show          off
+      Position      [30, 25]
+      Direction     left
+      Flipped       off
+      LabelPosition east
+      Frame         [-20, -20; 20, 20]
+      IconDisplayCommands "local IconLib = require('PlecsIconLib')\n"
+"\n"
+"IconLib.bjt(0, 0)\n"
+"\n"
+"Icon:text(10, 0, 'BD179', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         ".subckt Qbd179 c b e\n"
+"Q c b e Qbd179\n"
+".ends\n"
+"\n"
+"*--------------- End of main subcircuit ----------------------\n"
+"*--------------- References are appended below ---------------\n"
+"\n"
+".MODEL Qbd179 npn IS=2.17735e-10 BF=87.3643 NF=1.21238 VAF=10 IKF=5.92007 ISE"
+"=8.67187e-12 NE=3.34988 BR=3.54279 NR=1.26704 VAR=1.60537 IKR=8.04318 ISC=2.8"
+"8133e-13 NC=3.98064 RB=15.3279 IRB=0.1 RBM=0.1 RE=0.000912821 RC=0.254026 XTB"
+"=0.1 XTI=1 EG=1.05012 CJE=5.51549e-08 VJE=0.591953 MJE=0.457535 TF=1e-08 XTF="
+"1.35722 VTF=0.995733 ITF=0.999983 CJC=4.44061e-10 VJC=0.400133 MJC=0.410398 X"
+"CJC=0.803125 FC=0.585759 CJS=0 VJS=0.75 MJS=0.5 TR=1e-07 PTF=0 KF=0 AF=1\n"
+"\n"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [0, -25]
+        Direction     up
+        Name          "c"
+        NetlistName   "c"
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 0]
+        Direction     left
+        Name          "b"
+        NetlistName   "b"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 25]
+        Direction     down
+        Name          "e"
+        NetlistName   "e"
+      }
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist3"
+      Show          off
+      Position      [790, 330]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      IconDisplayCommands "local IconLib = require('PlecsIconLib')\n"
+"\n"
+"IconLib.bjt(0, 0)\n"
+"\n"
+"Icon:text(10, 0, 'BD179', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         ".subckt Qbd179 c b e\n"
+"Q c b e Qbd179\n"
+".ends\n"
+"\n"
+"*--------------- End of main subcircuit ----------------------\n"
+"*--------------- References are appended below ---------------\n"
+"\n"
+".MODEL Qbd179 npn IS=2.17735e-10 BF=87.3643 NF=1.21238 VAF=10 IKF=5.92007 ISE"
+"=8.67187e-12 NE=3.34988 BR=3.54279 NR=1.26704 VAR=1.60537 IKR=8.04318 ISC=2.8"
+"8133e-13 NC=3.98064 RB=15.3279 IRB=0.1 RBM=0.1 RE=0.000912821 RC=0.254026 XTB"
+"=0.1 XTI=1 EG=1.05012 CJE=5.51549e-08 VJE=0.591953 MJE=0.457535 TF=1e-08 XTF="
+"1.35722 VTF=0.995733 ITF=0.999983 CJC=4.44061e-10 VJC=0.400133 MJC=0.410398 X"
+"CJC=0.803125 FC=0.585759 CJS=0 VJS=0.75 MJS=0.5 TR=1e-07 PTF=0 KF=0 AF=1\n"
+"\n"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [0, -25]
+        Direction     up
+        Name          "c"
+        NetlistName   "c"
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 0]
+        Direction     left
+        Name          "b"
+        NetlistName   "b"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 25]
+        Direction     down
+        Name          "e"
+        NetlistName   "e"
       }
     }
     Connection {
@@ -1131,9 +1203,9 @@ Plecs {
           DstTerminal   2
         }
         Branch {
-          Points        [835, 365]
-          DstComponent  "Netlist2"
-          DstTerminal   1
+          Points        [790, 365]
+          DstComponent  "Netlist3"
+          DstTerminal   3
         }
       }
     }
@@ -1156,14 +1228,14 @@ Plecs {
       Type          Wire
       SrcComponent  "Rf1"
       SrcTerminal   2
-      Points        [835, 285]
+      Points        [790, 285]
       Branch {
         DstComponent  "Netlist"
         DstTerminal   3
       }
       Branch {
-        DstComponent  "Netlist2"
-        DstTerminal   2
+        DstComponent  "Netlist3"
+        DstTerminal   1
       }
     }
     Connection {
@@ -1177,9 +1249,8 @@ Plecs {
         DstTerminal   1
       }
       Branch {
-        Points        [765, 330; 765, 365; 825, 365]
-        DstComponent  "Netlist2"
-        DstTerminal   3
+        DstComponent  "Netlist3"
+        DstTerminal   2
       }
     }
     Annotation {
@@ -1192,4 +1263,3 @@ Plecs {
     } 
   }
 }
-DemoSignature "5EOxXy32EXhvW+UwccsGgk2bitOpmCcekjWw4heNqwg="
