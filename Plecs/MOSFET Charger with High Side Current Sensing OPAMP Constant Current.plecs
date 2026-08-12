@@ -4,7 +4,7 @@ Plecs {
   Version       "5.0"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
-  TimeSpan      "1.0"
+  TimeSpan      "500"
   Timeout       ""
   Solver        "auto"
   MaxStep       "1e-3"
@@ -72,8 +72,8 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [81, 80; 2001, 1046]
-    ZoomFactor    0.889698
+    Location      [145, 76; 2065, 1042]
+    ZoomFactor    1
     SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
@@ -92,20 +92,6 @@ Plecs {
       }
     }
     Component {
-      Type          Resistor
-      Name          "RL"
-      Show          on
-      Position      [1210, 565]
-      Direction     up
-      Flipped       off
-      LabelPosition east
-      Parameter {
-        Variable      "R"
-        Value         "1000"
-        Show          on
-      }
-    }
-    Component {
       Type          PlecsProbe
       Name          "Probe"
       Show          on
@@ -114,9 +100,9 @@ Plecs {
       Flipped       off
       LabelPosition south
       Probe {
-        Component     "RL"
+        Component     "C1"
         Path          ""
-        Signals       {"Resistor power", "Resistor voltage", "Resistor current"}
+        Signals       {"Capacitor voltage", "Capacitor current"}
       }
     }
     Component {
@@ -576,22 +562,22 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [302, 160; 1563, 959]
+      Location      [193, 43; 1391, 957]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAACkAAAD8fwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAIAAATtAAAAgfw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABO0AAABEAP///wAABO0AAAJ5AAAA"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAIAAASuAAAAc/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABK4AAABEAP///wAABK4AAAL6AAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":164,\"Labels\":[],"
-"\"VisualIdxs\":[]}"
+      HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":173,\"Labels\":["
+"],\"VisualIdxs\":[]}"
       PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0.0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "0"
+      Open          "1"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -654,7 +640,7 @@ Plecs {
       LabelPosition north
       Parameter {
         Variable      "C"
-        Value         "500e-9"
+        Value         "470e-9"
         Show          on
       }
       Parameter {
@@ -931,7 +917,7 @@ Plecs {
     }
     Component {
       Type          Resistor
-      Name          "Rf2"
+      Name          "R4"
       Show          on
       Position      [1195, 275]
       Direction     right
@@ -945,21 +931,21 @@ Plecs {
     }
     Component {
       Type          Resistor
-      Name          "Rf3"
+      Name          "R5"
       Show          on
-      Position      [1325, 180]
+      Position      [1310, 180]
       Direction     right
       Flipped       on
       LabelPosition southwest
       Parameter {
         Variable      "R"
-        Value         "20e3"
+        Value         "18e3"
         Show          on
       }
     }
     Component {
       Type          Resistor
-      Name          "Rf4"
+      Name          "R2"
       Show          on
       Position      [1195, 315]
       Direction     right
@@ -973,7 +959,7 @@ Plecs {
     }
     Component {
       Type          Resistor
-      Name          "Rf5"
+      Name          "R3"
       Show          on
       Position      [1245, 370]
       Direction     down
@@ -981,13 +967,13 @@ Plecs {
       LabelPosition northwest
       Parameter {
         Variable      "R"
-        Value         "20e3"
+        Value         "18e3"
         Show          on
       }
     }
     Component {
       Type          Resistor
-      Name          "Rsense1"
+      Name          "R1"
       Show          on
       Position      [1140, 450]
       Direction     right
@@ -1515,6 +1501,25 @@ Plecs {
       Flipped       on
       LabelPosition west
     }
+    Component {
+      Type          Capacitor
+      Name          "C1"
+      Show          on
+      Position      [1210, 565]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "30"
+        Show          off
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          off
+      }
+    }
     Connection {
       Type          Signal
       SrcComponent  "Probe"
@@ -1545,12 +1550,12 @@ Plecs {
           Branch {
             Points        [1100, 450]
             Branch {
-              DstComponent  "Rsense1"
+              DstComponent  "R1"
               DstTerminal   1
             }
             Branch {
               Points        [1100, 315]
-              DstComponent  "Rf4"
+              DstComponent  "R2"
               DstTerminal   1
             }
           }
@@ -1658,7 +1663,7 @@ Plecs {
         Points        [1070, 760]
         Branch {
           Points        [1210, 760]
-          DstComponent  "RL"
+          DstComponent  "C1"
           DstTerminal   2
         }
         Branch {
@@ -1705,22 +1710,7 @@ Plecs {
     }
     Connection {
       Type          Wire
-      SrcComponent  "Rf2"
-      SrcTerminal   2
-      Points        [1240, 275]
-      Branch {
-        Points        [1240, 180]
-        DstComponent  "Rf3"
-        DstTerminal   1
-      }
-      Branch {
-        DstComponent  "Netlist3"
-        DstTerminal   2
-      }
-    }
-    Connection {
-      Type          Wire
-      SrcComponent  "Rf4"
+      SrcComponent  "R2"
       SrcTerminal   2
       Points        [1245, 315]
       Branch {
@@ -1728,21 +1718,8 @@ Plecs {
         DstTerminal   1
       }
       Branch {
-        DstComponent  "Rf5"
+        DstComponent  "R3"
         DstTerminal   1
-      }
-    }
-    Connection {
-      Type          Wire
-      SrcComponent  "Ground6"
-      SrcTerminal   1
-      Points        [1295, 390]
-      Branch {
-        Points        [1295, 335]
-      }
-      Branch {
-        DstComponent  "Rf5"
-        DstTerminal   2
       }
     }
     Connection {
@@ -1755,16 +1732,16 @@ Plecs {
     }
     Connection {
       Type          Wire
-      SrcComponent  "Rsense1"
+      SrcComponent  "R1"
       SrcTerminal   2
       Points        [1175, 450]
       Branch {
         Points        [1210, 450]
-        DstComponent  "RL"
+        DstComponent  "C1"
         DstTerminal   1
       }
       Branch {
-        DstComponent  "Rf2"
+        DstComponent  "R4"
         DstTerminal   1
       }
     }
@@ -1781,7 +1758,7 @@ Plecs {
         }
         Branch {
           Points        [1385, 180]
-          DstComponent  "Rf3"
+          DstComponent  "R5"
           DstTerminal   2
         }
       }
@@ -1805,6 +1782,29 @@ Plecs {
       DstComponent  "Ground9"
       DstTerminal   1
     }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground6"
+      SrcTerminal   1
+      Points        [1295, 390]
+      DstComponent  "R3"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R4"
+      SrcTerminal   2
+      Points        [1245, 275]
+      Branch {
+        DstComponent  "Netlist3"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [1245, 180]
+        DstComponent  "R5"
+        DstTerminal   1
+      }
+    }
   }
 }
-DemoSignature "OdRjC8fDtOKzaCD4DOpHSlmP3LuRHDNb8zby3zVRqIU="
+DemoSignature "aTrsgq+RMIbh1mcUExQDpPyJnN64LZbHmr3XZRiS6TE="
