@@ -1,0 +1,7 @@
+Available from BOM sheet:
+- MOSFET IRFZ46NPBF
+- Schottky Diode SSA34-E3/61T
+
+Potentially better (Digikey):
+- MOSFET IRLB8748PBF
+- Diode CDBA340L-G
