@@ -2,7 +2,7 @@
  * timer1.h
  *
  * Created: 16-Aug-26 9:02:58 PM
- *  Author: whoyo
+ *  Author: Caleb Tran
  */ 
 
 

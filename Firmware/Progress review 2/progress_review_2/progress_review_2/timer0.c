@@ -18,7 +18,7 @@ void timer0_init() {
 	// Set prescaler to 64
 	TCCR0B |= (1 << CS01) | (1 << CS00);
 	
-	// Configure TC0 interrupts to trigger every 8 ms (i.e. take a "fake" sample every 8 ms)
+	// Configure TC0 interrupts to trigger every 8 ms (i.e. take a sample every 8 ms)
 	OCR0A = 249;
 	
 	// Enable interrupts

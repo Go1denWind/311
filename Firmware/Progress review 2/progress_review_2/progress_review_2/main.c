@@ -28,11 +28,12 @@ volatile uint8_t usart_to_do = 0;
 
 int main(void)
 {
-
-	sei();
 	usart_init(12);
 	timer0_init();
 	timer1_init();
+	adc_init();
+	
+	sei();
 	
 	// Set PB0 and PB1 to output (debugging)
 	DDRB |= (1 << DDB0) | (1 << DDB1);
