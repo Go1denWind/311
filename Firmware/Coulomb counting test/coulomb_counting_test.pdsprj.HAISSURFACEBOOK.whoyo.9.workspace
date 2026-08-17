@@ -2,18 +2,11 @@
 <WORKSPACE>
  <FRAME activeWindow="0">
   <PLACEMENT>01d9d0cb00030000fffffffefffffff200000bb9000007d1000000190000005000000b9e000007b700000000020000000bb8000000000000003300000bb7000007cf</PLACEMENT>
-  <WINDOW type="default" index="0" mode="00050a00" module="ISIS"/>
+  <WINDOW index="0" module="ISIS" mode="00050a00" type="default"/>
  </FRAME>
- <MODULE name="ARES">
-  <editor gridmajor="0" gridmode="2" snapidx="3" gridminor="0" snaprange="0" snap="0" metric="0" scale="10" flipped="0" xcursor="0" zoom="10" orgmode="0">
-   <centre y="0" x="0"/>
-   <origin y="0" x="0"/>
-   <world x2="15240000" y2="12700000" y1="-12700000" x1="-15240000"/>
-  </editor>
- </MODULE>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP iid="-1" h="30" w="100" pid="0" y="43" flags="00000082" x="10">
+   <POPUP pid="0" h="30" iid="-1" w="100" x="10" flags="00000082" y="43">
     <PROPERTIES>
      <ITEM name="Message Column Width">580</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
@@ -21,7 +14,7 @@
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="-1" h="30" w="100" pid="1" y="63" flags="000000b2" x="30">
+   <POPUP pid="1" h="30" iid="-1" w="100" x="30" flags="000000b2" y="63">
     <PROPERTIES>
      <ITEM name="Address Column Width">100</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -40,16 +33,16 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="-1" h="200" w="800" pid="2" y="83" flags="000000a2" x="50">
+   <POPUP pid="2" h="200" iid="-1" w="800" x="50" flags="000000a2" y="83">
     <PROPERTIES/>
    </POPUP>
-   <POPUP iid="2" h="391" w="1362" pid="1" y="385" flags="00000022" x="489">
+   <POPUP pid="1" h="391" iid="2" w="1362" x="489" flags="00000022" y="385">
     <PROPERTIES/>
    </POPUP>
-   <POPUP iid="1" h="16" w="30" pid="3" y="123" flags="00000008" x="90">
+   <POPUP pid="3" h="16" iid="1" w="30" x="90" flags="00000008" y="123">
     <PROPERTIES/>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="10" y="0" flags="0000000a" x="0">
+   <POPUP pid="10" h="30" iid="1" w="100" x="0" flags="0000000a" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -59,7 +52,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="6" y="0" flags="0000000a" x="0">
+   <POPUP pid="6" h="30" iid="1" w="100" x="0" flags="0000000a" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -69,7 +62,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="7" y="0" flags="0000000a" x="0">
+   <POPUP pid="7" h="30" iid="1" w="100" x="0" flags="0000000a" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -79,7 +72,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="31" w="16" pid="14" y="0" flags="00000000" x="0">
+   <POPUP pid="14" h="31" iid="1" w="16" x="0" flags="00000000" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -89,7 +82,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="4" y="0" flags="0000000a" x="0">
+   <POPUP pid="4" h="30" iid="1" w="100" x="0" flags="0000000a" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -99,7 +92,7 @@
      <ITEM name="TopLineAddress">00000100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="13" y="0" flags="0000000a" x="0">
+   <POPUP pid="13" h="30" iid="1" w="100" x="0" flags="0000000a" y="0">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -109,10 +102,10 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="1" y="263" flags="0000000a" x="230">
+   <POPUP pid="1" h="30" iid="1" w="100" x="230" flags="0000000a" y="263">
     <PROPERTIES/>
    </POPUP>
-   <POPUP iid="1" h="30" w="100" pid="2" y="611" flags="0000000a" x="536">
+   <POPUP pid="2" h="30" iid="1" w="100" x="536" flags="0000000a" y="611">
     <PROPERTIES>
      <ITEM name="Address Column Width">100</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -132,7 +125,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP iid="3" h="19" w="70" pid="0" y="1056" flags="000000a3" x="567">
+   <POPUP pid="0" h="20" iid="3" w="70" x="567" flags="000000a3" y="1056">
     <PROPERTIES>
      <ITEM name="AUTOECHO">0</ITEM>
      <ITEM name="ENCODING">UTF-8</ITEM>
@@ -143,15 +136,22 @@
    </POPUP>
   </PWI>
  </MODULE>
- <MODULE name="VSMEDIT">
-  <EDITOR/>
+ <MODULE name="ARES">
+  <editor metric="0" xcursor="0" snap="0" snapidx="3" zoom="10" gridmajor="0" gridmode="2" flipped="0" snaprange="0" scale="10" orgmode="0" gridminor="0">
+   <centre x="0" y="0"/>
+   <origin x="0" y="0"/>
+   <world y1="-12700000" y2="12700000" x1="-15240000" x2="15240000"/>
+  </editor>
  </MODULE>
  <MODULE name="ISIS">
   <debugState VALUE="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"/>
-  <editor gridmajor="2540000" gridmode="2" snapidx="2" gridminor="254000" snaprange="127000" snap="254000" metric="0" scale="245" flipped="0" xcursor="0" zoom="-1" orgmode="0">
-   <centre y="5162" x="0"/>
-   <origin y="0" x="0"/>
-   <world x2="12700000" y2="8890000" y1="-8890000" x1="-12700000"/>
+  <editor metric="0" xcursor="0" snap="254000" snapidx="2" zoom="-1" gridmajor="2540000" gridmode="2" flipped="0" snaprange="127000" scale="245" orgmode="0" gridminor="254000">
+   <centre x="0" y="5162"/>
+   <origin x="0" y="0"/>
+   <world y1="-8890000" y2="8890000" x1="-12700000" x2="12700000"/>
   </editor>
+ </MODULE>
+ <MODULE name="VSMEDIT">
+  <EDITOR/>
  </MODULE>
 </WORKSPACE>
