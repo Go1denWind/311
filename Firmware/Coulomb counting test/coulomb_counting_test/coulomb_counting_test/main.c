@@ -21,7 +21,7 @@
 volatile double capacity = 64800; // mAs
 
 // Fake array of samples to loop through (in mA, supercap discharging)
-volatile double fake_samples[4] = {1, 0, 0, 0};
+volatile double fake_samples[4] = {250, 250, 250, 250};
 volatile uint8_t i = 0;
 
 volatile uint8_t usart_to_do = 0;
@@ -30,7 +30,7 @@ int main(void)
 {
 
 	sei();
-	usart_init(9600);
+	usart_init(12);
 	timer0_init();
 	timer1_init();
 	
@@ -44,8 +44,9 @@ int main(void)
     {
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do) {
-			uint16_t number = capacity / 100;
-			usart_transmit_array("hi");
+			uint16_t number = (double)capacity / 10;
+			usart_transmit_num(number, 3);
+			usart_transmit('\n');
 			
 			// Clear USART flag
 			usart_to_do = 0;
