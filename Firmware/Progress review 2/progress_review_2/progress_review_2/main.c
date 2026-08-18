@@ -14,15 +14,18 @@
 #include "uart.h"
 #include "timer0.h"
 #include "timer1.h"
+#include "adc.h"
 
 #define T_SAMPLE 0.008 // s
 
 // Assume initial full capacity (3.8 V)
-volatile double capacity = 64800; // mAs
+volatile float sc_charge; // mAs
 
+/*
 // Fake array of samples to loop through (in mA, supercap discharging)
 volatile double fake_samples[4] = {250, 250, 250, 250};
 volatile uint8_t i = 0;
+*/
 
 volatile uint8_t usart_to_do = 0;
 
@@ -45,7 +48,8 @@ int main(void)
     {
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do) {
-			uint16_t number = (double)capacity / 100;
+			sc_charge = get_sc_charge();
+			uint16_t number = sc_charge / 100;
 			usart_transmit_num(number, 3);
 			usart_transmit('\n');
 			
@@ -55,6 +59,7 @@ int main(void)
     }
 }
 
+/*
 ISR(TIMER0_COMPA_vect) {
 	
 	// Calculate new capacity via coulomb counting
@@ -67,6 +72,7 @@ ISR(TIMER0_COMPA_vect) {
 	PINB = (1 << PINB0);
 	
 }
+*/
 
 ISR(TIMER1_COMPA_vect) {
 	
