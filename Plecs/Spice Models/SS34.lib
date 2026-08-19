@@ -1,0 +1,20 @@
+*********** Discrete Rectifier Electrical Parameters ***********
+** Product: SS34
+** Package: SMC/DO-214AB
+** Schottky Rectifiers
+****************************************************************
+.MODEL SS34 D
++ IS=8.096E-04
++ N=1.00
++ RS=8.2030E-3
++ IKF=1.8287E-5
++ CJO=1.0854E-09
++ M=0.4517
++ VJ=0.3905
++ BV=40
++ IBV=2.5E-4
++ EG=0.68
+****************************************************************
+** Creation: Feb.-27-2007
+** Fairchild Semiconductor
+
