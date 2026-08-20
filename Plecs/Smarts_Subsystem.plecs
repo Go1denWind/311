@@ -72,8 +72,8 @@ Plecs {
   IncompatibleInitialConditionMsg "2"
   Schematic {
     Location      [24, 50; 1064, 827]
-    ZoomFactor    0.945362
-    SliderPosition [0, 0]
+    ZoomFactor    1.23802
+    SliderPosition [134, 78]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -214,7 +214,7 @@ Plecs {
       Type          Label
       Name          "Label"
       Show          off
-      Position      [470, 90]
+      Position      [470, 100]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -249,7 +249,7 @@ Plecs {
       Type          Label
       Name          "Label1"
       Show          off
-      Position      [590, 90]
+      Position      [590, 100]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -284,7 +284,7 @@ Plecs {
       Type          Label
       Name          "Label2"
       Show          off
-      Position      [155, 60]
+      Position      [315, 90]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -319,7 +319,7 @@ Plecs {
       Type          DCVoltageSource
       Name          "V_dc"
       Show          on
-      Position      [155, 115]
+      Position      [315, 145]
       Direction     down
       Flipped       on
       LabelPosition east
@@ -333,7 +333,7 @@ Plecs {
       Type          Ground
       Name          "Ground1"
       Show          off
-      Position      [155, 180]
+      Position      [315, 210]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -400,7 +400,7 @@ Plecs {
       Type          Label
       Name          "Label3"
       Show          off
-      Position      [1105, 85]
+      Position      [1075, 105]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -435,7 +435,7 @@ Plecs {
       Type          Resistor
       Name          "Rload"
       Show          on
-      Position      [1105, 140]
+      Position      [1075, 160]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -449,7 +449,7 @@ Plecs {
       Type          Ground
       Name          "Ground2"
       Show          off
-      Position      [1105, 205]
+      Position      [1075, 225]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -458,7 +458,7 @@ Plecs {
       Type          Label
       Name          "Label4"
       Show          off
-      Position      [80, 60]
+      Position      [240, 90]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -493,7 +493,7 @@ Plecs {
       Type          DCVoltageSource
       Name          "V_dc1"
       Show          on
-      Position      [80, 115]
+      Position      [240, 145]
       Direction     down
       Flipped       on
       LabelPosition east
@@ -507,7 +507,7 @@ Plecs {
       Type          Ground
       Name          "Ground3"
       Show          off
-      Position      [80, 180]
+      Position      [240, 210]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -517,7 +517,7 @@ Plecs {
       SrcComponent  "Components/Electrical/Electronics/Op-Amp"
       Name          "Op-Amp"
       Show          on
-      Position      [655, 310]
+      Position      [630, 310]
       Direction     up
       Flipped       off
       LabelPosition north
@@ -552,7 +552,7 @@ Plecs {
       Type          Ground
       Name          "Ground4"
       Show          off
-      Position      [655, 350]
+      Position      [630, 350]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -561,7 +561,7 @@ Plecs {
       Type          Label
       Name          "Label5"
       Show          off
-      Position      [760, 310]
+      Position      [720, 310]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -666,7 +666,7 @@ Plecs {
       Type          Label
       Name          "Label8"
       Show          off
-      Position      [915, 100]
+      Position      [825, 105]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -702,7 +702,7 @@ Plecs {
       SrcComponent  "Components/Electrical/Passive Components/R3"
       Name          "R3"
       Show          on
-      Position      [915, 245]
+      Position      [825, 235]
       Direction     down
       Flipped       on
       LabelPosition west
@@ -727,7 +727,7 @@ Plecs {
       Type          Resistor
       Name          "R1"
       Show          on
-      Position      [915, 165]
+      Position      [825, 155]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -741,7 +741,7 @@ Plecs {
       Type          Ground
       Name          "Ground5"
       Show          off
-      Position      [915, 310]
+      Position      [825, 290]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -750,7 +750,7 @@ Plecs {
       Type          Constant
       Name          "Constant"
       Show          on
-      Position      [980, 255]
+      Position      [890, 245]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -770,7 +770,7 @@ Plecs {
       Type          Label
       Name          "Label9"
       Show          off
-      Position      [860, 210]
+      Position      [770, 200]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -805,7 +805,7 @@ Plecs {
       Type          Label
       Name          "Label10"
       Show          off
-      Position      [470, 555]
+      Position      [495, 525]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -840,7 +840,7 @@ Plecs {
       Type          Label
       Name          "Label11"
       Show          off
-      Position      [470, 645]
+      Position      [495, 590]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -875,7 +875,7 @@ Plecs {
       Type          Resistor
       Name          "R2"
       Show          on
-      Position      [530, 555]
+      Position      [555, 525]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -890,7 +890,7 @@ Plecs {
       SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
       Name          "Lim. Op-Amp"
       Show          on
-      Position      [645, 565]
+      Position      [670, 535]
       Direction     up
       Flipped       off
       LabelPosition north
@@ -930,7 +930,7 @@ Plecs {
       Type          Label
       Name          "Label12"
       Show          off
-      Position      [80, 285]
+      Position      [315, 270]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -965,7 +965,7 @@ Plecs {
       Type          DCVoltageSource
       Name          "V_dc2"
       Show          on
-      Position      [80, 335]
+      Position      [315, 320]
       Direction     down
       Flipped       on
       LabelPosition east
@@ -979,7 +979,7 @@ Plecs {
       Type          Ground
       Name          "Ground6"
       Show          off
-      Position      [80, 385]
+      Position      [315, 370]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -988,7 +988,7 @@ Plecs {
       Type          Label
       Name          "Label13"
       Show          off
-      Position      [590, 465]
+      Position      [615, 435]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -1023,7 +1023,7 @@ Plecs {
       Type          Ground
       Name          "Ground7"
       Show          off
-      Position      [645, 605]
+      Position      [670, 575]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -1032,7 +1032,7 @@ Plecs {
       Type          Resistor
       Name          "R4"
       Show          on
-      Position      [590, 515]
+      Position      [615, 485]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -1046,7 +1046,7 @@ Plecs {
       Type          Resistor
       Name          "R5"
       Show          on
-      Position      [530, 645]
+      Position      [555, 590]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -1060,7 +1060,7 @@ Plecs {
       Type          Resistor
       Name          "R6"
       Show          on
-      Position      [645, 680]
+      Position      [670, 625]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -1074,7 +1074,7 @@ Plecs {
       Type          Label
       Name          "Label14"
       Show          off
-      Position      [765, 565]
+      Position      [775, 535]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -1102,6 +1102,1785 @@ Plecs {
       Parameter {
         Variable      "HighlightLevel"
         Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label15"
+      Show          off
+      Position      [240, 810]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc3"
+      Show          on
+      Position      [240, 860]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "3.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground8"
+      Show          off
+      Position      [240, 910]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label16"
+      Show          off
+      Position      [325, 810]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc4"
+      Show          on
+      Position      [325, 860]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "2.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground9"
+      Show          off
+      Position      [325, 910]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label17"
+      Show          off
+      Position      [240, 955]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc5"
+      Show          on
+      Position      [240, 1005]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "4.25"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground10"
+      Show          off
+      Position      [240, 1055]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label18"
+      Show          off
+      Position      [325, 955]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc6"
+      Show          on
+      Position      [325, 1005]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "0.75"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground11"
+      Show          off
+      Position      [325, 1055]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label19"
+      Show          off
+      Position      [240, 1105]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc7"
+      Show          on
+      Position      [240, 1155]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "4.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground12"
+      Show          off
+      Position      [240, 1205]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label20"
+      Show          off
+      Position      [325, 1105]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc8"
+      Show          on
+      Position      [325, 1155]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "0.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground13"
+      Show          off
+      Position      [325, 1205]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label21"
+      Show          off
+      Position      [470, 925]
+      Direction     left
+      Flipped       off
+      LabelPosition north
+      Parameter {
+        Variable      "Tag"
+        Value         "Vsens_out"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp1"
+      Show          on
+      Position      [730, 840]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground14"
+      Show          off
+      Position      [730, 815]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Resistor
+      Name          "R7"
+      Show          on
+      Position      [630, 850]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R8"
+      Show          on
+      Position      [730, 910]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp2"
+      Show          on
+      Position      [730, 990]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground15"
+      Show          off
+      Position      [730, 965]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Resistor
+      Name          "R9"
+      Show          on
+      Position      [630, 1000]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R10"
+      Show          on
+      Position      [730, 1060]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label22"
+      Show          off
+      Position      [580, 885]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label23"
+      Show          off
+      Position      [650, 950]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator1"
+      Show          on
+      Position      [890, 950]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm1"
+      Show          on
+      Position      [825, 875]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm2"
+      Show          on
+      Position      [825, 1025]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground16"
+      Show          off
+      Position      [825, 905]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Ground
+      Name          "Ground17"
+      Show          off
+      Position      [825, 1055]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Goto
+      Name          "Goto"
+      Show          off
+      Position      [935, 950]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label24"
+      Show          off
+      Position      [470, 1265]
+      Direction     left
+      Flipped       off
+      LabelPosition north
+      Parameter {
+        Variable      "Tag"
+        Value         "Isens_out"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp3"
+      Show          on
+      Position      [730, 1180]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground18"
+      Show          off
+      Position      [730, 1155]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Resistor
+      Name          "R11"
+      Show          on
+      Position      [630, 1190]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R12"
+      Show          on
+      Position      [730, 1250]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp4"
+      Show          on
+      Position      [730, 1330]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground19"
+      Show          off
+      Position      [730, 1305]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Resistor
+      Name          "R13"
+      Show          on
+      Position      [630, 1340]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R14"
+      Show          on
+      Position      [730, 1400]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label25"
+      Show          off
+      Position      [580, 1225]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label26"
+      Show          off
+      Position      [650, 1290]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator2"
+      Show          on
+      Position      [890, 1290]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm3"
+      Show          on
+      Position      [825, 1215]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm4"
+      Show          on
+      Position      [825, 1365]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground20"
+      Show          off
+      Position      [825, 1245]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Ground
+      Name          "Ground21"
+      Show          off
+      Position      [825, 1395]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Goto
+      Name          "Goto1"
+      Show          off
+      Position      [935, 1290]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label27"
+      Show          off
+      Position      [1040, 925]
+      Direction     left
+      Flipped       off
+      LabelPosition north
+      Parameter {
+        Variable      "Tag"
+        Value         "Tsens_out"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp5"
+      Show          on
+      Position      [1300, 840]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R15"
+      Show          on
+      Position      [1200, 850]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R16"
+      Show          on
+      Position      [1300, 910]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Electronics/Lim. Op-Amp"
+      Name          "Lim. Op-Amp6"
+      Show          on
+      Position      [1300, 990]
+      Direction     up
+      Flipped       on
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "A"
+        Value         "1e6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Vlim"
+        Value         "[0 5]"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [25, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 15]
+        Direction     down
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground22"
+      Show          off
+      Position      [1300, 965]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Resistor
+      Name          "R17"
+      Show          on
+      Position      [1200, 1000]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "10e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R18"
+      Show          on
+      Position      [1300, 1060]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label28"
+      Show          off
+      Position      [1150, 885]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso_ref1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label29"
+      Show          off
+      Position      [1220, 950]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso_ref2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator3"
+      Show          on
+      Position      [1460, 950]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm5"
+      Show          on
+      Position      [1395, 875]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm6"
+      Show          on
+      Position      [1395, 1025]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground23"
+      Show          off
+      Position      [1395, 905]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Ground
+      Name          "Ground24"
+      Show          off
+      Position      [1395, 1055]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Goto
+      Name          "Goto2"
+      Show          off
+      Position      [1505, 950]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground25"
+      Show          off
+      Position      [1300, 815]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator4"
+      Show          on
+      Position      [1155, 1240]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator5"
+      Show          on
+      Position      [1280, 1260]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "3"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From"
+      Show          off
+      Position      [1100, 1215]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Viso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From1"
+      Show          off
+      Position      [1100, 1265]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Iiso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From2"
+      Show          off
+      Position      [1225, 1295]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Control/Logical/SR Flip-flop"
+      Name          "SR Flip-flop"
+      Show          on
+      Position      [1370, 1250]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-20, -20; 20, 20]
+      Parameter {
+        Variable      "x_init"
+        Value         "0"
+        Show          off
+      }
+      Terminal {
+        Type          Input
+        Position      [-20, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Input
+        Position      [-20, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Output
+        Position      [24, -10]
+        Direction     right
+      }
+      Terminal {
+        Type          Output
+        Position      [24, 10]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Goto
+      Name          "Goto3"
+      Show          off
+      Position      [1440, 1240]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Isolation signal"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From3"
+      Show          off
+      Position      [480, 140]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Isolation signal"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          PulseGenerator
+      Name          "Pulse\nGenerator"
+      Show          on
+      Position      [1100, 1385]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Hi"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Lo"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "f"
+        Value         "0.1"
+        Show          off
+      }
+      Parameter {
+        Variable      "DutyCycle"
+        Value         "0.01"
+        Show          off
+      }
+      Parameter {
+        Variable      "Delay"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          Goto
+      Name          "Goto4"
+      Show          off
+      Position      [1170, 1385]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Reset push button"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From4"
+      Show          off
+      Position      [1280, 1185]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Reset push button"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Constant
+      Name          "Constant1"
+      Show          on
+      Position      [295, 460]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Frame         [-10, -10; 10, 10]
+      Parameter {
+        Variable      "Value"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
         Show          off
       }
     }
@@ -1136,7 +2915,7 @@ Plecs {
       Type          Wire
       SrcComponent  "Label"
       SrcTerminal   1
-      Points        [530, 90]
+      Points        [530, 100]
       Branch {
         DstComponent  "Label1"
         DstTerminal   1
@@ -1220,7 +2999,7 @@ Plecs {
       Type          Wire
       SrcComponent  "Op-Amp"
       SrcTerminal   2
-      Points        [610, 320; 610, 375; 705, 375; 705, 310]
+      Points        [585, 320; 585, 375; 680, 375; 680, 310]
       Branch {
         DstComponent  "Op-Amp"
         DstTerminal   3
@@ -1269,7 +3048,7 @@ Plecs {
       Type          Wire
       SrcComponent  "R1"
       SrcTerminal   2
-      Points        [915, 210]
+      Points        [825, 200]
       Branch {
         DstComponent  "R3"
         DstTerminal   1
@@ -1318,7 +3097,7 @@ Plecs {
       Type          Wire
       SrcComponent  "R2"
       SrcTerminal   1
-      Points        [590, 555]
+      Points        [615, 525]
       Branch {
         DstComponent  "Lim. Op-Amp"
         DstTerminal   1
@@ -1339,14 +3118,14 @@ Plecs {
       Type          Wire
       SrcComponent  "R5"
       SrcTerminal   1
-      Points        [590, 645]
+      Points        [615, 590]
       Branch {
-        Points        [590, 575]
+        Points        [615, 545]
         DstComponent  "Lim. Op-Amp"
         DstTerminal   2
       }
       Branch {
-        Points        [590, 680]
+        Points        [615, 625]
         DstComponent  "R6"
         DstTerminal   2
       }
@@ -1355,9 +3134,9 @@ Plecs {
       Type          Wire
       SrcComponent  "Lim. Op-Amp"
       SrcTerminal   3
-      Points        [705, 565]
+      Points        [730, 535]
       Branch {
-        Points        [705, 680]
+        Points        [730, 625]
         DstComponent  "R6"
         DstTerminal   1
       }
@@ -1366,9 +3145,590 @@ Plecs {
         DstTerminal   1
       }
     }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc3"
+      SrcTerminal   2
+      DstComponent  "Ground8"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc3"
+      SrcTerminal   1
+      DstComponent  "Label15"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc4"
+      SrcTerminal   2
+      DstComponent  "Ground9"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc4"
+      SrcTerminal   1
+      DstComponent  "Label16"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc5"
+      SrcTerminal   2
+      DstComponent  "Ground10"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc5"
+      SrcTerminal   1
+      DstComponent  "Label17"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc6"
+      SrcTerminal   2
+      DstComponent  "Ground11"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc6"
+      SrcTerminal   1
+      DstComponent  "Label18"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc7"
+      SrcTerminal   2
+      DstComponent  "Ground12"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc7"
+      SrcTerminal   1
+      DstComponent  "Label19"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc8"
+      SrcTerminal   2
+      DstComponent  "Ground13"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc8"
+      SrcTerminal   1
+      DstComponent  "Label20"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground14"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp1"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R7"
+      SrcTerminal   1
+      Points        [675, 850]
+      Branch {
+        DstComponent  "Lim. Op-Amp1"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [675, 910]
+        DstComponent  "R8"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R7"
+      SrcTerminal   2
+      Points        [580, 850]
+      DstComponent  "Label22"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground15"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp2"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R9"
+      SrcTerminal   1
+      Points        [675, 1000]
+      Branch {
+        DstComponent  "Lim. Op-Amp2"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [675, 1060]
+        DstComponent  "R10"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label21"
+      SrcTerminal   1
+      Points        [505, 925]
+      Branch {
+        Points        [505, 830]
+        DstComponent  "Lim. Op-Amp1"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [505, 1000]
+        DstComponent  "R9"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Lim. Op-Amp2"
+      SrcTerminal   2
+      Points        [650, 980]
+      DstComponent  "Label23"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground16"
+      SrcTerminal   1
+      DstComponent  "Vm1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground17"
+      SrcTerminal   1
+      DstComponent  "Vm2"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R10"
+      SrcTerminal   1
+      Points        [790, 1060; 790, 990]
+      Branch {
+        DstComponent  "Lim. Op-Amp2"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [825, 990]
+        DstComponent  "Vm2"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R8"
+      SrcTerminal   1
+      Points        [790, 910; 790, 840]
+      Branch {
+        DstComponent  "Lim. Op-Amp1"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [825, 840]
+        DstComponent  "Vm1"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm1"
+      SrcTerminal   3
+      Points        [855, 875; 855, 945]
+      DstComponent  "Logical\nOperator1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm2"
+      SrcTerminal   3
+      Points        [855, 1025; 855, 955]
+      DstComponent  "Logical\nOperator1"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator1"
+      SrcTerminal   1
+      DstComponent  "Goto"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground18"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp3"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R11"
+      SrcTerminal   1
+      Points        [675, 1190]
+      Branch {
+        DstComponent  "Lim. Op-Amp3"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [675, 1250]
+        DstComponent  "R12"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R11"
+      SrcTerminal   2
+      Points        [580, 1190]
+      DstComponent  "Label25"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground19"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp4"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R13"
+      SrcTerminal   1
+      Points        [675, 1340]
+      Branch {
+        DstComponent  "Lim. Op-Amp4"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [675, 1400]
+        DstComponent  "R14"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label24"
+      SrcTerminal   1
+      Points        [505, 1265]
+      Branch {
+        Points        [505, 1170]
+        DstComponent  "Lim. Op-Amp3"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [505, 1340]
+        DstComponent  "R13"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Lim. Op-Amp4"
+      SrcTerminal   2
+      Points        [650, 1320]
+      DstComponent  "Label26"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground20"
+      SrcTerminal   1
+      DstComponent  "Vm3"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground21"
+      SrcTerminal   1
+      DstComponent  "Vm4"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R14"
+      SrcTerminal   1
+      Points        [790, 1400; 790, 1330]
+      Branch {
+        DstComponent  "Lim. Op-Amp4"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [825, 1330]
+        DstComponent  "Vm4"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R12"
+      SrcTerminal   1
+      Points        [790, 1250; 790, 1180]
+      Branch {
+        DstComponent  "Lim. Op-Amp3"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [825, 1180]
+        DstComponent  "Vm3"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm3"
+      SrcTerminal   3
+      Points        [855, 1215; 855, 1285]
+      DstComponent  "Logical\nOperator2"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm4"
+      SrcTerminal   3
+      Points        [855, 1365; 855, 1295]
+      DstComponent  "Logical\nOperator2"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator2"
+      SrcTerminal   1
+      DstComponent  "Goto1"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R15"
+      SrcTerminal   1
+      Points        [1245, 850]
+      Branch {
+        DstComponent  "Lim. Op-Amp5"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [1245, 910]
+        DstComponent  "R16"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R15"
+      SrcTerminal   2
+      Points        [1150, 850]
+      DstComponent  "Label28"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground22"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp6"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R17"
+      SrcTerminal   1
+      Points        [1245, 1000]
+      Branch {
+        DstComponent  "Lim. Op-Amp6"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [1245, 1060]
+        DstComponent  "R18"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label27"
+      SrcTerminal   1
+      Points        [1075, 925]
+      Branch {
+        Points        [1075, 830]
+        DstComponent  "Lim. Op-Amp5"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [1075, 1000]
+        DstComponent  "R17"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Lim. Op-Amp6"
+      SrcTerminal   2
+      Points        [1220, 980]
+      DstComponent  "Label29"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground23"
+      SrcTerminal   1
+      DstComponent  "Vm5"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground24"
+      SrcTerminal   1
+      DstComponent  "Vm6"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R18"
+      SrcTerminal   1
+      Points        [1360, 1060; 1360, 990]
+      Branch {
+        DstComponent  "Lim. Op-Amp6"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [1395, 990]
+        DstComponent  "Vm6"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R16"
+      SrcTerminal   1
+      Points        [1360, 910; 1360, 840]
+      Branch {
+        DstComponent  "Lim. Op-Amp5"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [1395, 840]
+        DstComponent  "Vm5"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm5"
+      SrcTerminal   3
+      Points        [1425, 875; 1425, 945]
+      DstComponent  "Logical\nOperator3"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm6"
+      SrcTerminal   3
+      Points        [1425, 1025; 1425, 955]
+      DstComponent  "Logical\nOperator3"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator3"
+      SrcTerminal   1
+      DstComponent  "Goto2"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground25"
+      SrcTerminal   1
+      DstComponent  "Lim. Op-Amp5"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From"
+      SrcTerminal   1
+      Points        [1120, 1215; 1120, 1235]
+      DstComponent  "Logical\nOperator4"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From1"
+      SrcTerminal   1
+      Points        [1120, 1265; 1120, 1245]
+      DstComponent  "Logical\nOperator4"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator4"
+      SrcTerminal   1
+      Points        [1225, 1240; 1225, 1255]
+      DstComponent  "Logical\nOperator5"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From2"
+      SrcTerminal   1
+      Points        [1245, 1295; 1245, 1265]
+      DstComponent  "Logical\nOperator5"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator5"
+      SrcTerminal   1
+      DstComponent  "SR Flip-flop"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "SR Flip-flop"
+      SrcTerminal   3
+      DstComponent  "Goto3"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From3"
+      SrcTerminal   1
+      DstComponent  "Siso"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Pulse\nGenerator"
+      SrcTerminal   1
+      DstComponent  "Goto4"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From4"
+      SrcTerminal   1
+      Points        [1325, 1185; 1325, 1240]
+      DstComponent  "SR Flip-flop"
+      DstTerminal   2
+    }
     Annotation {
       Name          "<html><body>\n<p>corner</p></body></html>"
-      Position      [2940, 2195]
+      Position      [2960, 2200]
     } 
     Annotation {
       Name          "<html><body>\n<p><span style=\" font-size:10px; color:#aa"
@@ -1377,7 +3737,44 @@ Plecs {
 "style=\" font-size:10px; color:#aaaa00;\">placed near supercap for</span></p>"
 "\n<p><span style=\" font-size:10px; color:#aaaa00;\">temperature sensing</spa"
 "n></p></body></html>"
-      Position      [1005, 310]
+      Position      [915, 300]
+    } 
+    RectangleAnnotation {
+      Position     [670, 375]
+      Width        960
+      Height       640
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278190080
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
+"ht:700;\">SC and sensing circuitry</span></p></body></html>"
+      Position      [295, 30]
+    } 
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
+"ht:700;\">Digital logic</span></p></body></html>"
+      Position      [240, 745]
+    } 
+    Annotation {
+      Name          "<html><body>\n<p>Note: AND gates for digital logic</p>\n<"
+"p>only output LOW if unsafe</p>\n<p>operation is detected.</p></body></html>"
+      Position      [565, 1080]
+    } 
+    RectangleAnnotation {
+      Position     [890, 1120]
+      Width        1400
+      Height       700
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278190080
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
     } 
   }
 }
