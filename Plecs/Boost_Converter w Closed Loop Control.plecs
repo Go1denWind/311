@@ -71,9 +71,9 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [5760, 23; 7680, 990]
-    ZoomFactor    1.30957
-    SliderPosition [0, 0]
+    Location      [0, 24; 1920, 990]
+    ZoomFactor    1.49863
+    SliderPosition [0, 103]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -105,7 +105,7 @@ Plecs {
       LabelPosition west
       Parameter {
         Variable      "C"
-        Value         "220e-6"
+        Value         "560e-6"
         Show          on
       }
       Parameter {
@@ -133,7 +133,7 @@ Plecs {
       LabelPosition west
       Parameter {
         Variable      "V"
-        Value         "2.5"
+        Value         "3"
         Show          on
       }
     }
@@ -146,11 +146,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 24; 1920, 1021]
+      Location      [0, 23; 1920, 1011]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAYvw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANeAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANVAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -322,7 +322,7 @@ Plecs {
       Frame         [-30, -10; 30, 10]
       Parameter {
         Variable      "Value"
-        Value         "1.75"
+        Value         "2.5"
         Show          off
       }
       Parameter {
@@ -382,12 +382,12 @@ Plecs {
       }
       Parameter {
         Variable      "kp"
-        Value         "1"
+        Value         "5"
         Show          off
       }
       Parameter {
         Variable      "ki"
-        Value         "500"
+        Value         "1000"
         Show          off
       }
       Parameter {
@@ -1606,7 +1606,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "22e3"
+        Value         "100e3"
         Show          on
       }
     }
@@ -1620,7 +1620,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "12e3"
+        Value         "100e3"
         Show          on
       }
     }
@@ -1634,7 +1634,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "C"
-        Value         "2200e-12"
+        Value         "3300e-12"
         Show          on
       }
       Parameter {
@@ -1656,13 +1656,13 @@ Plecs {
       Type          Resistor
       Name          "RL"
       Show          on
-      Position      [640, 265]
+      Position      [640, 305]
       Direction     up
       Flipped       off
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "5"
+        Value         "10"
         Show          on
       }
     }
@@ -1712,7 +1712,7 @@ Plecs {
       LabelPosition north
       Parameter {
         Variable      "R"
-        Value         "4.7e3"
+        Value         "47e3"
         Show          on
       }
     }
@@ -1745,7 +1745,7 @@ Plecs {
       LabelPosition south
       Parameter {
         Variable      "R"
-        Value         "10e3"
+        Value         "100e3"
         Show          on
       }
     }
@@ -1786,7 +1786,7 @@ Plecs {
       LabelPosition north
       Parameter {
         Variable      "R"
-        Value         "4.7e3"
+        Value         "47e3"
         Show          on
       }
     }
@@ -1819,7 +1819,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "10e3"
+        Value         "100e3"
         Show          on
       }
     }
@@ -1831,6 +1831,34 @@ Plecs {
       Direction     up
       Flipped       off
       LabelPosition east
+    }
+    Component {
+      Type          Resistor
+      Name          "ESR"
+      Show          on
+      Position      [585, 315]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "R"
+        Value         "5e-3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rv"
+      Show          on
+      Position      [640, 240]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "R"
+        Value         "220e-3"
+        Show          on
+      }
     }
     Connection {
       Type          Wire
@@ -1878,7 +1906,7 @@ Plecs {
           }
         }
         Branch {
-          DstComponent  "C1"
+          DstComponent  "ESR"
           DstTerminal   2
         }
       }
@@ -1903,7 +1931,7 @@ Plecs {
       Branch {
         Points        [640, 190]
         Branch {
-          DstComponent  "RL"
+          DstComponent  "Rv"
           DstTerminal   1
         }
         Branch {
@@ -2119,5 +2147,20 @@ Plecs {
         }
       }
     }
+    Connection {
+      Type          Wire
+      SrcComponent  "ESR"
+      SrcTerminal   1
+      DstComponent  "C1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rv"
+      SrcTerminal   2
+      DstComponent  "RL"
+      DstTerminal   1
+    }
   }
 }
+DemoSignature "+lPNNRfjez3SRB1qTZ8Dx3o1AqqlPTpUVrqGOYkJkXs="
