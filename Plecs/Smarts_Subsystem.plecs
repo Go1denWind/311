@@ -51,8 +51,8 @@ Plecs {
   ExternalModeSettings ""
   AlgebraicLoopMethod "1"
   AlgebraicLoopTolerance "1e-6"
-  ScriptsDialogGeometry ""
-  ScriptsDialogSplitterPos "0"
+  ScriptsDialogGeometry "[726 385 500 244]"
+  ScriptsDialogSplitterPos "100"
   MixedSignalSolverBypassOperatingPoint "1"
   MixedSignalSolverInitialConditions "2"
   MixedSignalSolverMaxNewtonIterations "25"
@@ -71,9 +71,9 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [24, 50; 1064, 827]
-    ZoomFactor    2.12319
-    SliderPosition [1735, 2386]
+    Location      [0, 23; 1920, 989]
+    ZoomFactor    0.945363
+    SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -91,7 +91,7 @@ Plecs {
       }
       Parameter {
         Variable      "v_init"
-        Value         "3.47"
+        Value         "3.499"
         Show          on
       }
     }
@@ -2834,16 +2834,16 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [347, 205; 995, 602]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAABbvwCAAAAA/sAAAAQAFoAbwBvA"
+      Location      [263, 227; 911, 794]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAABsvwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwEAAAA0AA"
-"ABbgAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAFeAAAAYPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAAAV4AAABEAP///wAAAgAAAAFuAAAA"
+"ABsgAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAYPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAAGyAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":168,\"Labels\":[\""
-"Delta\"],\"VisualIdxs\":[3]}"
+      HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":168,\"Labels\":["
+"\"Delta\"],\"VisualIdxs\":[3]}"
       PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0.0"
@@ -4078,13 +4078,6 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Relational\nOperator"
-      SrcTerminal   3
-      DstComponent  "Goto4"
-      DstTerminal   1
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "Clock"
       SrcTerminal   1
       Points        [1025, 1355; 1025, 1380]
@@ -4098,6 +4091,13 @@ Plecs {
       Points        [1025, 1415; 1025, 1390]
       DstComponent  "Relational\nOperator"
       DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Relational\nOperator"
+      SrcTerminal   3
+      DstComponent  "Goto4"
+      DstTerminal   1
     }
     Annotation {
       Name          "<html><body>\n<p>corner</p></body></html>"
@@ -4148,6 +4148,13 @@ Plecs {
       PenAlpha     1
       BrushColor   0
       BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" color:#ff0000;\">Note: if"
+" &quot;reset push button&quot; immediately</span></p>\n<p><span style=\" colo"
+"r:#ff0000;\">causes unsafe operating conditions, the</span></p>\n<p><span sty"
+"le=\" color:#ff0000;\">simulation will stall.</span></p></body></html>"
+      Position      [990, 555]
     } 
   }
 }
