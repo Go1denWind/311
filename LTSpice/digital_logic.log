@@ -1,0 +1,18 @@
+LTspice 26.0.2 for Windows
+Circuit: C:\Users\whoyo\Documents\ELECTENG 311\311\LTSpice\digital_logic.net
+Start Time: Thu Aug 20 08:55:58 2026
+solver = Normal
+Maximum thread count: 4
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 2.917 seconds.
+
+Files loaded:
+C:\Users\whoyo\Documents\ELECTENG 311\311\LTSpice\digital_logic.net
+C:\Users\whoyo\AppData\Local\LTspice\lib\sub\UniversalOpAmp2.lib
+
