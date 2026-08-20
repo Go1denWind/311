@@ -1,6 +1,5 @@
 Plecs {
-  Name          "MOSFET Charger with High Side Current Sensing OPAMP Constant "
-"Current"
+  Name          "MOSFET Charger FINAL"
   Version       "5.0"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
@@ -2216,4 +2215,4 @@ Plecs {
     }
   }
 }
-DemoSignature "xMVvj63HaYCIluJ2yhuGGhI073JhR0t5K/TBIdDjTfM="
+DemoSignature "jJx+2N1me4e/b6wsiBIdgPQK5302K4sjjrKOJJZhVC4="
