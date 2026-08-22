@@ -71,7 +71,7 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [0, 23; 1920, 989]
+    Location      [18, 50; 1702, 968]
     ZoomFactor    0.945363
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -733,7 +733,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "100"
+        Value         "10e3"
         Show          on
       }
     }
@@ -757,7 +757,7 @@ Plecs {
       Frame         [-10, -10; 10, 10]
       Parameter {
         Variable      "Value"
-        Value         "100"
+        Value         "10e3"
         Show          off
       }
       Parameter {
@@ -4110,7 +4110,7 @@ Plecs {
 "style=\" font-size:10px; color:#aaaa00;\">placed near supercap for</span></p>"
 "\n<p><span style=\" font-size:10px; color:#aaaa00;\">temperature sensing</spa"
 "n></p></body></html>"
-      Position      [915, 300]
+      Position      [965, 160]
     } 
     RectangleAnnotation {
       Position     [670, 375]
@@ -4155,6 +4155,13 @@ Plecs {
 "r:#ff0000;\">causes unsafe operating conditions, the</span></p>\n<p><span sty"
 "le=\" color:#ff0000;\">simulation will stall.</span></p></body></html>"
       Position      [990, 555]
+    } 
+    Annotation {
+      Name          "<html><body>\n<p align=\"right\"><span style=\" font-size"
+":9px;\">Thermistor: 1067.7 @ 80deg C</span></p>\n<p align=\"right\"><span sty"
+"le=\" font-size:9px;\">10000 @ 25deg C</span></p>\n<p align=\"right\"><span s"
+"tyle=\" font-size:9px;\"> 84510 @ -15deg C</span></p></body></html>"
+      Position      [930, 300]
     } 
   }
 }
