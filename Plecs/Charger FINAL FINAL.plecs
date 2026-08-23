@@ -1,5 +1,5 @@
 Plecs {
-  Name          "Detour"
+  Name          "Charger FINAL FINAL"
   Version       "5.0"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
@@ -2307,4 +2307,4 @@ Plecs {
     } 
   }
 }
-DemoSignature "7/JLNznOVQFN7ZiKX1JAUjhe7GgHta136GbUqaymSZg="
+DemoSignature "pHeaqEIDJ6cg9go02jqlQdoJSLLX+K+JI3kKqVSOiHg="
