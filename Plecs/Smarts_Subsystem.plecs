@@ -400,7 +400,7 @@ Plecs {
       Type          Label
       Name          "Label3"
       Show          off
-      Position      [1075, 105]
+      Position      [1295, 110]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -435,7 +435,7 @@ Plecs {
       Type          Resistor
       Name          "Rload"
       Show          on
-      Position      [1075, 160]
+      Position      [1295, 165]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -449,7 +449,7 @@ Plecs {
       Type          Ground
       Name          "Ground2"
       Show          off
-      Position      [1075, 225]
+      Position      [1295, 230]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -666,7 +666,7 @@ Plecs {
       Type          Label
       Name          "Label8"
       Show          off
-      Position      [825, 105]
+      Position      [1045, 110]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -702,7 +702,7 @@ Plecs {
       SrcComponent  "Components/Electrical/Passive Components/R3"
       Name          "R3"
       Show          on
-      Position      [825, 235]
+      Position      [1045, 240]
       Direction     down
       Flipped       on
       LabelPosition west
@@ -727,7 +727,7 @@ Plecs {
       Type          Resistor
       Name          "R1"
       Show          on
-      Position      [825, 155]
+      Position      [1045, 160]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -741,7 +741,7 @@ Plecs {
       Type          Ground
       Name          "Ground5"
       Show          off
-      Position      [825, 290]
+      Position      [1045, 295]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -750,7 +750,7 @@ Plecs {
       Type          Constant
       Name          "Constant"
       Show          on
-      Position      [890, 245]
+      Position      [1110, 250]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -770,7 +770,7 @@ Plecs {
       Type          Label
       Name          "Label9"
       Show          off
-      Position      [770, 200]
+      Position      [990, 205]
       Direction     left
       Flipped       off
       LabelPosition north
@@ -2829,7 +2829,7 @@ Plecs {
       Type          Scope
       Name          "Scope1"
       Show          on
-      Position      [1065, 390]
+      Position      [1320, 380]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -2887,7 +2887,7 @@ Plecs {
       Type          PlecsProbe
       Name          "Probe"
       Show          on
-      Position      [980, 390]
+      Position      [1235, 380]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2901,7 +2901,7 @@ Plecs {
       Type          Scope
       Name          "Scope2"
       Show          on
-      Position      [1065, 455]
+      Position      [1320, 445]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -2959,7 +2959,7 @@ Plecs {
       Type          From
       Name          "From5"
       Show          off
-      Position      [995, 455]
+      Position      [1250, 445]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -3356,7 +3356,7 @@ Plecs {
       Type          Wire
       SrcComponent  "R1"
       SrcTerminal   2
-      Points        [825, 200]
+      Points        [1045, 205]
       Branch {
         DstComponent  "R3"
         DstTerminal   1
@@ -4110,11 +4110,11 @@ Plecs {
 "style=\" font-size:10px; color:#aaaa00;\">placed near supercap for</span></p>"
 "\n<p><span style=\" font-size:10px; color:#aaaa00;\">temperature sensing</spa"
 "n></p></body></html>"
-      Position      [965, 160]
+      Position      [1185, 165]
     } 
     RectangleAnnotation {
-      Position     [670, 375]
-      Width        960
+      Position     [790, 375]
+      Width        1200
       Height       640
       CornerRadius 3
       Thickness    2
@@ -4154,14 +4154,14 @@ Plecs {
 " &quot;reset push button&quot; immediately</span></p>\n<p><span style=\" colo"
 "r:#ff0000;\">causes unsafe operating conditions, the</span></p>\n<p><span sty"
 "le=\" color:#ff0000;\">simulation will stall.</span></p></body></html>"
-      Position      [990, 555]
+      Position      [960, 565]
     } 
     Annotation {
       Name          "<html><body>\n<p align=\"right\"><span style=\" font-size"
 ":9px;\">Thermistor: 1067.7 @ 80deg C</span></p>\n<p align=\"right\"><span sty"
 "le=\" font-size:9px;\">10000 @ 25deg C</span></p>\n<p align=\"right\"><span s"
 "tyle=\" font-size:9px;\"> 84510 @ -15deg C</span></p></body></html>"
-      Position      [930, 300]
+      Position      [1150, 305]
     } 
   }
 }
