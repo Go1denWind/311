@@ -72,8 +72,8 @@ Plecs {
   IncompatibleInitialConditionMsg "2"
   Schematic {
     Location      [6, 49; 1690, 967]
-    ZoomFactor    1.23802
-    SliderPosition [276, 134]
+    ZoomFactor    1.08184
+    SliderPosition [115, -1]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -139,74 +139,6 @@ Plecs {
       Parameter {
         Variable      "f_grid"
         Value         "0"
-        Show          off
-      }
-    }
-    Component {
-      Type          PlecsProbe
-      Name          "Voltage probe"
-      Show          on
-      Position      [1475, 220]
-      Direction     right
-      Flipped       off
-      LabelPosition south
-    }
-    Component {
-      Type          LogicalOperator
-      Name          "Logical\nOperator"
-      Show          on
-      Position      [1665, 195]
-      Direction     up
-      Flipped       off
-      LabelPosition south
-      Parameter {
-        Variable      "Operator"
-        Value         "1"
-        Show          off
-      }
-      Parameter {
-        Variable      "Inputs"
-        Value         "2"
-        Show          off
-      }
-    }
-    Component {
-      Type          ConstantRelationalOperator
-      Name          "Vlow"
-      Show          on
-      Position      [1560, 220]
-      Direction     right
-      Flipped       off
-      LabelPosition south
-      Frame         [-20, -10; 20, 10]
-      Parameter {
-        Variable      "Operator"
-        Value         "4"
-        Show          off
-      }
-      Parameter {
-        Variable      "Threshold"
-        Value         "2.5"
-        Show          off
-      }
-    }
-    Component {
-      Type          ConstantRelationalOperator
-      Name          "Vhigh"
-      Show          on
-      Position      [1560, 270]
-      Direction     right
-      Flipped       off
-      LabelPosition south
-      Frame         [-20, -10; 20, 10]
-      Parameter {
-        Variable      "Operator"
-        Value         "5"
-        Show          off
-      }
-      Parameter {
-        Variable      "Threshold"
-        Value         "3.5"
         Show          off
       }
     }
@@ -337,64 +269,6 @@ Plecs {
       Direction     up
       Flipped       off
       LabelPosition east
-    }
-    Component {
-      Type          Scope
-      Name          "Scope"
-      Show          on
-      Position      [1560, 165]
-      Direction     up
-      Flipped       off
-      LabelPosition south
-      Frame         [-15, -15; 15, 15]
-      Location      [719, 505; 1069, 736]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
-"G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADIAAAA"
-"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
-"AAAAA=="
-      SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":168,\"Labels\":[],"
-"\"VisualIdxs\":[]}"
-      PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-      Axes          "1"
-      TimeRange     "0.0"
-      ScrollingMode "1"
-      SingleTimeAxis "1"
-      Open          "0"
-      Ts            "-1"
-      SampleLimit   "0"
-      XAxisLabel    "Time / s"
-      ShowLegend    "1"
-      Axis {
-        Name          ""
-        AutoScale     1
-        MinValue      0
-        MaxValue      1
-        Signals       {}
-        SignalTypes   [ ]
-        Untangle      0
-        KeepBaseline  off
-        BaselineValue 0
-      }
-      Fourier {
-        SingleXAxis       on
-        AxisLabel         "Frequency / Hz"
-        Scaling           0
-        PhaseDisplay      0
-        ShowFourierLegend off
-        Axis {
-          Name          ""
-          AutoScale     1
-          MinValue      0
-          MaxValue      1
-          Signals       {}
-          Untangle      0
-          KeepBaseline  off
-          BaselineValue 0
-        }
-      }
     }
     Component {
       Type          Label
@@ -2529,7 +2403,7 @@ Plecs {
       Type          LogicalOperator
       Name          "Logical\nOperator5"
       Show          on
-      Position      [1280, 1385]
+      Position      [1465, 1385]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -2618,13 +2492,13 @@ Plecs {
       Type          From
       Name          "From2"
       Show          off
-      Position      [1225, 1420]
+      Position      [1410, 1420]
       Direction     right
       Flipped       off
       LabelPosition south
       Parameter {
         Variable      "Tag"
-        Value         "Tiso"
+        Value         "MCU_iso"
         Show          off
       }
       Parameter {
@@ -2654,7 +2528,7 @@ Plecs {
       SrcComponent  "Components/Control/Logical/SR Flip-flop"
       Name          "SR Flip-flop"
       Show          on
-      Position      [1370, 1375]
+      Position      [1555, 1375]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -2689,7 +2563,7 @@ Plecs {
       Type          Goto
       Name          "Goto3"
       Show          off
-      Position      [1440, 1365]
+      Position      [1625, 1365]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2794,7 +2668,7 @@ Plecs {
       Type          From
       Name          "From4"
       Show          off
-      Position      [1280, 1310]
+      Position      [1465, 1310]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2834,11 +2708,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [263, 227; 911, 803]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAABu/wCAAAAA/sAAAAQAFoAbwBvA"
+      Location      [418, 240; 1066, 852]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAAB3/wCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwEAAAA0AA"
-"ABuwAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAYPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAAG7AAAA"
+"AB3wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAYPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAAHfAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -3463,20 +3337,20 @@ Plecs {
     }
     Component {
       Type          CScript
-      Name          "C-Script"
+      Name          "ADC"
       Show          on
-      Position      [1595, 405]
+      Position      [1725, 300]
       Direction     up
       Flipped       off
       LabelPosition south
       Parameter {
         Variable      "DialogGeometry"
-        Value         "[611 262 455 516]"
+        Value         "[1066 300 455 516]"
         Show          off
       }
       Parameter {
         Variable      "NumInputs"
-        Value         "1"
+        Value         "3"
         Show          off
       }
       Parameter {
@@ -3491,7 +3365,7 @@ Plecs {
       }
       Parameter {
         Variable      "NumDiscStates"
-        Value         "0"
+        Value         "2"
         Show          off
       }
       Parameter {
@@ -3541,22 +3415,56 @@ Plecs {
       }
       Parameter {
         Variable      "Declarations"
-        Value         ""
+        Value         "#define v_in InputSignal(0,0)\n"
+"#define i_in InputSignal(1,0)\n"
+"#define t_in InputSignal(2,0)\n"
+"\n"
+"#define adc_state DiscState(0)\n"
+"#define iso_state DiscState(1)\n"
+"\n"
+"#define iso_out OutputSignal(0,0)"
         Show          off
       }
       Parameter {
         Variable      "StartFcn"
-        Value         ""
+        Value         "// Variable to track which signal to sample next\n"
+"adc_state = 0;\n"
+"\n"
+"// Variable to keep isolation switch OFF if \n"
+"// unsafe operation is detected. Initially\n"
+"// assume everything OK.\n"
+"iso_state = 1;"
         Show          off
       }
       Parameter {
         Variable      "OutputFcn"
-        Value         ""
+        Value         "iso_out = iso_state;"
         Show          off
       }
       Parameter {
         Variable      "UpdateFcn"
-        Value         ""
+        Value         "if (adc_state == 0) { // sample voltage\n"
+"\n"
+"\t// Turn isolation switch OFF if voltage out of range\n"
+"\tif ((v_in < 2.5) || (v_in > 3.55)) {\n"
+"\t\tiso_state = 0;\n"
+"\t}\n"
+"\t\n"
+"} else if (adc_state == 1) { // sample current\n"
+"\n"
+"\t// Turn isolation switch OFF if current out of range\n"
+"\tif ((i_in < 0.743) || (i_in > 4.257)) {\n"
+"\t\tiso_state = 0;\n"
+"\t}\n"
+"\t\n"
+"} else { // sample temperature\n"
+"\n"
+"\t// Turn isolation switch OFF if current out of range\n"
+"\tif ((t_in < 0.532) || (t_in > 4.468)) {\n"
+"\t\tiso_state = 0;\n"
+"\t}\n"
+"\t\n"
+"}"
         Show          off
       }
       Parameter {
@@ -3580,32 +3488,275 @@ Plecs {
         Show          off
       }
     }
+    Component {
+      Type          SignalMux
+      Name          "Mux"
+      Show          off
+      Position      [1620, 300]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Frame         [-2, -15; 7, 15]
+      Parameter {
+        Variable      "Width"
+        Value         "3"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label33"
+      Show          off
+      Position      [1495, 125]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Vsens_aa"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm9"
+      Show          on
+      Position      [1495, 170]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground32"
+      Show          off
+      Position      [1495, 215]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label34"
+      Show          off
+      Position      [1495, 255]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Isens_aa"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm10"
+      Show          on
+      Position      [1495, 300]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground33"
+      Show          off
+      Position      [1495, 345]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label35"
+      Show          off
+      Position      [1495, 385]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Tsens_aa"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm11"
+      Show          on
+      Position      [1495, 430]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground34"
+      Show          off
+      Position      [1495, 475]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator6"
+      Show          on
+      Position      [1275, 1365]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          From
+      Name          "From6"
+      Show          off
+      Position      [1215, 1400]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Tiso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Goto
+      Name          "Goto5"
+      Show          off
+      Position      [1810, 300]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "MCU_iso"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
     Connection {
       Type          Wire
       SrcComponent  "SC"
       SrcTerminal   2
       DstComponent  "Ground"
       DstTerminal   1
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Voltage probe"
-      SrcTerminal   1
-      Points        [1515, 220]
-      Branch {
-        DstComponent  "Vlow"
-        DstTerminal   1
-      }
-      Branch {
-        Points        [1515, 270]
-        DstComponent  "Vhigh"
-        DstTerminal   1
-      }
-      Branch {
-        Points        [1515, 165]
-        DstComponent  "Scope"
-        DstTerminal   1
-      }
     }
     Connection {
       Type          Wire
@@ -4354,17 +4505,9 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Logical\nOperator4"
-      SrcTerminal   1
-      Points        [1225, 1365; 1225, 1380]
-      DstComponent  "Logical\nOperator5"
-      DstTerminal   2
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "From2"
       SrcTerminal   1
-      Points        [1245, 1420; 1245, 1390]
+      Points        [1430, 1420; 1430, 1390]
       DstComponent  "Logical\nOperator5"
       DstTerminal   3
     }
@@ -4393,7 +4536,7 @@ Plecs {
       Type          Signal
       SrcComponent  "From4"
       SrcTerminal   1
-      Points        [1325, 1310; 1325, 1365]
+      Points        [1510, 1310; 1510, 1365]
       DstComponent  "SR Flip-flop"
       DstTerminal   2
     }
@@ -4591,6 +4734,102 @@ Plecs {
         DstTerminal   2
       }
     }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label33"
+      SrcTerminal   1
+      DstComponent  "Vm9"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Vm9"
+      SrcTerminal   2
+      DstComponent  "Ground32"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label34"
+      SrcTerminal   1
+      DstComponent  "Vm10"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Vm10"
+      SrcTerminal   2
+      DstComponent  "Ground33"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Label35"
+      SrcTerminal   1
+      DstComponent  "Vm11"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Vm11"
+      SrcTerminal   2
+      DstComponent  "Ground34"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm9"
+      SrcTerminal   3
+      Points        [1560, 170; 1560, 290]
+      DstComponent  "Mux"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm10"
+      SrcTerminal   3
+      DstComponent  "Mux"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm11"
+      SrcTerminal   3
+      Points        [1560, 430; 1560, 310]
+      DstComponent  "Mux"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Mux"
+      SrcTerminal   1
+      DstComponent  "ADC"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "From6"
+      SrcTerminal   1
+      Points        [1235, 1400; 1235, 1370]
+      DstComponent  "Logical\nOperator6"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator4"
+      SrcTerminal   1
+      Points        [1230, 1365; 1230, 1360]
+      DstComponent  "Logical\nOperator6"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator6"
+      SrcTerminal   1
+      Points        [1365, 1365; 1365, 1380]
+      DstComponent  "Logical\nOperator5"
+      DstTerminal   2
+    }
     Annotation {
       Name          "<html><body>\n<p>corner</p></body></html>"
       Position      [2960, 2200]
@@ -4631,9 +4870,9 @@ Plecs {
       Position      [565, 1205]
     } 
     RectangleAnnotation {
-      Position     [890, 1245]
-      Width        1400
-      Height       700
+      Position     [1095, 1255]
+      Width        1810
+      Height       720
       CornerRadius 3
       Thickness    2
       PenColor     4278190080
