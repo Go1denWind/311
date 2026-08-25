@@ -73,7 +73,7 @@ Plecs {
   Schematic {
     Location      [6, 49; 1690, 967]
     ZoomFactor    1.08184
-    SliderPosition [925, -1]
+    SliderPosition [1134, -1]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -3287,13 +3287,13 @@ Plecs {
       Type          CScript
       Name          "ADC"
       Show          on
-      Position      [1720, 300]
+      Position      [1730, 300]
       Direction     up
       Flipped       off
       LabelPosition south
       Parameter {
         Variable      "DialogGeometry"
-        Value         "[1066 300 455 516]"
+        Value         "[687 256 834 560]"
         Show          off
       }
       Parameter {
@@ -3399,7 +3399,9 @@ Plecs {
 "iso_state = 1;\n"
 "\n"
 "// Variable to prevent change of iso_state at t=0\n"
-"start_state = 0;"
+"start_state = 0;\n"
+"\n"
+"soc_curr = -1;"
         Show          off
       }
       Parameter {
@@ -3408,7 +3410,8 @@ Plecs {
 "\n"
 "v_out = v_curr;\n"
 "i_out = i_curr;\n"
-"t_out = t_curr;"
+"t_out = t_curr;\n"
+"soc_out = soc_curr;"
         Show          off
       }
       Parameter {
@@ -3427,6 +3430,14 @@ Plecs {
 "\t\tiso_state = 0;\n"
 "\t}\n"
 "\t\n"
+"\t// If SOC has not been initialised, or current is roughly zero\n"
+"\tif ((soc_curr == -1) || ((i_curr > -0.002) && (i_curr < 0.002))) {\n"
+"\t\t\n"
+"\t\t// Use voltage to initialise SOC\n"
+"\t\tsoc_curr = 100 * (v_in - 2.5);\n"
+"\t\t\n"
+"\t}\n"
+"\t\n"
 "} else if (adc_state == 1) { // sample current\n"
 "\n"
 "\t// Convert ADC input to SC current\n"
@@ -3435,6 +3446,13 @@ Plecs {
 "\t// Turn isolation switch OFF if current out of range\n"
 "\tif ((i_in < 0.760) || (i_in > 4.240)) {\n"
 "\t\tiso_state = 0;\n"
+"\t}\n"
+"\t\n"
+"\t// If current is non-zero, calculate SOC via numerical integration\n"
+"\tif ((i_curr > 0.002) || (i_curr < -0.002)) {\n"
+"\n"
+"\t\tsoc_curr = soc_curr + (i_curr * 0.0001875 / 64.8) * 100;\n"
+"\t\n"
 "\t}\n"
 "\t\n"
 "} else { // sample temperature\n"
@@ -3827,11 +3845,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 525]
+      Location      [640, 276; 990, 534]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADaAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADjAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -4471,11 +4489,17 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 0; 0, 0]
-      State         ""
-      SavedViews    ""
-      HeaderState   ""
-      PlotPalettes  ""
+      Location      [640, 276; 990, 507]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADIAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":98,\"Labels\":[],"
+"\"VisualIdxs\":[]}"
+      PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0.0"
       ScrollingMode "1"
