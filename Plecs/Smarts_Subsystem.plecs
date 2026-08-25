@@ -72,8 +72,8 @@ Plecs {
   IncompatibleInitialConditionMsg "2"
   Schematic {
     Location      [6, 49; 1690, 967]
-    ZoomFactor    1.85534
-    SliderPosition [545, 134]
+    ZoomFactor    0.826101
+    SliderPosition [531, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -91,7 +91,7 @@ Plecs {
       }
       Parameter {
         Variable      "v_init"
-        Value         "3.5"
+        Value         "3"
         Show          on
       }
     }
@@ -383,7 +383,7 @@ Plecs {
       Type          Label
       Name          "Label5"
       Show          off
-      Position      [665, 355]
+      Position      [700, 355]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2656,11 +2656,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [468, 66; 1116, 982]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAAC/PwCAAAAA/sAAAAQAFoAbwBvA"
+      Location      [468, 66; 1116, 1054]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAADRPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwEAAAA0AA"
-"AC/AAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAc/w"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAAL8AAAA"
+"ADRAAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAc/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAANEAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -2834,7 +2834,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm8"
       Show          on
-      Position      [640, 395]
+      Position      [675, 395]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -2843,7 +2843,7 @@ Plecs {
       Type          Ground
       Name          "Ground27"
       Show          off
-      Position      [640, 445]
+      Position      [675, 445]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -2852,16 +2852,16 @@ Plecs {
       Type          Scope
       Name          "Scope3"
       Show          on
-      Position      [695, 395]
+      Position      [730, 395]
       Direction     up
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [347, 205; 697, 463]
+      Location      [347, 205; 697, 490]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADjAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAD+AAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -2915,11 +2915,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [983, 411; 1333, 687]
+      Location      [983, 411; 1333, 696]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAD1AAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAD+AAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -3287,7 +3287,7 @@ Plecs {
       Type          CScript
       Name          "ADC"
       Show          on
-      Position      [1705, 300]
+      Position      [2305, 1140]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -3456,7 +3456,7 @@ Plecs {
       Type          SignalMux
       Name          "Mux"
       Show          off
-      Position      [1620, 300]
+      Position      [2240, 1140]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -3471,7 +3471,7 @@ Plecs {
       Type          Label
       Name          "Label33"
       Show          off
-      Position      [1495, 125]
+      Position      [2115, 965]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3506,7 +3506,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm9"
       Show          on
-      Position      [1495, 170]
+      Position      [2115, 1010]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3515,7 +3515,7 @@ Plecs {
       Type          Ground
       Name          "Ground32"
       Show          off
-      Position      [1495, 215]
+      Position      [2115, 1055]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3524,7 +3524,7 @@ Plecs {
       Type          Label
       Name          "Label34"
       Show          off
-      Position      [1495, 255]
+      Position      [2115, 1095]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3559,7 +3559,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm10"
       Show          on
-      Position      [1495, 300]
+      Position      [2115, 1140]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3568,7 +3568,7 @@ Plecs {
       Type          Ground
       Name          "Ground33"
       Show          off
-      Position      [1495, 345]
+      Position      [2115, 1185]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3577,7 +3577,7 @@ Plecs {
       Type          Label
       Name          "Label35"
       Show          off
-      Position      [1495, 385]
+      Position      [2115, 1225]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3612,7 +3612,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm11"
       Show          on
-      Position      [1495, 430]
+      Position      [2115, 1270]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3621,7 +3621,7 @@ Plecs {
       Type          Ground
       Name          "Ground34"
       Show          off
-      Position      [1495, 475]
+      Position      [2115, 1315]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3684,7 +3684,7 @@ Plecs {
       Type          Goto
       Name          "Goto5"
       Show          off
-      Position      [1810, 300]
+      Position      [2400, 1140]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -3742,11 +3742,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 516]
+      Location      [640, 276; 990, 525]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADRAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADaAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -3795,7 +3795,7 @@ Plecs {
       Type          Scope
       Name          "Scope5"
       Show          on
-      Position      [1855, 385]
+      Position      [2415, 1190]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -3858,11 +3858,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 579]
+      Location      [640, 276; 990, 642]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAEQAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAFPAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -3916,11 +3916,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 516]
+      Location      [640, 276; 990, 543]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADRAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADsAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -3974,11 +3974,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 516]
+      Location      [640, 276; 990, 534]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADRAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADjAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -4032,11 +4032,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [640, 276; 990, 516]
+      Location      [640, 276; 990, 525]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADRAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADaAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -4147,7 +4147,7 @@ Plecs {
       }
       Parameter {
         Variable      "X0"
-        Value         "20"
+        Value         "50"
         Show          off
       }
       Parameter {
@@ -4188,26 +4188,119 @@ Plecs {
       }
     }
     Component {
-      Type          Switch
-      Name          "S2"
+      Type          Constant
+      Name          "Constant3"
       Show          on
-      Position      [510, 145]
-      Direction     left
+      Position      [510, 90]
+      Direction     down
       Flipped       off
-      LabelPosition south
+      LabelPosition west
+      Frame         [-10, -10; 10, 10]
       Parameter {
-        Variable      "s_init"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "SwitchModel"
+        Variable      "Value"
         Value         "1"
         Show          off
       }
       Parameter {
-        Variable      "f_grid"
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          Label
+      Name          "Label36"
+      Show          off
+      Position      [240, 580]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "Touch_ref"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
         Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc9"
+      Show          on
+      Position      [240, 630]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "2.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground36"
+      Show          off
+      Position      [240, 680]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          PulseGenerator
+      Name          "Pulse\nGenerator"
+      Show          on
+      Position      [1525, 160]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Hi"
+        Value         "5"
+        Show          off
+      }
+      Parameter {
+        Variable      "Lo"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "f"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "DutyCycle"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "Delay"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
         Show          off
       }
     }
@@ -4270,7 +4363,7 @@ Plecs {
         DstTerminal   3
       }
       Branch {
-        Points        [640, 355]
+        Points        [675, 355]
         Branch {
           DstComponent  "Label5"
           DstTerminal   1
@@ -5148,7 +5241,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Vm9"
       SrcTerminal   3
-      Points        [1560, 170; 1560, 290]
+      Points        [2180, 1010; 2180, 1130]
       DstComponent  "Mux"
       DstTerminal   2
     }
@@ -5163,7 +5256,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Vm11"
       SrcTerminal   3
-      Points        [1560, 430; 1560, 310]
+      Points        [2180, 1270; 2180, 1150]
       DstComponent  "Mux"
       DstTerminal   4
     }
@@ -5216,13 +5309,13 @@ Plecs {
       Type          Signal
       SrcComponent  "ADC"
       SrcTerminal   2
-      Points        [1775, 300]
+      Points        [2365, 1140]
       Branch {
         DstComponent  "Goto5"
         DstTerminal   1
       }
       Branch {
-        Points        [1775, 385]
+        Points        [2365, 1190]
         DstComponent  "Scope5"
         DstTerminal   1
       }
@@ -5347,15 +5440,28 @@ Plecs {
         DstTerminal   2
       }
       Branch {
-        DstComponent  "S2"
+        DstComponent  "Label1"
         DstTerminal   1
       }
     }
     Connection {
+      Type          Signal
+      SrcComponent  "Constant3"
+      SrcTerminal   1
+      Points        [510, 140]
+    }
+    Connection {
       Type          Wire
-      SrcComponent  "S2"
+      SrcComponent  "V_dc9"
       SrcTerminal   2
-      DstComponent  "Label1"
+      DstComponent  "Ground36"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc9"
+      SrcTerminal   1
+      DstComponent  "Label36"
       DstTerminal   1
     }
     Annotation {
@@ -5431,8 +5537,8 @@ Plecs {
       Position      [290, 1380]
     } 
     RectangleAnnotation {
-      Position     [1670, 295]
-      Width        490
+      Position     [2265, 1135]
+      Width        440
       Height       480
       CornerRadius 3
       Thickness    2
@@ -5444,7 +5550,23 @@ Plecs {
     Annotation {
       Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
 "ht:700;\">MCU Protection</span></p></body></html>"
-      Position      [1495, 30]
+      Position      [2115, 870]
+    } 
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
+"ht:700;\">Touch sensing circuitry</span></p></body></html>"
+      Position      [1535, 30]
+    } 
+    RectangleAnnotation {
+      Position     [1905, 435]
+      Width        940
+      Height       760
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278190080
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
     } 
   }
 }
