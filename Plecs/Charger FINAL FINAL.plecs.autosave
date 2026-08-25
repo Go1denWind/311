@@ -1,0 +1,2353 @@
+Plecs {
+  Name          "Charger FINAL FINAL"
+  Version       "5.0"
+  CircuitModel  "ContStateSpace"
+  StartTime     "0.0"
+  TimeSpan      "300"
+  Timeout       ""
+  Solver        "auto"
+  MaxStep       "1e-3"
+  InitStep      "-1"
+  FixedStep     "1e-3"
+  Refine        "1"
+  ZCStepSize    "1e-9"
+  RelTol        "1e-3"
+  AbsTol        "-1"
+  TurnOnThreshold "0"
+  NonIdealSwitchResistance "1"
+  SyncFixedStepTasks "2"
+  UseSingleCommonBaseRate "2"
+  LossVariableLimitExceededMsg "3"
+  NegativeSwitchLossMsg "3"
+  DivisionByZeroMsg "3"
+  DatatypeOverflowMsg "3"
+  DatatypeInheritanceConflictMsg "2"
+  ContSampleTimeConflictMsg "2"
+  StiffnessDetectionMsg "2"
+  MaxConsecutiveZCs "1000"
+  AlgebraicLoopWithStateMachineMsg "3"
+  AssertionAction "1"
+  FixedPointDatatypeOverride "1"
+  InitializationCommands ""
+  InitialState  "1"
+  SystemState   ""
+  JacobianComputation "2"
+  TaskingMode   "1"
+  TaskConfigurations ""
+  CodeGenParameterInlining "2"
+  CodeGenFloatingPointFormat "2"
+  CodeGenAbsTimeUsageMsg "3"
+  CodeGenBaseName ""
+  CodeGenOutputDir ""
+  CodeGenExtraOpts ""
+  CodeGenTarget "Generic"
+  CodeGenTargetSettings ""
+  ExtendedMatrixPrecision "1"
+  MatrixSignificanceCheck "2"
+  RemoveUnusedStateSpaceOutputs "2"
+  EnableStateSpaceSplitting "2"
+  DisplayStateSpaceSplitting "1"
+  DiscretizationMethod "2"
+  ExternalModeSettings ""
+  AlgebraicLoopMethod "1"
+  AlgebraicLoopTolerance "1e-6"
+  ScriptsDialogGeometry ""
+  ScriptsDialogSplitterPos "0"
+  MixedSignalSolverBypassOperatingPoint "1"
+  MixedSignalSolverInitialConditions "2"
+  MixedSignalSolverMaxNewtonIterations "25"
+  MixedSignalSolverNumThreads "-1"
+  OperatingPointMaxNewtonIterations "50"
+  OperatingPointRelativeNewtonTolerance "1e-3"
+  OperatingPointAbsoluteNewtonTolerance "1e-12"
+  OperatingPointNodalVoltageNewtonTolerance "1e-6"
+  SpiceTemperature "27"
+  SpiceGMin     "0"
+  SpiceInductorRPar "0"
+  SpiceInductorRSer "0"
+  SpiceCapacitorGPar "0"
+  SpiceCapacitorRSer "0"
+  NetlistParserDetails "2"
+  InvalidNetlistFunctionEvaluationMsg "1"
+  IncompatibleInitialConditionMsg "2"
+  Schematic {
+    Location      [0, 24; 1920, 990]
+    ZoomFactor    1.16513
+    SliderPosition [-1, 0]
+    ShowBrowser   off
+    BrowserWidth  100
+    Component {
+      Type          DCVoltageSource
+      Name          "USB Voltage"
+      Show          on
+      Position      [470, 470]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "5"
+        Show          on
+      }
+    }
+    Component {
+      Type          PlecsProbe
+      Name          "Probe"
+      Show          on
+      Position      [250, 110]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Probe {
+        Component     "Battery"
+        Path          ""
+        Signals       {"Capacitor current", "Capacitor voltage"}
+      }
+      Probe {
+        Component     "Vm2"
+        Path          ""
+        Signals       {}
+      }
+      Probe {
+        Component     "Vm1"
+        Path          ""
+        Signals       {"Measured voltage"}
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground1"
+      Show          off
+      Position      [735, 575]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Resistor
+      Name          "Ra"
+      Show          on
+      Position      [900, 425]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "1e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rb"
+      Show          on
+      Position      [900, 545]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "1e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "Co"
+      Show          on
+      Position      [990, 465]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "100e-8"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          on
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc1"
+      Show          on
+      Position      [1575, 535]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "1.75"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground3"
+      Show          off
+      Position      [1575, 560]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label4"
+      Show          off
+      Position      [1575, 495]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "VREF"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rg"
+      Show          on
+      Position      [645, 520]
+      Direction     right
+      Flipped       on
+      LabelPosition south
+      Parameter {
+        Variable      "R"
+        Value         "1000"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rf"
+      Show          on
+      Position      [795, 410]
+      Direction     right
+      Flipped       on
+      LabelPosition southwest
+      Parameter {
+        Variable      "R"
+        Value         "1e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Scope
+      Name          "Scope3"
+      Show          on
+      Position      [320, 110]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-15, -15; 15, 15]
+      Location      [0, 24; 1920, 1030]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACkAAAD8fwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAIAAAeAAAAAc/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAAB4AAAABEAP///wAAB4AAAAPPAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":196,\"Labels\":[],"
+"\"VisualIdxs\":[]}"
+      PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      Axes          "1"
+      TimeRange     "0.0"
+      ScrollingMode "1"
+      SingleTimeAxis "1"
+      Open          "0"
+      Ts            "-1"
+      SampleLimit   "0"
+      XAxisLabel    "Time / s"
+      ShowLegend    "1"
+      Axis {
+        Name          ""
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {}
+        SignalTypes   [ ]
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Fourier {
+        SingleXAxis       on
+        AxisLabel         "Frequency / Hz"
+        Scaling           0
+        PhaseDisplay      0
+        ShowFourierLegend off
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "Ca"
+      Show          on
+      Position      [860, 375]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "4.7e-7"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          on
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "Zf"
+      Show          on
+      Position      [705, 410]
+      Direction     left
+      Flipped       on
+      LabelPosition north
+      Parameter {
+        Variable      "C"
+        Value         "3.3e-9"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground2"
+      Show          off
+      Position      [745, 640]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label3"
+      Show          off
+      Position      [1485, 495]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Tag"
+        Value         "5V"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc2"
+      Show          on
+      Position      [1485, 535]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground4"
+      Show          off
+      Position      [1485, 560]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist"
+      Show          off
+      Position      [645, 300]
+      Direction     left
+      Flipped       off
+      LabelPosition east
+      Frame         [-15, -30; 15, 30]
+      IconDisplayCommands "local IconLib = require('PlecsIconLib')\n"
+"\n"
+"IconLib.mosfet(0, 0, {deviceType=\"p\"})\n"
+"\n"
+"Icon:text(20, 0, \"IRF9Z24N\", \"FontSize\", 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          off
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         ".SUBCKT irf9z24n 1 2 3\n"
+"**************************************\n"
+"*      Model Generated by MODPEX     *\n"
+"*Copyright(c) Symmetry Design Systems*\n"
+"*         All Rights Reserved        *\n"
+"*    UNPUBLISHED LICENSED SOFTWARE   *\n"
+"*   Contains Proprietary Information *\n"
+"*      Which is The Property of      *\n"
+"*     SYMMETRY OR ITS LICENSORS      *\n"
+"*Commercial Use or Resale Restricted *\n"
+"*   by Symmetry License Agreement    *\n"
+"**************************************\n"
+"* Model generated on Mar  7, 97\n"
+"* MODEL FORMAT: SPICE3\n"
+"* Symmetry POWER MOS Model (Version 1.0)\n"
+"* External Node Designations\n"
+"* Node 1 -> Drain\n"
+"* Node 2 -> Gate\n"
+"* Node 3 -> Source\n"
+"M1 9 7 8 8 MM L=100u W=100u\n"
+".MODEL MM PMOS LEVEL=1 IS=1e-32 VTO=-3.43932 LAMBDA=0 KP=2.45777 CGSO=2.66558"
+"e-06 CGDO=1e-11\n"
+"RS 8 3 0.0964368\n"
+"D1 1 3 MD\n"
+".MODEL MD D IS=6.40889e-11 RS=0.0172841 N=1.25507 BV=55 IBV=0.00025 EG=1.2 XT"
+"I=4 TT=1e-07 CJO=2.57014e-10 VJ=3.38187 M=0.582191 FC=0.5\n"
+"RDS 3 1 2.2e+06\n"
+"RD 9 1 0.0001\n"
+"RG 2 7 11.5569\n"
+"D2 5 4 MD1\n"
+".MODEL MD1 D IS=1e-32 N=50 CJO=5.09353e-10 VJ=0.5 M=0.43731 FC=1e-08\n"
+"D3 5 0 MD2\n"
+".MODEL MD2 D IS=1e-10 N=0.4 RS=3.00002e-06\n"
+"RL 5 10 1\n"
+"FI2 7 9 VFI2 -1\n"
+"VFI2 4 0 0\n"
+"EV16 10 0 9 7 1\n"
+"CAP 11 10 7.862e-10\n"
+"FI1 7 9 VFI1 -1\n"
+"VFI1 11 6 0\n"
+"RCAP 6 10 1\n"
+"D4 6 0 MD3\n"
+".MODEL MD3 D IS=1e-10 N=0.4\n"
+".ENDS irf9z24n"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 20]
+        Direction     down
+        Name          "1"
+        NetlistName   "1"
+      }
+      Terminal {
+        Type          Port
+        Position      [-35, 0]
+        Direction     left
+        Name          "2"
+        NetlistName   "2"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, -20]
+        Direction     up
+        Name          "3"
+        NetlistName   "3"
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rsense"
+      Show          on
+      Position      [530, 300]
+      Direction     right
+      Flipped       on
+      LabelPosition southwest
+      Parameter {
+        Variable      "R"
+        Value         "1.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "Battery"
+      Show          on
+      Position      [1055, 465]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "30"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          on
+      }
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist7"
+      Show          off
+      Position      [730, 520]
+      Direction     right
+      Flipped       off
+      LabelPosition west
+      Frame         [-40, -30; 40, 30]
+      IconDisplayCommands "Icon:line({-50,50},{-40,-40})\n"
+"Icon:line({-50,0},{-40,40})\n"
+"Icon:line({50,0},{-40,40})\n"
+"Icon:text(0, 20, 'OUT', 'FontSize', 9)\n"
+"Icon:text(20, -30, 'IN+', 'FontSize', 9)\n"
+"Icon:text(-20, -30, 'IN-', 'FontSize', 9)\n"
+"Icon:text(-20, -10, 'VCC', 'FontSize', 9)\n"
+"Icon:text(20, -10, 'VEE', 'FontSize', 9)\n"
+"Icon:text(0, -15, 'TLV9162', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         "* TLV916x\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* (C) Copyright 2025 Texas Instruments Incorporated. All rights reserved.    "
+" \n"
+"*****************************************************************************"
+"*******************************************\n"
+"** This model is designed as an aid for customers of Texas Instruments.      "
+"\n"
+"** TI and its licensors and suppliers make no warranties, either expressed   "
+"\n"
+"** or implied, with respect to this model, including the warranties of       "
+"\n"
+"** merchantability or fitness for a particular purpose. The model is        "
+"\n"
+"** provided solely on an \"as is\" basis. The entire risk as to its quality  "
+" \n"
+"** and performance is with the customer\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"** Released by: Online Design Tools, Texas Instruments Inc.\n"
+"* Model Type: Generic (suitable for all analysis types)\n"
+"* EVM Order Number: NA\n"
+"* EVM Users Guide: NA\n"
+"* Datasheet: SBOSA68D - NOV '21 - REV MAR '24\n"
+"* Created with Green-Williams-Lis Op Amp Macro-model Architecture\n"
+"* Released by: Srivatsan Sathyamoorthy\n"
+"* Date: 11/06/2025\n"
+"* Part: TLV916x\n"
+"*\n"
+"* Top Level Model: TLV916x\n"
+"* Model Version: 1.1\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"* Updates:\n"
+"*\n"
+"* Final 1.1\n"
+"*      1. Uniquify the sub-circuit calls to prevent overlapping with existing"
+" models and/or PSpice keywords.\n"
+"*      2. No changes to the model itself.\n"
+"*\n"
+"* Final 1.0\n"
+"* Release to Web. [Created by: Carolina Walters]\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* MODEL NOTES: MACRO-MODEL SIMULATED PARAMETERS:\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"* OPEN-LOOP GAIN AND PHASE VS. FREQUENCY  WITH RL, CL EFFECTS (Aol)\n"
+"* UNITY GAIN BANDWIDTH (GBW)\n"
+"* INPUT COMMON-MODE REJECTION RATIO VS. FREQUENCY (CMRR)\n"
+"* POWER SUPPLY REJECTION RATIO VS. FREQUENCY (PSRR)\n"
+"* DIFFERENTIAL INPUT IMPEDANCE (Zid)\n"
+"* COMMON-MODE INPUT IMPEDANCE (Zic)\n"
+"* OPEN-LOOP OUTPUT IMPEDANCE VS. FREQUENCY (Zo)\n"
+"* OUTPUT CURRENT THROUGH THE SUPPLY (Iout)\n"
+"* INPUT VOLTAGE NOISE DENSITY VS. FREQUENCY (en)\n"
+"* INPUT CURRENT NOISE DENSITY VS. FREQUENCY (in)\n"
+"* OUTPUT VOLTAGE SWING vs. OUTPUT CURRENT (Vo)\n"
+"* SHORT-CIRCUIT OUTPUT CURRENT (Isc)\n"
+"* QUIESCENT CURRENT (Iq)\n"
+"* SETTLING TIME VS. CAPACITIVE LOAD (ts)\n"
+"* SLEW RATE (SR)\n"
+"* SMALL SIGNAL OVERSHOOT VS. CAPACITIVE LOAD\n"
+"* LARGE SIGNAL RESPONSE\n"
+"* OVERLOAD RECOVERY TIME (tor)\n"
+"* INPUT BIAS CURRENT (Ib)\n"
+"* INPUT OFFSET CURRENT (Ios)\n"
+"* INPUT OFFSET VOLTAGE (Vos)\n"
+"* INPUT OFFSET VOLTAGE VS. TEMPERATURE (VOS DRIFT)\n"
+"* INPUT COMMON-MODE VOLTAGE RANGE (Vcm)\n"
+"* INPUT OFFSET VOLTAGE VS. INPUT COMMON-MODE VOLTAGE (Vos vs. Vcm)\n"
+"* INPUT/OUTPUT ESD CELLS (ESDin, ESDout)\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+".SUBCKT TLV916x IN+ IN- VCC VEE OUT\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* Models\n"
+".MODEL BB_SW VSWITCH (RON=50 ROFF=1E12 VON=700E-3 VOFF=0)\n"
+".MODEL ESD_SW VSWITCH (RON=50 ROFF=1E12 VON=250E-3 VOFF=0)\n"
+".MODEL OL_SW VSWITCH (RON=1E-3 ROFF=1E9 VON=900E-3 VOFF=800E-3)\n"
+".MODEL OR_SW VSWITCH (RON=10E-3 ROFF=1E9 VON=1E-3 VOFF=0)\n"
+".MODEL R_NOISELESS RES (T_ABS=-273)\n"
+".MODEL S_VSWITCH_1 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_2 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_3 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_4 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_5 VSWITCH (RON=10M ROFF=1G VON=10M VOFF=0)\n"
+".MODEL S_VSWITCH_6 VSWITCH (RON=10M ROFF=1G VON=10M VOFF=0)\n"
+".MODEL S_VSWITCH_7 VSWITCH (RON=1M ROFF=1G VON=900M VOFF=800M)\n"
+".MODEL S_VSWITCH_8 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_9 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+"C_CMN ESDN MID 1P \n"
+"C_CMP MID ESDP 1P \n"
+"C_DIFF ESDP ESDN 9P \n"
+"C_VCLP VCLP MID 100P \n"
+"C_VIMON VIMON MID 1N \n"
+"C_VOUT_S VOUT_S MID 1N \n"
+"C1 51 52 159.2P \n"
+"C1B 49 50 159F \n"
+"C2 CLAMP MID 184.6N IC=0\n"
+"C3 27 MID 5F IC=0\n"
+"C4 46 47 176.8P \n"
+"C5 44 45 3.183P \n"
+"C6 41 42 159.2P \n"
+"C7 29 MID 1F \n"
+"C8 MID 78 1F \n"
+"C9 79 MID 1F \n"
+"C10 82 MID 1F \n"
+"C11 MID 83 1F \n"
+"C12 74 MID 1F \n"
+"C13 MID 75 1F \n"
+"C14 58 MID 1F \n"
+"C15 MID 59 1F \n"
+"C16 55 MID 1F \n"
+"C17 62 MID 1P \n"
+"C18 60 MID 1P \n"
+"C19 SW_OL MID 1P \n"
+"C21 38 39 90N IC=0\n"
+"C22 34 MID 75.07F IC=0\n"
+"C23 31 MID 8P IC=0\n"
+"C33 94 0 1F \n"
+"C34 92 0 100N \n"
+"C35 93 0 1F \n"
+"E2 87 MID CL_CLAMP MID 1\n"
+"E3 86 MID OUT MID 1\n"
+"E6 MID 0 92 0 1\n"
+"G_1 52 MID ESDP MID -7.924M\n"
+"G_2 48 MID 49 MID -6\n"
+"G_ADJUST 42 MID VEE_B MID -802.1M\n"
+"G_ADJUST1 33 MID 39 MID 22.58\n"
+"G_ADJUST2 36 MID 32 MID 1\n"
+"G_AOL_ZO 38 MID CL_CLAMP 40 -368.16\n"
+"G_CMR 96 25 48 MID -1M\n"
+"G6 91 95 43 41 -1M\n"
+"G8 VCC_CLP MID 78 MID -1M\n"
+"G9 VEE_CLP MID 79 MID -1M\n"
+"G10 66 MID 67 MID -1\n"
+"G11 64 MID 65 MID -1\n"
+"G12 VSENSE MID CLAMP MID -1M\n"
+"G15 CLAW_CLAMP MID 27 MID -1M\n"
+"G16 CL_CLAMP MID CLAW_CLAMP MID -1M\n"
+"G36 VCC_B 0 VCC 0 -1\n"
+"G37 VEE_B 0 VEE 0 -1\n"
+"GVCCS1 50 MID 51 MID -1\n"
+"GVCCS2 47 MID VCC_B MID -1.761M\n"
+"GVCCS3 45 MID 46 MID -1\n"
+"GVCCS4 43 MID 44 MID -400\n"
+"GVCCS5 27 MID VSENSE MID -1U\n"
+"H2 63 MID V11 -1\n"
+"H3 61 MID V12 1\n"
+"H3_2 85 MID V4 1K\n"
+"I_B 26 MID 10P\n"
+"I_OS ESDN MID 0\n"
+"I_Q VCC VEE 2.4M\n"
+"R_CMR 25 96 R_NOISELESS 1K \n"
+"R_VCLP 87 VCLP R_NOISELESS 100 \n"
+"R_VIMON 85 VIMON R_NOISELESS 100 \n"
+"R_VOUT_S 86 VOUT_S R_NOISELESS 100 \n"
+"R1 IN+ ESDP R_NOISELESS 10M \n"
+"R1B 50 49 R_NOISELESS 1MEG \n"
+"R2 IN- ESDN R_NOISELESS 10M \n"
+"R2B MID 49 R_NOISELESS 200K \n"
+"R3 MID ESDP R_NOISELESS 1T \n"
+"R4 ESDN MID R_NOISELESS 1T \n"
+"R5 52 51 R_NOISELESS 1MEG \n"
+"R6 MID 51 R_NOISELESS 200 \n"
+"R7 37 MID 1 \n"
+"R8 MID 47 R_NOISELESS 1 \n"
+"R9 95 96 R_NOISELESS 1M \n"
+"R10 30 ESDN R_NOISELESS 1M \n"
+"R11 38 MID R_NOISELESS 1 \n"
+"R12 INP_ESDN INP_ESDP R_NOISELESS 50 \n"
+"R13 INN_ESDP INN_ESDN R_NOISELESS 50 \n"
+"R14 MID 50 R_NOISELESS 1 \n"
+"R15 MID 48 R_NOISELESS 1 \n"
+"R16 47 46 R_NOISELESS 1MEG \n"
+"R17 MID 46 R_NOISELESS 900.8 \n"
+"R18 MID 45 R_NOISELESS 1 \n"
+"R19 45 44 R_NOISELESS 1MEG \n"
+"R20 MID 44 R_NOISELESS 2.506K \n"
+"R21 95 91 R_NOISELESS 1K \n"
+"R22 MID 43 R_NOISELESS 1 \n"
+"R23 MID 42 R_NOISELESS 1 \n"
+"R24 42 41 R_NOISELESS 100MEG \n"
+"R25 MID 89 R_NOISELESS 1G \n"
+"R26 90 MID R_NOISELESS 1G \n"
+"R27 MID 88 R_NOISELESS 1 \n"
+"R28 29 88 R_NOISELESS 1M \n"
+"R29 76 VCC_B R_NOISELESS 1K \n"
+"R30 76 78 R_NOISELESS 1M \n"
+"R31 VCC_CLP MID R_NOISELESS 1K \n"
+"R32 VEE_B 77 R_NOISELESS 1K \n"
+"R33 79 77 R_NOISELESS 1M \n"
+"R34 MID VEE_CLP R_NOISELESS 1K \n"
+"R35 VCC_CLP MID R_NOISELESS 1G \n"
+"R36 80 MID R_NOISELESS 1 \n"
+"R37 80 82 R_NOISELESS 1M \n"
+"R38 81 83 R_NOISELESS 1M \n"
+"R39 MID 81 R_NOISELESS 1 \n"
+"R40 VEE_CLP MID R_NOISELESS 1G \n"
+"R41 68 MID R_NOISELESS 1G \n"
+"R42 70 MID R_NOISELESS 1 \n"
+"R43 70 74 R_NOISELESS 1M \n"
+"R44 71 75 R_NOISELESS 1M \n"
+"R45 MID 71 R_NOISELESS 1 \n"
+"R46 MID 69 R_NOISELESS 1G \n"
+"R47 66 MID R_NOISELESS 1 \n"
+"R48 MID 64 R_NOISELESS 1 \n"
+"R49 53 MID R_NOISELESS 1G \n"
+"R50 56 MID R_NOISELESS 1 \n"
+"R51 56 58 R_NOISELESS 1M \n"
+"R52 57 59 R_NOISELESS 1M \n"
+"R53 MID 57 R_NOISELESS 1 \n"
+"R54 54 MID R_NOISELESS 1G \n"
+"R55 VSENSE 55 R_NOISELESS 1M \n"
+"R56 63 62 R_NOISELESS 100 \n"
+"R57 61 60 R_NOISELESS 100 \n"
+"R58 84 MID R_NOISELESS 1 \n"
+"R59 84 SW_OL R_NOISELESS 100 \n"
+"R60 MID 28 R_NOISELESS 1MEG \n"
+"R61 MID CLAMP R_NOISELESS 1MEG \n"
+"R62 MID VSENSE R_NOISELESS 1K \n"
+"R63 MID 41 R_NOISELESS 111.1 \n"
+"R64 33 MID R_NOISELESS 1 \n"
+"R65 MID CLAW_CLAMP R_NOISELESS 1K \n"
+"R66 MID CL_CLAMP R_NOISELESS 1K \n"
+"R67 39 38 R_NOISELESS 10K \n"
+"R68 39 MID R_NOISELESS 463.4 \n"
+"R69 36 MID R_NOISELESS 1 \n"
+"R70 35 36 R_NOISELESS 18.38K \n"
+"R71 34 35 R_NOISELESS 10K \n"
+"R72 32 33 R_NOISELESS 352K \n"
+"R73 31 32 R_NOISELESS 10K \n"
+"R74 MID 27 R_NOISELESS 1MEG \n"
+"R81 MID 85 R_NOISELESS 1G \n"
+"R83 MID 86 R_NOISELESS 1G \n"
+"R107 VCC_B 0 R_NOISELESS 1 \n"
+"R108 92 0 R_NOISELESS 1T \n"
+"R109 VEE_B 0 R_NOISELESS 1 \n"
+"R110 VCC_B 94 R_NOISELESS 1M \n"
+"R111 94 92 R_NOISELESS 1MEG \n"
+"R112 92 93 R_NOISELESS 1MEG \n"
+"R113 93 VEE_B R_NOISELESS 1M \n"
+"RDUMMY MID 40 R_NOISELESS 1.01K \n"
+"RSRC MID 52 R_NOISELESS 1 \n"
+"RX 40 37 R_NOISELESS 10.1K \n"
+"S1 38 39 SW_OL MID S_VSWITCH_7\n"
+"S2 INN_ESDP VCC INN_ESDP VCC S_VSWITCH_3\n"
+"S3 INP_ESDP VCC INP_ESDP VCC S_VSWITCH_4\n"
+"S4 VEE INN_ESDN VEE INN_ESDN S_VSWITCH_2\n"
+"S5 VEE INP_ESDN VEE INP_ESDN S_VSWITCH_1\n"
+"S6 OUT VCC OUT VCC S_VSWITCH_9\n"
+"S7 VEE OUT VEE OUT S_VSWITCH_8\n"
+"SOR_SWN 73 CLAMP 73 CLAMP S_VSWITCH_6\n"
+"SOR_SWP CLAMP 72 CLAMP 72 S_VSWITCH_5\n"
+"V_GRN 54 MID -35\n"
+"V_GRP 53 MID 50\n"
+"V_ISCN 69 MID -65\n"
+"V_ISCP 68 MID 65\n"
+"V_ORN 67 VCLP -3.84\n"
+"V_ORP 65 VCLP 4.32\n"
+"V_OS 25 26 -32U\n"
+"V4 40 OUT 0\n"
+"V11 73 66 0\n"
+"V12 72 64 0\n"
+"VCM_MAX 90 VCC_B 0\n"
+"VCM_MIN 89 VEE_B 0\n"
+"XCL_AMP 68 69 VIMON MID 70 71 CLAMP_AMP_LO_0_TLV916x\n"
+"XCL_SRC 74 75 CL_CLAMP MID VCCS_LIM_4_0_TLV916x\n"
+"XCLAW_AMP VCC_CLP VEE_CLP VOUT_S MID 80 81 CLAMP_AMP_LO_0_TLV916x\n"
+"XCLAW_SRC 82 83 CLAW_CLAMP MID VCCS_LIM_3_0_TLV916x\n"
+"XCLAWN MID VIMON VEE_B 77 VCCS_LIM_CLAW-_0_TLV916x\n"
+"XCLAWP VIMON MID 76 VCC_B VCCS_LIM_CLAW+_0_TLV916x\n"
+"XE_N ESDP 26 VNSE_0_TLV916x\n"
+"XGR_AMP 53 54 55 MID 56 57 CLAMP_AMP_HI_0_TLV916x\n"
+"XGR_SRC 58 59 CLAMP MID VCCS_LIM_GR_0_TLV916x\n"
+"XI_N MID 26 FEMT_0_TLV916x\n"
+"XIN11 ESDN MID FEMT_0_TLV916x\n"
+"XIQN MID VIMON VEE MID VCCS_LIMIT_IQ_0_TLV916x\n"
+"XIQP VIMON MID MID VCC VCCS_LIMIT_IQ_0_TLV916x\n"
+"XOL_SENSE MID 84 62 60 OL_SENSE_0_TLV916x\n"
+"XVCCS_LIM_1 29 30 MID 28 VCCS_LIM_1_0_TLV916x\n"
+"XVCCS_LIM_2 28 MID MID CLAMP VCCS_LIM_2_0_TLV916x\n"
+"XVCCS_LIM_ZO 34 MID MID 37 VCCS_LIM_ZO_0_TLV916x\n"
+"XVCM_CLAMP 91 MID 88 MID 90 89 VCCS_EXT_LIM_0_TLV916x\n"
+".ENDS TLV916x\n"
+"\n"
+"*--------------- End of main subcircuit ----------------------\n"
+"*--------------- References are appended below ---------------\n"
+"\n"
+".SUBCKT CLAMP_AMP_HI_0_TLV916x VC+ VC- VIN COM VO+ VO-\n"
+".PARAM G=10\n"
+"GVO- COM VO- VALUE = {IF(V(VIN,COM)<V(VC-,COM),((V(VC-,COM)-V(VIN,COM))*G),0)"
+"}\n"
+"GVO+ COM VO+ VALUE = {IF(V(VIN,COM)>V(VC+,COM),((V(VIN,COM)-V(VC+,COM))*G),0)"
+"}\n"
+".ENDS CLAMP_AMP_HI_0_TLV916x\n"
+"\n"
+".SUBCKT CLAMP_AMP_LO_0_TLV916x VC+ VC- VIN COM VO+ VO-\n"
+".PARAM G=1\n"
+"GVO- COM VO- VALUE = {IF(V(VIN,COM)<V(VC-,COM),((V(VC-,COM)-V(VIN,COM))*G),0)"
+"}\n"
+"GVO+ COM VO+ VALUE = {IF(V(VIN,COM)>V(VC+,COM),((V(VIN,COM)-V(VC+,COM))*G),0)"
+"}\n"
+".ENDS CLAMP_AMP_LO_0_TLV916x\n"
+"\n"
+".SUBCKT FEMT_0_TLV916x 1 2\n"
+".PARAM FLWF=1E-3\n"
+".PARAM GLFF={PWR(FLWF,0.25)*NLFF/1164}\n"
+".PARAM NLFF=60\n"
+".PARAM NVRF=60\n"
+".PARAM RNVF={1.184*PWR(NVRF,2)}\n"
+".MODEL DVNF D (KF={PWR(FLWF,0.5)/1E11} IS=1.0E-16)\n"
+"D1 7 0 DVNF \n"
+"D2 8 0 DVNF \n"
+"E1 3 6 7 8 {GLFF}\n"
+"E2 6 4 5 0 10\n"
+"G1 1 2 3 4 1E-6\n"
+"I1 0 7 10E-3\n"
+"I2 0 8 10E-3\n"
+"R1 3 0 1E9 \n"
+"R2 3 0 1E9 \n"
+"R3 3 6 1E9 \n"
+"R4 5 0 {RNVF} \n"
+"R5 5 0 {RNVF} \n"
+"R6 3 4 1E9 \n"
+"R7 4 0 1E9 \n"
+".ENDS FEMT_0_TLV916x\n"
+"\n"
+".SUBCKT OL_SENSE_0_TLV916x COM SW+ OLN OLP\n"
+"GSW+ COM SW+ VALUE = {IF((V(OLN,COM)>10E-3|V(OLP,COM)>10E-3),1,0)}\n"
+".ENDS OL_SENSE_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_EXT_LIM_0_TLV916x VIN+ VIN- IOUT- IOUT+ VP+ VP-\n"
+".PARAM GAIN=1\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VIN+,VIN-),V(VP-,VIN-),V(VP+,VIN-))}\n"
+".ENDS VCCS_EXT_LIM_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_1_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1E-4\n"
+".PARAM INEG=-.5\n"
+".PARAM IPOS=.5\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_1_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_2_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1.26E-1\n"
+".PARAM INEG=-5.9\n"
+".PARAM IPOS=6.64\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_2_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_3_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-70E-3\n"
+".PARAM IPOS=100E-3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_3_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_4_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-200E-3\n"
+".PARAM IPOS=200E-3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_4_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_CLAW+_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+"G1 IOUT+ IOUT- TABLE {(V(VC+,VC-))} =(0, 6.87E-5)(15, 4.04E-4)(30, 7.93E-4)(4"
+"5, 1.27E-3)(60, 1.8E-3)(70, 2.4E-3)(80,  3.75E-3)(90, 9.83E-3)\n"
+".ENDS VCCS_LIM_CLAW+_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_CLAW-_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+"G1 IOUT+ IOUT- TABLE {(V(VC+,VC-))} =(0, 7.59E-5)(40, 1.21E-3)(60, 2E-3)(70, "
+"2.61E-3)(80, 4.42E-3)(90, 9.61E-3)\n"
+".ENDS VCCS_LIM_CLAW-_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_GR_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-12\n"
+".PARAM IPOS=14\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_GR_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_ZO_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-2E3\n"
+".PARAM IPOS=2E3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_ZO_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIMIT_IQ_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1E-3\n"
+"G1 IOUT- IOUT+ VALUE={IF((V(VC+,VC-)<=0),0,GAIN*V(VC+,VC-))}\n"
+".ENDS VCCS_LIMIT_IQ_0_TLV916x\n"
+"\n"
+".SUBCKT VNSE_0_TLV916x 1 2\n"
+".PARAM FLW=10\n"
+".PARAM GLF={PWR(FLW,0.25)*NLF/1164}\n"
+".PARAM NLF=64.13\n"
+".PARAM NVR=4\n"
+".PARAM RNV={1.184*PWR(NVR,2)}\n"
+".MODEL DVN D (KF={PWR(FLW,0.5)/1E11} IS=1.0E-16)\n"
+"D1 7 0 DVN \n"
+"D2 8 0 DVN \n"
+"E1 3 6 7 8 {GLF}\n"
+"E2 6 4 5 0 10\n"
+"E3 1 2 3 4 1\n"
+"I1 0 7 10E-3\n"
+"I2 0 8 10E-3\n"
+"R1 3 0 1E9 \n"
+"R2 3 0 1E9 \n"
+"R3 3 6 1E9 \n"
+"R4 5 0 {RNV} \n"
+"R5 5 0 {RNV} \n"
+"R6 3 4 1E9 \n"
+"R7 4 0 1E9 \n"
+".ENDS VNSE_0_TLV916x\n"
+"\n"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [15, -45]
+        Direction     up
+        Name          "IN+"
+        NetlistName   "IN+"
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -45]
+        Direction     up
+        Name          "IN-"
+        NetlistName   "IN-"
+      }
+      Terminal {
+        Type          Port
+        Position      [-35, -5]
+        Direction     left
+        Name          "VCC"
+        NetlistName   "VCC"
+      }
+      Terminal {
+        Type          Port
+        Position      [35, -5]
+        Direction     right
+        Name          "VEE"
+        NetlistName   "VEE"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 45]
+        Direction     down
+        Name          "OUT"
+        NetlistName   "OUT"
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rc"
+      Show          on
+      Position      [400, 450]
+      Direction     down
+      Flipped       on
+      LabelPosition northwest
+      Parameter {
+        Variable      "R"
+        Value         "47e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc3"
+      Show          on
+      Position      [1455, 665]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "5.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Ra1"
+      Show          on
+      Position      [1515, 635]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "47e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm2"
+      Show          on
+      Position      [1550, 715]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground6"
+      Show          off
+      Position      [1550, 760]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Ground
+      Name          "Ground7"
+      Show          off
+      Position      [1485, 770]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist2"
+      Show          off
+      Position      [1515, 700]
+      Direction     left
+      Flipped       off
+      LabelPosition east
+      Frame         [-15, -10; 15, 10]
+      IconDisplayCommands "Icon:line({-6, -6, 6, -6}, {-7, 7, 0, -7})\n"
+"Icon:line({3, 6, 6, 9}, {-9, -7, 7, 9})\n"
+"Icon:line({-10, -6}, {0, 0})\n"
+"Icon:line({10, 6}, {0, 0})\n"
+"\n"
+"\n"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         "******\n"
+"* Spice Model\n"
+"* Item: CMOZ1L8\n"
+"* Date: 02/12/16\n"
+"* Revision History: REV A\n"
+"*==========================================================\n"
+"* This model was developed by: \n"
+"* Central Semiconductor, LLC.\n"
+"* 145 Adams Avenue\n"
+"* Hauppauge, NY 11788\n"
+"*\n"
+"* These models are subject to change without notice.\n"
+"* Users may not directly or indirectly re-sell or \n"
+"* re-distribute this model. This model may not \n"
+"* be modified, or altered without the consent of Central Semiconductor, LLC. "
+"\n"
+"*\n"
+"* For more information on this model contact\n"
+"* Central Semiconductor, LLC. at:\n"
+"* (631) 435-1110 or https://aeminc.com/en/contact-us\n"
+"*\n"
+"*\n"
+"* NOTE: THIS MODEL IS ACCURATE FROM 0 to 1mA OF ZENER CURRENT.  \n"
+"* DO NOT USE AT CURRENTS ABOVE 1MA.\n"
+"*\n"
+"*==========================================================\n"
+"******\n"
+"*SRC=CMOZ1L8;CMOZ1L8;Diodes;Zener <=10V;1.80V 0.250W Central Semi Central Sem"
+"i\n"
+"*SYM=HZEN\n"
+".SUBCKT CMOZ1L8 1 2\n"
+"* Terminals A K\n"
+"D1 1 2 DF\n"
+"DZ 3 1 DR\n"
+"VZ 2 3 0\n"
+".MODEL DF D ( IS=64.4p RS=36.3 N=1.10  CJO=226p VJ=0.750 M=0.330 TT=50.1n )\n"
+".MODEL DR D ( IS=12.9f RS=0.08k N=3.00 )\n"
+".ENDS"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-15, 0]
+        Direction     left
+        Name          "1"
+        NetlistName   "1"
+      }
+      Terminal {
+        Type          Port
+        Position      [15, 0]
+        Direction     right
+        Name          "2"
+        NetlistName   "2"
+      }
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist4"
+      Show          off
+      Position      [400, 530]
+      Direction     left
+      Flipped       off
+      LabelPosition east
+      Frame         [-15, -10; 15, 10]
+      IconDisplayCommands "Icon:line({-6, -6, 6, -6}, {-7, 7, 0, -7})\n"
+"Icon:line({3, 6, 6, 9}, {-9, -7, 7, 9})\n"
+"Icon:line({-10, -6}, {0, 0})\n"
+"Icon:line({10, 6}, {0, 0})\n"
+"\n"
+"\n"
+"Icon:text(15, -25, 'CMOZ1L8', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         "******\n"
+"* Spice Model\n"
+"* Item: CMOZ1L8\n"
+"* Date: 02/12/16\n"
+"* Revision History: REV A\n"
+"*==========================================================\n"
+"* This model was developed by: \n"
+"* Central Semiconductor, LLC.\n"
+"* 145 Adams Avenue\n"
+"* Hauppauge, NY 11788\n"
+"*\n"
+"* These models are subject to change without notice.\n"
+"* Users may not directly or indirectly re-sell or \n"
+"* re-distribute this model. This model may not \n"
+"* be modified, or altered without the consent of Central Semiconductor, LLC. "
+"\n"
+"*\n"
+"* For more information on this model contact\n"
+"* Central Semiconductor, LLC. at:\n"
+"* (631) 435-1110 or https://aeminc.com/en/contact-us\n"
+"*\n"
+"*\n"
+"* NOTE: THIS MODEL IS ACCURATE FROM 0 to 1mA OF ZENER CURRENT.  \n"
+"* DO NOT USE AT CURRENTS ABOVE 1MA.\n"
+"*\n"
+"*==========================================================\n"
+"******\n"
+"*SRC=CMOZ1L8;CMOZ1L8;Diodes;Zener <=10V;1.80V 0.250W Central Semi Central Sem"
+"i\n"
+"*SYM=HZEN\n"
+".SUBCKT CMOZ1L8 1 2\n"
+"* Terminals A K\n"
+"D1 1 2 DF\n"
+"DZ 3 1 DR\n"
+"VZ 2 3 0\n"
+".MODEL DF D ( IS=64.4p RS=36.3 N=1.10  CJO=226p VJ=0.750 M=0.330 TT=50.1n )\n"
+".MODEL DR D ( IS=12.9f RS=0.08k N=3.00 )\n"
+".ENDS"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-15, 0]
+        Direction     left
+        Name          "1"
+        NetlistName   "1"
+      }
+      Terminal {
+        Type          Port
+        Position      [15, 0]
+        Direction     right
+        Name          "2"
+        NetlistName   "2"
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "V_dc4"
+      Show          on
+      Position      [1600, 665]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "5.5"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Ra2"
+      Show          on
+      Position      [1660, 635]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "47e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm4"
+      Show          on
+      Position      [1695, 715]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Ground
+      Name          "Ground8"
+      Show          off
+      Position      [1695, 760]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Ground
+      Name          "Ground9"
+      Show          off
+      Position      [1630, 770]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Resistor
+      Name          "Ra3"
+      Show          on
+      Position      [1660, 700]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "25.3e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist8"
+      Show          off
+      Position      [400, 670]
+      Direction     right
+      Flipped       on
+      LabelPosition east
+      Frame         [-40, -30; 40, 30]
+      IconDisplayCommands "Icon:line({-50,50},{-40,-40})\n"
+"Icon:line({-50,0},{-40,40})\n"
+"Icon:line({50,0},{-40,40})\n"
+"Icon:text(0, 20, 'OUT', 'FontSize', 9)\n"
+"Icon:text(20, -30, 'IN+', 'FontSize', 9)\n"
+"Icon:text(-20, -30, 'IN-', 'FontSize', 9)\n"
+"Icon:text(-20, -10, 'VCC', 'FontSize', 9)\n"
+"Icon:text(20, -10, 'VEE', 'FontSize', 9)\n"
+"Icon:text(0, -15, 'TLV9162', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          on
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         "* TLV916x\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* (C) Copyright 2025 Texas Instruments Incorporated. All rights reserved.    "
+" \n"
+"*****************************************************************************"
+"*******************************************\n"
+"** This model is designed as an aid for customers of Texas Instruments.      "
+"\n"
+"** TI and its licensors and suppliers make no warranties, either expressed   "
+"\n"
+"** or implied, with respect to this model, including the warranties of       "
+"\n"
+"** merchantability or fitness for a particular purpose. The model is        "
+"\n"
+"** provided solely on an \"as is\" basis. The entire risk as to its quality  "
+" \n"
+"** and performance is with the customer\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"** Released by: Online Design Tools, Texas Instruments Inc.\n"
+"* Model Type: Generic (suitable for all analysis types)\n"
+"* EVM Order Number: NA\n"
+"* EVM Users Guide: NA\n"
+"* Datasheet: SBOSA68D - NOV '21 - REV MAR '24\n"
+"* Created with Green-Williams-Lis Op Amp Macro-model Architecture\n"
+"* Released by: Srivatsan Sathyamoorthy\n"
+"* Date: 11/06/2025\n"
+"* Part: TLV916x\n"
+"*\n"
+"* Top Level Model: TLV916x\n"
+"* Model Version: 1.1\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"* Updates:\n"
+"*\n"
+"* Final 1.1\n"
+"*      1. Uniquify the sub-circuit calls to prevent overlapping with existing"
+" models and/or PSpice keywords.\n"
+"*      2. No changes to the model itself.\n"
+"*\n"
+"* Final 1.0\n"
+"* Release to Web. [Created by: Carolina Walters]\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* MODEL NOTES: MACRO-MODEL SIMULATED PARAMETERS:\n"
+"*****************************************************************************"
+"*******************************************\n"
+"*\n"
+"* OPEN-LOOP GAIN AND PHASE VS. FREQUENCY  WITH RL, CL EFFECTS (Aol)\n"
+"* UNITY GAIN BANDWIDTH (GBW)\n"
+"* INPUT COMMON-MODE REJECTION RATIO VS. FREQUENCY (CMRR)\n"
+"* POWER SUPPLY REJECTION RATIO VS. FREQUENCY (PSRR)\n"
+"* DIFFERENTIAL INPUT IMPEDANCE (Zid)\n"
+"* COMMON-MODE INPUT IMPEDANCE (Zic)\n"
+"* OPEN-LOOP OUTPUT IMPEDANCE VS. FREQUENCY (Zo)\n"
+"* OUTPUT CURRENT THROUGH THE SUPPLY (Iout)\n"
+"* INPUT VOLTAGE NOISE DENSITY VS. FREQUENCY (en)\n"
+"* INPUT CURRENT NOISE DENSITY VS. FREQUENCY (in)\n"
+"* OUTPUT VOLTAGE SWING vs. OUTPUT CURRENT (Vo)\n"
+"* SHORT-CIRCUIT OUTPUT CURRENT (Isc)\n"
+"* QUIESCENT CURRENT (Iq)\n"
+"* SETTLING TIME VS. CAPACITIVE LOAD (ts)\n"
+"* SLEW RATE (SR)\n"
+"* SMALL SIGNAL OVERSHOOT VS. CAPACITIVE LOAD\n"
+"* LARGE SIGNAL RESPONSE\n"
+"* OVERLOAD RECOVERY TIME (tor)\n"
+"* INPUT BIAS CURRENT (Ib)\n"
+"* INPUT OFFSET CURRENT (Ios)\n"
+"* INPUT OFFSET VOLTAGE (Vos)\n"
+"* INPUT OFFSET VOLTAGE VS. TEMPERATURE (VOS DRIFT)\n"
+"* INPUT COMMON-MODE VOLTAGE RANGE (Vcm)\n"
+"* INPUT OFFSET VOLTAGE VS. INPUT COMMON-MODE VOLTAGE (Vos vs. Vcm)\n"
+"* INPUT/OUTPUT ESD CELLS (ESDin, ESDout)\n"
+"*\n"
+"*****************************************************************************"
+"*******************************************\n"
+".SUBCKT TLV916x IN+ IN- VCC VEE OUT\n"
+"*****************************************************************************"
+"*******************************************\n"
+"* Models\n"
+".MODEL BB_SW VSWITCH (RON=50 ROFF=1E12 VON=700E-3 VOFF=0)\n"
+".MODEL ESD_SW VSWITCH (RON=50 ROFF=1E12 VON=250E-3 VOFF=0)\n"
+".MODEL OL_SW VSWITCH (RON=1E-3 ROFF=1E9 VON=900E-3 VOFF=800E-3)\n"
+".MODEL OR_SW VSWITCH (RON=10E-3 ROFF=1E9 VON=1E-3 VOFF=0)\n"
+".MODEL R_NOISELESS RES (T_ABS=-273)\n"
+".MODEL S_VSWITCH_1 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_2 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_3 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_4 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_5 VSWITCH (RON=10M ROFF=1G VON=10M VOFF=0)\n"
+".MODEL S_VSWITCH_6 VSWITCH (RON=10M ROFF=1G VON=10M VOFF=0)\n"
+".MODEL S_VSWITCH_7 VSWITCH (RON=1M ROFF=1G VON=900M VOFF=800M)\n"
+".MODEL S_VSWITCH_8 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+".MODEL S_VSWITCH_9 VSWITCH (RON=50 ROFF=1T VON=500M VOFF=450M)\n"
+"C_CMN ESDN MID 1P \n"
+"C_CMP MID ESDP 1P \n"
+"C_DIFF ESDP ESDN 9P \n"
+"C_VCLP VCLP MID 100P \n"
+"C_VIMON VIMON MID 1N \n"
+"C_VOUT_S VOUT_S MID 1N \n"
+"C1 51 52 159.2P \n"
+"C1B 49 50 159F \n"
+"C2 CLAMP MID 184.6N IC=0\n"
+"C3 27 MID 5F IC=0\n"
+"C4 46 47 176.8P \n"
+"C5 44 45 3.183P \n"
+"C6 41 42 159.2P \n"
+"C7 29 MID 1F \n"
+"C8 MID 78 1F \n"
+"C9 79 MID 1F \n"
+"C10 82 MID 1F \n"
+"C11 MID 83 1F \n"
+"C12 74 MID 1F \n"
+"C13 MID 75 1F \n"
+"C14 58 MID 1F \n"
+"C15 MID 59 1F \n"
+"C16 55 MID 1F \n"
+"C17 62 MID 1P \n"
+"C18 60 MID 1P \n"
+"C19 SW_OL MID 1P \n"
+"C21 38 39 90N IC=0\n"
+"C22 34 MID 75.07F IC=0\n"
+"C23 31 MID 8P IC=0\n"
+"C33 94 0 1F \n"
+"C34 92 0 100N \n"
+"C35 93 0 1F \n"
+"E2 87 MID CL_CLAMP MID 1\n"
+"E3 86 MID OUT MID 1\n"
+"E6 MID 0 92 0 1\n"
+"G_1 52 MID ESDP MID -7.924M\n"
+"G_2 48 MID 49 MID -6\n"
+"G_ADJUST 42 MID VEE_B MID -802.1M\n"
+"G_ADJUST1 33 MID 39 MID 22.58\n"
+"G_ADJUST2 36 MID 32 MID 1\n"
+"G_AOL_ZO 38 MID CL_CLAMP 40 -368.16\n"
+"G_CMR 96 25 48 MID -1M\n"
+"G6 91 95 43 41 -1M\n"
+"G8 VCC_CLP MID 78 MID -1M\n"
+"G9 VEE_CLP MID 79 MID -1M\n"
+"G10 66 MID 67 MID -1\n"
+"G11 64 MID 65 MID -1\n"
+"G12 VSENSE MID CLAMP MID -1M\n"
+"G15 CLAW_CLAMP MID 27 MID -1M\n"
+"G16 CL_CLAMP MID CLAW_CLAMP MID -1M\n"
+"G36 VCC_B 0 VCC 0 -1\n"
+"G37 VEE_B 0 VEE 0 -1\n"
+"GVCCS1 50 MID 51 MID -1\n"
+"GVCCS2 47 MID VCC_B MID -1.761M\n"
+"GVCCS3 45 MID 46 MID -1\n"
+"GVCCS4 43 MID 44 MID -400\n"
+"GVCCS5 27 MID VSENSE MID -1U\n"
+"H2 63 MID V11 -1\n"
+"H3 61 MID V12 1\n"
+"H3_2 85 MID V4 1K\n"
+"I_B 26 MID 10P\n"
+"I_OS ESDN MID 0\n"
+"I_Q VCC VEE 2.4M\n"
+"R_CMR 25 96 R_NOISELESS 1K \n"
+"R_VCLP 87 VCLP R_NOISELESS 100 \n"
+"R_VIMON 85 VIMON R_NOISELESS 100 \n"
+"R_VOUT_S 86 VOUT_S R_NOISELESS 100 \n"
+"R1 IN+ ESDP R_NOISELESS 10M \n"
+"R1B 50 49 R_NOISELESS 1MEG \n"
+"R2 IN- ESDN R_NOISELESS 10M \n"
+"R2B MID 49 R_NOISELESS 200K \n"
+"R3 MID ESDP R_NOISELESS 1T \n"
+"R4 ESDN MID R_NOISELESS 1T \n"
+"R5 52 51 R_NOISELESS 1MEG \n"
+"R6 MID 51 R_NOISELESS 200 \n"
+"R7 37 MID 1 \n"
+"R8 MID 47 R_NOISELESS 1 \n"
+"R9 95 96 R_NOISELESS 1M \n"
+"R10 30 ESDN R_NOISELESS 1M \n"
+"R11 38 MID R_NOISELESS 1 \n"
+"R12 INP_ESDN INP_ESDP R_NOISELESS 50 \n"
+"R13 INN_ESDP INN_ESDN R_NOISELESS 50 \n"
+"R14 MID 50 R_NOISELESS 1 \n"
+"R15 MID 48 R_NOISELESS 1 \n"
+"R16 47 46 R_NOISELESS 1MEG \n"
+"R17 MID 46 R_NOISELESS 900.8 \n"
+"R18 MID 45 R_NOISELESS 1 \n"
+"R19 45 44 R_NOISELESS 1MEG \n"
+"R20 MID 44 R_NOISELESS 2.506K \n"
+"R21 95 91 R_NOISELESS 1K \n"
+"R22 MID 43 R_NOISELESS 1 \n"
+"R23 MID 42 R_NOISELESS 1 \n"
+"R24 42 41 R_NOISELESS 100MEG \n"
+"R25 MID 89 R_NOISELESS 1G \n"
+"R26 90 MID R_NOISELESS 1G \n"
+"R27 MID 88 R_NOISELESS 1 \n"
+"R28 29 88 R_NOISELESS 1M \n"
+"R29 76 VCC_B R_NOISELESS 1K \n"
+"R30 76 78 R_NOISELESS 1M \n"
+"R31 VCC_CLP MID R_NOISELESS 1K \n"
+"R32 VEE_B 77 R_NOISELESS 1K \n"
+"R33 79 77 R_NOISELESS 1M \n"
+"R34 MID VEE_CLP R_NOISELESS 1K \n"
+"R35 VCC_CLP MID R_NOISELESS 1G \n"
+"R36 80 MID R_NOISELESS 1 \n"
+"R37 80 82 R_NOISELESS 1M \n"
+"R38 81 83 R_NOISELESS 1M \n"
+"R39 MID 81 R_NOISELESS 1 \n"
+"R40 VEE_CLP MID R_NOISELESS 1G \n"
+"R41 68 MID R_NOISELESS 1G \n"
+"R42 70 MID R_NOISELESS 1 \n"
+"R43 70 74 R_NOISELESS 1M \n"
+"R44 71 75 R_NOISELESS 1M \n"
+"R45 MID 71 R_NOISELESS 1 \n"
+"R46 MID 69 R_NOISELESS 1G \n"
+"R47 66 MID R_NOISELESS 1 \n"
+"R48 MID 64 R_NOISELESS 1 \n"
+"R49 53 MID R_NOISELESS 1G \n"
+"R50 56 MID R_NOISELESS 1 \n"
+"R51 56 58 R_NOISELESS 1M \n"
+"R52 57 59 R_NOISELESS 1M \n"
+"R53 MID 57 R_NOISELESS 1 \n"
+"R54 54 MID R_NOISELESS 1G \n"
+"R55 VSENSE 55 R_NOISELESS 1M \n"
+"R56 63 62 R_NOISELESS 100 \n"
+"R57 61 60 R_NOISELESS 100 \n"
+"R58 84 MID R_NOISELESS 1 \n"
+"R59 84 SW_OL R_NOISELESS 100 \n"
+"R60 MID 28 R_NOISELESS 1MEG \n"
+"R61 MID CLAMP R_NOISELESS 1MEG \n"
+"R62 MID VSENSE R_NOISELESS 1K \n"
+"R63 MID 41 R_NOISELESS 111.1 \n"
+"R64 33 MID R_NOISELESS 1 \n"
+"R65 MID CLAW_CLAMP R_NOISELESS 1K \n"
+"R66 MID CL_CLAMP R_NOISELESS 1K \n"
+"R67 39 38 R_NOISELESS 10K \n"
+"R68 39 MID R_NOISELESS 463.4 \n"
+"R69 36 MID R_NOISELESS 1 \n"
+"R70 35 36 R_NOISELESS 18.38K \n"
+"R71 34 35 R_NOISELESS 10K \n"
+"R72 32 33 R_NOISELESS 352K \n"
+"R73 31 32 R_NOISELESS 10K \n"
+"R74 MID 27 R_NOISELESS 1MEG \n"
+"R81 MID 85 R_NOISELESS 1G \n"
+"R83 MID 86 R_NOISELESS 1G \n"
+"R107 VCC_B 0 R_NOISELESS 1 \n"
+"R108 92 0 R_NOISELESS 1T \n"
+"R109 VEE_B 0 R_NOISELESS 1 \n"
+"R110 VCC_B 94 R_NOISELESS 1M \n"
+"R111 94 92 R_NOISELESS 1MEG \n"
+"R112 92 93 R_NOISELESS 1MEG \n"
+"R113 93 VEE_B R_NOISELESS 1M \n"
+"RDUMMY MID 40 R_NOISELESS 1.01K \n"
+"RSRC MID 52 R_NOISELESS 1 \n"
+"RX 40 37 R_NOISELESS 10.1K \n"
+"S1 38 39 SW_OL MID S_VSWITCH_7\n"
+"S2 INN_ESDP VCC INN_ESDP VCC S_VSWITCH_3\n"
+"S3 INP_ESDP VCC INP_ESDP VCC S_VSWITCH_4\n"
+"S4 VEE INN_ESDN VEE INN_ESDN S_VSWITCH_2\n"
+"S5 VEE INP_ESDN VEE INP_ESDN S_VSWITCH_1\n"
+"S6 OUT VCC OUT VCC S_VSWITCH_9\n"
+"S7 VEE OUT VEE OUT S_VSWITCH_8\n"
+"SOR_SWN 73 CLAMP 73 CLAMP S_VSWITCH_6\n"
+"SOR_SWP CLAMP 72 CLAMP 72 S_VSWITCH_5\n"
+"V_GRN 54 MID -35\n"
+"V_GRP 53 MID 50\n"
+"V_ISCN 69 MID -65\n"
+"V_ISCP 68 MID 65\n"
+"V_ORN 67 VCLP -3.84\n"
+"V_ORP 65 VCLP 4.32\n"
+"V_OS 25 26 -32U\n"
+"V4 40 OUT 0\n"
+"V11 73 66 0\n"
+"V12 72 64 0\n"
+"VCM_MAX 90 VCC_B 0\n"
+"VCM_MIN 89 VEE_B 0\n"
+"XCL_AMP 68 69 VIMON MID 70 71 CLAMP_AMP_LO_0_TLV916x\n"
+"XCL_SRC 74 75 CL_CLAMP MID VCCS_LIM_4_0_TLV916x\n"
+"XCLAW_AMP VCC_CLP VEE_CLP VOUT_S MID 80 81 CLAMP_AMP_LO_0_TLV916x\n"
+"XCLAW_SRC 82 83 CLAW_CLAMP MID VCCS_LIM_3_0_TLV916x\n"
+"XCLAWN MID VIMON VEE_B 77 VCCS_LIM_CLAW-_0_TLV916x\n"
+"XCLAWP VIMON MID 76 VCC_B VCCS_LIM_CLAW+_0_TLV916x\n"
+"XE_N ESDP 26 VNSE_0_TLV916x\n"
+"XGR_AMP 53 54 55 MID 56 57 CLAMP_AMP_HI_0_TLV916x\n"
+"XGR_SRC 58 59 CLAMP MID VCCS_LIM_GR_0_TLV916x\n"
+"XI_N MID 26 FEMT_0_TLV916x\n"
+"XIN11 ESDN MID FEMT_0_TLV916x\n"
+"XIQN MID VIMON VEE MID VCCS_LIMIT_IQ_0_TLV916x\n"
+"XIQP VIMON MID MID VCC VCCS_LIMIT_IQ_0_TLV916x\n"
+"XOL_SENSE MID 84 62 60 OL_SENSE_0_TLV916x\n"
+"XVCCS_LIM_1 29 30 MID 28 VCCS_LIM_1_0_TLV916x\n"
+"XVCCS_LIM_2 28 MID MID CLAMP VCCS_LIM_2_0_TLV916x\n"
+"XVCCS_LIM_ZO 34 MID MID 37 VCCS_LIM_ZO_0_TLV916x\n"
+"XVCM_CLAMP 91 MID 88 MID 90 89 VCCS_EXT_LIM_0_TLV916x\n"
+".ENDS TLV916x\n"
+"\n"
+"*--------------- End of main subcircuit ----------------------\n"
+"*--------------- References are appended below ---------------\n"
+"\n"
+".SUBCKT CLAMP_AMP_HI_0_TLV916x VC+ VC- VIN COM VO+ VO-\n"
+".PARAM G=10\n"
+"GVO- COM VO- VALUE = {IF(V(VIN,COM)<V(VC-,COM),((V(VC-,COM)-V(VIN,COM))*G),0)"
+"}\n"
+"GVO+ COM VO+ VALUE = {IF(V(VIN,COM)>V(VC+,COM),((V(VIN,COM)-V(VC+,COM))*G),0)"
+"}\n"
+".ENDS CLAMP_AMP_HI_0_TLV916x\n"
+"\n"
+".SUBCKT CLAMP_AMP_LO_0_TLV916x VC+ VC- VIN COM VO+ VO-\n"
+".PARAM G=1\n"
+"GVO- COM VO- VALUE = {IF(V(VIN,COM)<V(VC-,COM),((V(VC-,COM)-V(VIN,COM))*G),0)"
+"}\n"
+"GVO+ COM VO+ VALUE = {IF(V(VIN,COM)>V(VC+,COM),((V(VIN,COM)-V(VC+,COM))*G),0)"
+"}\n"
+".ENDS CLAMP_AMP_LO_0_TLV916x\n"
+"\n"
+".SUBCKT FEMT_0_TLV916x 1 2\n"
+".PARAM FLWF=1E-3\n"
+".PARAM GLFF={PWR(FLWF,0.25)*NLFF/1164}\n"
+".PARAM NLFF=60\n"
+".PARAM NVRF=60\n"
+".PARAM RNVF={1.184*PWR(NVRF,2)}\n"
+".MODEL DVNF D (KF={PWR(FLWF,0.5)/1E11} IS=1.0E-16)\n"
+"D1 7 0 DVNF \n"
+"D2 8 0 DVNF \n"
+"E1 3 6 7 8 {GLFF}\n"
+"E2 6 4 5 0 10\n"
+"G1 1 2 3 4 1E-6\n"
+"I1 0 7 10E-3\n"
+"I2 0 8 10E-3\n"
+"R1 3 0 1E9 \n"
+"R2 3 0 1E9 \n"
+"R3 3 6 1E9 \n"
+"R4 5 0 {RNVF} \n"
+"R5 5 0 {RNVF} \n"
+"R6 3 4 1E9 \n"
+"R7 4 0 1E9 \n"
+".ENDS FEMT_0_TLV916x\n"
+"\n"
+".SUBCKT OL_SENSE_0_TLV916x COM SW+ OLN OLP\n"
+"GSW+ COM SW+ VALUE = {IF((V(OLN,COM)>10E-3|V(OLP,COM)>10E-3),1,0)}\n"
+".ENDS OL_SENSE_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_EXT_LIM_0_TLV916x VIN+ VIN- IOUT- IOUT+ VP+ VP-\n"
+".PARAM GAIN=1\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VIN+,VIN-),V(VP-,VIN-),V(VP+,VIN-))}\n"
+".ENDS VCCS_EXT_LIM_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_1_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1E-4\n"
+".PARAM INEG=-.5\n"
+".PARAM IPOS=.5\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_1_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_2_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1.26E-1\n"
+".PARAM INEG=-5.9\n"
+".PARAM IPOS=6.64\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_2_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_3_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-70E-3\n"
+".PARAM IPOS=100E-3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_3_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_4_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-200E-3\n"
+".PARAM IPOS=200E-3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_4_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_CLAW+_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+"G1 IOUT+ IOUT- TABLE {(V(VC+,VC-))} =(0, 6.87E-5)(15, 4.04E-4)(30, 7.93E-4)(4"
+"5, 1.27E-3)(60, 1.8E-3)(70, 2.4E-3)(80,  3.75E-3)(90, 9.83E-3)\n"
+".ENDS VCCS_LIM_CLAW+_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_CLAW-_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+"G1 IOUT+ IOUT- TABLE {(V(VC+,VC-))} =(0, 7.59E-5)(40, 1.21E-3)(60, 2E-3)(70, "
+"2.61E-3)(80, 4.42E-3)(90, 9.61E-3)\n"
+".ENDS VCCS_LIM_CLAW-_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_GR_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-12\n"
+".PARAM IPOS=14\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_GR_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIM_ZO_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1\n"
+".PARAM INEG=-2E3\n"
+".PARAM IPOS=2E3\n"
+"G1 IOUT+ IOUT- VALUE={LIMIT(GAIN*V(VC+,VC-),INEG,IPOS)}\n"
+".ENDS VCCS_LIM_ZO_0_TLV916x\n"
+"\n"
+".SUBCKT VCCS_LIMIT_IQ_0_TLV916x VC+ VC- IOUT+ IOUT-\n"
+".PARAM GAIN=1E-3\n"
+"G1 IOUT- IOUT+ VALUE={IF((V(VC+,VC-)<=0),0,GAIN*V(VC+,VC-))}\n"
+".ENDS VCCS_LIMIT_IQ_0_TLV916x\n"
+"\n"
+".SUBCKT VNSE_0_TLV916x 1 2\n"
+".PARAM FLW=10\n"
+".PARAM GLF={PWR(FLW,0.25)*NLF/1164}\n"
+".PARAM NLF=64.13\n"
+".PARAM NVR=4\n"
+".PARAM RNV={1.184*PWR(NVR,2)}\n"
+".MODEL DVN D (KF={PWR(FLW,0.5)/1E11} IS=1.0E-16)\n"
+"D1 7 0 DVN \n"
+"D2 8 0 DVN \n"
+"E1 3 6 7 8 {GLF}\n"
+"E2 6 4 5 0 10\n"
+"E3 1 2 3 4 1\n"
+"I1 0 7 10E-3\n"
+"I2 0 8 10E-3\n"
+"R1 3 0 1E9 \n"
+"R2 3 0 1E9 \n"
+"R3 3 6 1E9 \n"
+"R4 5 0 {RNV} \n"
+"R5 5 0 {RNV} \n"
+"R6 3 4 1E9 \n"
+"R7 4 0 1E9 \n"
+".ENDS VNSE_0_TLV916x\n"
+"\n"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [15, -45]
+        Direction     up
+        Name          "IN+"
+        NetlistName   "IN+"
+      }
+      Terminal {
+        Type          Port
+        Position      [-25, -45]
+        Direction     up
+        Name          "IN-"
+        NetlistName   "IN-"
+      }
+      Terminal {
+        Type          Port
+        Position      [-35, -5]
+        Direction     left
+        Name          "VCC"
+        NetlistName   "VCC"
+      }
+      Terminal {
+        Type          Port
+        Position      [35, -5]
+        Direction     right
+        Name          "VEE"
+        NetlistName   "VEE"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 45]
+        Direction     down
+        Name          "OUT"
+        NetlistName   "OUT"
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground5"
+      Show          off
+      Position      [395, 715]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm1"
+      Show          on
+      Position      [590, 505]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Netlist
+      Name          "Netlist3"
+      Show          off
+      Position      [565, 350]
+      Direction     right
+      Flipped       on
+      LabelPosition east
+      Frame         [-15, -30; 15, 30]
+      IconDisplayCommands "local IconLib = require('PlecsIconLib')\n"
+"\n"
+"IconLib.bjt(0, 0, {deviceType=\"pnp\"})\n"
+"\n"
+"Icon:text(10, 0, 'BD140', 'FontSize', 9)"
+      IconDisplayLanguage "2"
+      IconFrame           off
+      IconOpaque          off
+      IconRotates         on
+      Parameter {
+        Variable      "Netlist"
+        Value         "*******************************************************"
+"**********\n"
+"******STMicroelectronics MOSFET, IGBT and Bipolar Library *******\n"
+"*****************************************************************\n"
+"*\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*\n"
+"* Models provided by STMicroelectronics are not guaranteed to   *\n"
+"* fully represent all the specifications and operating\t\t\t*\n"
+"* characteristics of the product behavior that they reproduce.  *\n"
+"* The model describes the characteristics of a typical device.  *\n"
+"* In all cases, the current product data sheet contains all     *\n"
+"* information to be used like final design guidelines and the   *\n"
+"* only actual performance specification.                        *\n"
+"* Altough models can be a useful tool in evaluating device      *\n"
+"* performance, they cannot model exact device performance under *\n"
+"* all conditions.\t\t\t\t\t\t\t\t\t\t\t\t*\n"
+"* STMicroelectronics therefore does not assume any              *\n"
+"* responsibility arising from their use.                        *\n"
+"* STMicroelectronics reserves the right to change models        *\n"
+"* without prior notice.                                         *\n"
+"*                                                               *\n"
+"*****************************************************************\n"
+" \n"
+".SUBCKT BD140 1 2 3\n"
+"RB 2 5 1E-06\n"
+"RC 1 4 1E-06\n"
+"RE 3 6 1E-06\n"
+"Q1 4 5 6 Q\n"
+".MODEL Q PNP Is    = 0.188E-16 Bf    = 201.325 Vaf   = 39.764 Ikf   = 0.521 I"
+"se   = 0.447E-15 Ne    = 2.771 Br    = 0.671E-01 Var   = 131.148 Ikr   = 0.49"
+"4 Isc   = 0.921E-12 Nc    = 1.674 Nk    = 0.515 Rb    = 0.572E-01 Rbm   = 0.3"
+"35E-02 Nf    = 0.981 Re    = 0.185E-02 Rc    = 0.127 Qco   = 0.214E-09 Rco   "
+"= 1.681 Vo    = 10.359 Gamma = 0.579E-10 Cjc   = 0.469E-12 Vjc   = 0.715 Mjc "
+"  = 0.313 Cje   = 0.297E-12 Vje   = 0.735 Mje   = 0.384 Fc    = 0.526 Tr    ="
+" 0.129E-07 Tf    = 0.849E-10 Itf   = 0.332 Vtf   = 6.784 Xtf   = 0.505\n"
+".ENDS BD140"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [0, -20]
+        Direction     up
+        Name          "1"
+        NetlistName   "1"
+      }
+      Terminal {
+        Type          Port
+        Position      [-35, 0]
+        Direction     left
+        Name          "2"
+        NetlistName   "2"
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 20]
+        Direction     down
+        Name          "3"
+        NetlistName   "3"
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Probe"
+      SrcTerminal   1
+      DstComponent  "Scope3"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ca"
+      SrcTerminal   1
+      Points        [860, 300]
+      Branch {
+        Points        [900, 300]
+        Branch {
+          Points        [990, 300]
+          Branch {
+            DstComponent  "Co"
+            DstTerminal   1
+          }
+          Branch {
+            Points        [1055, 300]
+            DstComponent  "Battery"
+            DstTerminal   1
+          }
+        }
+        Branch {
+          DstComponent  "Ra"
+          DstTerminal   1
+        }
+      }
+      Branch {
+        DstComponent  "Netlist"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground3"
+      SrcTerminal   1
+      DstComponent  "V_dc1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc1"
+      SrcTerminal   1
+      DstComponent  "Label4"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rb"
+      SrcTerminal   1
+      Points        [900, 505]
+      Branch {
+        DstComponent  "Ra"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [860, 505]
+        Branch {
+          DstComponent  "Ca"
+          DstTerminal   2
+        }
+        Branch {
+          Points        [860, 535]
+          DstComponent  "Netlist7"
+          DstTerminal   1
+        }
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground1"
+      SrcTerminal   1
+      DstComponent  "Netlist7"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rf"
+      SrcTerminal   1
+      DstComponent  "Zf"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rb"
+      SrcTerminal   2
+      Points        [900, 610]
+      Branch {
+        Points        [745, 610]
+        Branch {
+          Points        [590, 610]
+          Branch {
+            Points        [470, 610]
+            Branch {
+              DstComponent  "USB Voltage"
+              DstTerminal   2
+            }
+            Branch {
+              Points        [400, 610]
+              DstComponent  "Netlist4"
+              DstTerminal   1
+            }
+          }
+          Branch {
+            DstComponent  "Vm1"
+            DstTerminal   2
+          }
+        }
+        Branch {
+          DstComponent  "Ground2"
+          DstTerminal   1
+        }
+      }
+      Branch {
+        Points        [990, 610]
+        Branch {
+          Points        [1055, 610]
+          DstComponent  "Battery"
+          DstTerminal   2
+        }
+        Branch {
+          DstComponent  "Co"
+          DstTerminal   2
+        }
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground4"
+      SrcTerminal   1
+      DstComponent  "V_dc2"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc2"
+      SrcTerminal   1
+      DstComponent  "Label3"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rc"
+      SrcTerminal   1
+      Points        [400, 300; 470, 300]
+      Branch {
+        Points        [470, 350]
+        Branch {
+          Points        [470, 430]
+          Branch {
+            DstComponent  "USB Voltage"
+            DstTerminal   1
+          }
+          Branch {
+            Points        [735, 430]
+            DstComponent  "Netlist7"
+            DstTerminal   3
+          }
+          Branch {
+            Points        [455, 430; 455, 620; 395, 620]
+            DstComponent  "Netlist8"
+            DstTerminal   3
+          }
+        }
+        Branch {
+          DstComponent  "Netlist3"
+          DstTerminal   1
+        }
+      }
+      Branch {
+        DstComponent  "Rsense"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc3"
+      SrcTerminal   1
+      Points        [1455, 585; 1515, 585]
+      DstComponent  "Ra1"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground6"
+      SrcTerminal   1
+      DstComponent  "Vm2"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc3"
+      SrcTerminal   2
+      Points        [1455, 745; 1485, 745]
+      Branch {
+        DstComponent  "Ground7"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [1515, 745]
+        DstComponent  "Netlist2"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ra1"
+      SrcTerminal   2
+      Points        [1515, 660]
+      Branch {
+        Points        [1550, 660]
+        DstComponent  "Vm2"
+        DstTerminal   1
+      }
+      Branch {
+        DstComponent  "Netlist2"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc4"
+      SrcTerminal   1
+      Points        [1600, 585; 1660, 585]
+      DstComponent  "Ra2"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground8"
+      SrcTerminal   1
+      DstComponent  "Vm4"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ra2"
+      SrcTerminal   2
+      Points        [1660, 660]
+      Branch {
+        Points        [1695, 660]
+        DstComponent  "Vm4"
+        DstTerminal   1
+      }
+      Branch {
+        DstComponent  "Ra3"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "V_dc4"
+      SrcTerminal   2
+      Points        [1600, 745; 1630, 745]
+      Branch {
+        DstComponent  "Ground9"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [1660, 745]
+        DstComponent  "Ra3"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Netlist"
+      SrcTerminal   2
+      Points        [645, 350; 605, 350]
+      Branch {
+        Points        [605, 520]
+        DstComponent  "Rg"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [590, 350]
+        Branch {
+          DstComponent  "Vm1"
+          DstTerminal   1
+        }
+        Branch {
+          DstComponent  "Netlist3"
+          DstTerminal   3
+        }
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rg"
+      SrcTerminal   2
+      Points        [670, 520]
+      Branch {
+        Points        [670, 410]
+        DstComponent  "Zf"
+        DstTerminal   2
+      }
+      Branch {
+        DstComponent  "Netlist7"
+        DstTerminal   5
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Ground5"
+      SrcTerminal   1
+      DstComponent  "Netlist8"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Netlist4"
+      SrcTerminal   2
+      Points        [400, 485]
+      Branch {
+        DstComponent  "Rc"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [340, 485; 340, 685]
+        DstComponent  "Netlist8"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Netlist8"
+      SrcTerminal   2
+      Points        [305, 645; 305, 745; 445, 745; 445, 670]
+      Branch {
+        DstComponent  "Netlist8"
+        DstTerminal   5
+      }
+      Branch {
+        Points        [445, 660; 845, 660; 845, 495; 820, 495]
+        Branch {
+          Points        [820, 410]
+          DstComponent  "Rf"
+          DstTerminal   2
+        }
+        Branch {
+          DstComponent  "Netlist7"
+          DstTerminal   2
+        }
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rsense"
+      SrcTerminal   2
+      Points        [565, 300]
+      Branch {
+        DstComponent  "Netlist"
+        DstTerminal   3
+      }
+      Branch {
+        DstComponent  "Netlist3"
+        DstTerminal   2
+      }
+    }
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" font-weight:700; color:#0"
+"000b0;\">Linear Regulator for Charger</span></p>\n<p><span style=\" font-weig"
+"ht:700; color:#0000b0;\">ELECTENG 311</span></p>\n<p><span style=\" font-size"
+":9px; font-weight:700; color:#0000b0;\">Paco Poon and Mingze Sun (08-2026)</s"
+"pan></p></body></html>"
+      Position      [360, 235]
+    } 
+    RectangleAnnotation {
+      Position     [385, 575]
+      Width        150
+      Height       350
+      CornerRadius 3
+      Thickness    2
+      PenColor     4294945280
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p><span style=\" color:#ffaa00;\">Voltage<"
+"/span></p>\n<p><span style=\" color:#ffaa00;\"> reference </span></p></body><"
+"/html>"
+      Position      [365, 455]
+    } 
+    RectangleAnnotation {
+      Position     [525, 305]
+      Width        140
+      Height       130
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278233600
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p align=\"center\"><span style=\" font-siz"
+"e:13px; color:#00aa00;\">Constant</span></p>\n<p><span style=\" font-size:13p"
+"x; color:#00aa00;\"> current</span></p></body></html>"
+      Position      [490, 280]
+    } 
+    RectangleAnnotation {
+      Position     [770, 465]
+      Width        310
+      Height       250
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278212095
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p align=\"center\"><span style=\" font-siz"
+"e:13px; color:#0055ff;\">Constant</span></p>\n<p><span style=\" font-size:13p"
+"x; color:#0055ff;\"> voltage</span></p></body></html>"
+      Position      [650, 380]
+    } 
+    RectangleAnnotation {
+      Position     [1575, 620]
+      Width        300
+      Height       360
+      CornerRadius 3
+      Thickness    2
+      PenColor     4278190080
+      PenAlpha     1
+      BrushColor   0
+      BrushAlpha   0
+    } 
+    Annotation {
+      Name          "<html><body>\n<p>Testing Area</p>\n<p>*Ignore this</p>\n<"
+"p> </p></body></html>"
+      Position      [1660, 495]
+    } 
+  }
+}
+DemoSignature "XCJge/3h7hGKtmwoqWOZ7FI9BMOUj8xVzfsIqvCf37w="
