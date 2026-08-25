@@ -72,8 +72,8 @@ Plecs {
   IncompatibleInitialConditionMsg "2"
   Schematic {
     Location      [6, 49; 1690, 967]
-    ZoomFactor    0.630816
-    SliderPosition [211, 0]
+    ZoomFactor    0.721885
+    SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -105,7 +105,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "10e-3"
+        Value         "68e-3"
         Show          on
       }
     }
@@ -972,7 +972,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "3.5"
+        Value         "3.565"
         Show          on
       }
     }
@@ -1088,7 +1088,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "2.8"
+        Value         "4.257"
         Show          on
       }
     }
@@ -1146,7 +1146,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "2.2"
+        Value         "0.743"
         Show          on
       }
     }
@@ -1204,7 +1204,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "4.5"
+        Value         "4.468"
         Show          on
       }
     }
@@ -1262,7 +1262,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "0.5"
+        Value         "0.532"
         Show          on
       }
     }
@@ -2546,7 +2546,7 @@ Plecs {
       Type          From
       Name          "From3"
       Show          off
-      Position      [405, 195]
+      Position      [405, 185]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2656,16 +2656,16 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [468, 66; 1116, 1054]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAADRPwCAAAAA/sAAAAQAFoAbwBvA"
+      Location      [464, 68; 1112, 1038]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAACCAAADMvwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwEAAAA0AA"
-"ADRAAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAc/w"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAANEAAAA"
+"ADMgAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAKIAAAAc/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAogAAABEAP///wAAAgAAAAMyAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":173,\"Labels\":["
-"\"Delta\"],\"VisualIdxs\":[3]}"
+      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":173,\"Labels\":[\""
+"Delta\"],\"VisualIdxs\":[3]}"
       PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0.0"
@@ -4105,7 +4105,7 @@ Plecs {
       Type          Switch
       Name          "S1"
       Show          on
-      Position      [465, 195]
+      Position      [465, 185]
       Direction     down
       Flipped       off
       LabelPosition east
@@ -4185,26 +4185,6 @@ Plecs {
         Type          Input
         Position      [-10, 10]
         Direction     left
-      }
-    }
-    Component {
-      Type          Constant
-      Name          "Constant3"
-      Show          on
-      Position      [510, 90]
-      Direction     down
-      Flipped       off
-      LabelPosition west
-      Frame         [-10, -10; 10, 10]
-      Parameter {
-        Variable      "Value"
-        Value         "1"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
       }
     }
     Component {
@@ -5404,12 +5384,6 @@ Plecs {
         DstComponent  "Label1"
         DstTerminal   1
       }
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Constant3"
-      SrcTerminal   1
-      Points        [510, 140]
     }
     Connection {
       Type          Wire

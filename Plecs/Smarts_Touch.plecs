@@ -105,7 +105,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "10e-3"
+        Value         "68e-3"
         Show          on
       }
     }
@@ -1091,4 +1091,4 @@ Plecs {
     } 
   }
 }
-DemoSignature "YsbsDISLzE6GloFyGJmFDErNKL7qUgHbURrvrZC+8Io="
+DemoSignature "YVo1Co6JHAgDToRx8wGWvoIcJQz24yilsTEIgVmmxh8="
