@@ -227,7 +227,7 @@ Plecs {
       Type          Ground
       Name          "Ground1"
       Show          off
-      Position      [90, 190]
+      Position      [90, 185]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -325,7 +325,7 @@ Plecs {
       }
       Parameter {
         Variable      "NumDiscStates"
-        Value         "4"
+        Value         "8"
         Show          off
       }
       Parameter {
@@ -383,6 +383,13 @@ Plecs {
 "\n"
 "#define count DiscState(3)\n"
 "\n"
+"#define osc_period DiscState(4)\n"
+"#define osc_start DiscState(5)\n"
+"#define osc_end DiscState(6)\n"
+"#define osc_overflows DiscState(7)\n"
+"\n"
+"#define osc_in_prev DiscState(8)\n"
+"\n"
 "#define iso_out OutputSignal(0,0)"
         Show          off
       }
@@ -398,14 +405,21 @@ Plecs {
 "touch_ready = 1;\n"
 "\n"
 "\n"
-"\n"
 "// Set T/C to 0, initially\n"
-"count = 0;"
+"count = 0;\n"
+"\n"
+"\n"
+"osc_period = 0;\n"
+"osc_start = 0;\n"
+"osc_end = 0;\n"
+"osc_overflows = 0; // (these shouldn't be used)\n"
+"\n"
+"osc_in_prev = 0;"
         Show          off
       }
       Parameter {
         Variable      "OutputFcn"
-        Value         "iso_out = count; // debug, usually = iso_state."
+        Value         "iso_out = iso_state;"
         Show          off
       }
       Parameter {
@@ -415,6 +429,10 @@ Plecs {
 "\n"
 "if (count >= 256) {\n"
 "\tcount = 0;\n"
+"}\n"
+"\n"
+"if (osc_in == 5) {\n"
+"\tosc_start = count;\n"
 "}"
         Show          off
       }
@@ -541,11 +559,17 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 0; 0, 0]
-      State         ""
-      SavedViews    ""
-      HeaderState   ""
-      PlotPalettes  ""
+      Location      [640, 276; 990, 507]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAADIAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":65,\"Labels\":[],"
+"\"VisualIdxs\":[]}"
+      PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0.0"
       ScrollingMode "1"
@@ -710,4 +734,4 @@ Plecs {
     } 
   }
 }
-DemoSignature "vFwGVvvGTfMmQWK4jqhOb5rrUViOjmME8v4FDsJUWT0="
+DemoSignature "ssjyEbzJ4MmB4n87oBf7+fYAbQhesGKr/6kq36h1kRM="
