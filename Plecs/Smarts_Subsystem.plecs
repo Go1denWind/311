@@ -72,8 +72,8 @@ Plecs {
   IncompatibleInitialConditionMsg "2"
   Schematic {
     Location      [6, 49; 1690, 967]
-    ZoomFactor    0.826101
-    SliderPosition [531, 0]
+    ZoomFactor    0.630816
+    SliderPosition [211, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -3287,7 +3287,7 @@ Plecs {
       Type          CScript
       Name          "ADC"
       Show          on
-      Position      [2305, 1140]
+      Position      [1690, 300]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -3456,7 +3456,7 @@ Plecs {
       Type          SignalMux
       Name          "Mux"
       Show          off
-      Position      [2240, 1140]
+      Position      [1625, 300]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -3471,7 +3471,7 @@ Plecs {
       Type          Label
       Name          "Label33"
       Show          off
-      Position      [2115, 965]
+      Position      [1500, 125]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3506,7 +3506,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm9"
       Show          on
-      Position      [2115, 1010]
+      Position      [1500, 170]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3515,7 +3515,7 @@ Plecs {
       Type          Ground
       Name          "Ground32"
       Show          off
-      Position      [2115, 1055]
+      Position      [1500, 215]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3524,7 +3524,7 @@ Plecs {
       Type          Label
       Name          "Label34"
       Show          off
-      Position      [2115, 1095]
+      Position      [1500, 255]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3559,7 +3559,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm10"
       Show          on
-      Position      [2115, 1140]
+      Position      [1500, 300]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3568,7 +3568,7 @@ Plecs {
       Type          Ground
       Name          "Ground33"
       Show          off
-      Position      [2115, 1185]
+      Position      [1500, 345]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3577,7 +3577,7 @@ Plecs {
       Type          Label
       Name          "Label35"
       Show          off
-      Position      [2115, 1225]
+      Position      [1500, 385]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3612,7 +3612,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm11"
       Show          on
-      Position      [2115, 1270]
+      Position      [1500, 430]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -3621,7 +3621,7 @@ Plecs {
       Type          Ground
       Name          "Ground34"
       Show          off
-      Position      [2115, 1315]
+      Position      [1500, 475]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -3684,7 +3684,7 @@ Plecs {
       Type          Goto
       Name          "Goto5"
       Show          off
-      Position      [2400, 1140]
+      Position      [1785, 300]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -3795,7 +3795,7 @@ Plecs {
       Type          Scope
       Name          "Scope5"
       Show          on
-      Position      [2415, 1190]
+      Position      [1800, 350]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -4264,45 +4264,6 @@ Plecs {
       Direction     up
       Flipped       off
       LabelPosition east
-    }
-    Component {
-      Type          PulseGenerator
-      Name          "Pulse\nGenerator"
-      Show          on
-      Position      [1525, 160]
-      Direction     right
-      Flipped       off
-      LabelPosition south
-      Parameter {
-        Variable      "Hi"
-        Value         "5"
-        Show          off
-      }
-      Parameter {
-        Variable      "Lo"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "f"
-        Value         "1"
-        Show          off
-      }
-      Parameter {
-        Variable      "DutyCycle"
-        Value         "0.5"
-        Show          off
-      }
-      Parameter {
-        Variable      "Delay"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
-      }
     }
     Connection {
       Type          Wire
@@ -5241,7 +5202,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Vm9"
       SrcTerminal   3
-      Points        [2180, 1010; 2180, 1130]
+      Points        [1565, 170; 1565, 290]
       DstComponent  "Mux"
       DstTerminal   2
     }
@@ -5256,7 +5217,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Vm11"
       SrcTerminal   3
-      Points        [2180, 1270; 2180, 1150]
+      Points        [1565, 430; 1565, 310]
       DstComponent  "Mux"
       DstTerminal   4
     }
@@ -5309,13 +5270,13 @@ Plecs {
       Type          Signal
       SrcComponent  "ADC"
       SrcTerminal   2
-      Points        [2365, 1140]
+      Points        [1750, 300]
       Branch {
         DstComponent  "Goto5"
         DstTerminal   1
       }
       Branch {
-        Points        [2365, 1190]
+        Points        [1750, 350]
         DstComponent  "Scope5"
         DstTerminal   1
       }
@@ -5537,7 +5498,7 @@ Plecs {
       Position      [290, 1380]
     } 
     RectangleAnnotation {
-      Position     [2265, 1135]
+      Position     [1650, 295]
       Width        440
       Height       480
       CornerRadius 3
@@ -5550,23 +5511,7 @@ Plecs {
     Annotation {
       Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
 "ht:700;\">MCU Protection</span></p></body></html>"
-      Position      [2115, 870]
-    } 
-    Annotation {
-      Name          "<html><body>\n<p><span style=\" font-size:18px; font-weig"
-"ht:700;\">Touch sensing circuitry</span></p></body></html>"
-      Position      [1535, 30]
-    } 
-    RectangleAnnotation {
-      Position     [1905, 435]
-      Width        940
-      Height       760
-      CornerRadius 3
-      Thickness    2
-      PenColor     4278190080
-      PenAlpha     1
-      BrushColor   0
-      BrushAlpha   0
+      Position      [1500, 30]
     } 
   }
 }
