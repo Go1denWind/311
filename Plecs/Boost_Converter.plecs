@@ -71,7 +71,7 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [373, 31; 1919, 988]
+    Location      [374, 102; 1920, 1059]
     ZoomFactor    1.49863
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -227,7 +227,7 @@ Plecs {
       LabelPosition west
       Parameter {
         Variable      "C"
-        Value         "150e-6"
+        Value         "560e-6"
         Show          on
       }
       Parameter {
@@ -246,7 +246,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "10"
+        Value         "5"
         Show          on
       }
     }
@@ -259,16 +259,16 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -30; 15, 30]
-      Location      [945, 76; 1712, 1089]
+      Location      [0, 23; 1920, 1011]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAANAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAL/AAAA4vw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAAAv8AAABEAP///wAAAv8AAAPWAAAA"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAjfw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAAMqAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":204,\"Labels\":[],"
-"\"VisualIdxs\":[]}"
+      HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":204,\"Labels\":["
+"\"Min\",\"Max\"],\"VisualIdxs\":[5,6]}"
       PlotPalettes  "AAAAAQAAAAIAAAABAAAAAgAAAAEB/////wAAAAAAAAAAAAEB//8AAMXFA"
 "AAAAAAAAAIAAAABAQAAAAEBAAAAAgAAAAEAAAABAAAAAQAAAAEAAAACAAAAAQAAAAABAAAAAAIAAA"
 "ABP/AAAAAAAAAAAAABP/AAAAAAAAAAAAACAAAAAQAAAAABAAAAAAEAAAABAAAAAgAAAAEC//8u4P/"
@@ -283,7 +283,7 @@ Plecs {
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "0"
-      Open          "1"
+      Open          "0"
       Ts            "10e-8"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -412,7 +412,12 @@ Plecs {
       Probe {
         Component     "RL"
         Path          ""
-        Signals       {"Resistor voltage", "Resistor current", "Resistor power"}
+        Signals       {"Resistor power", "Resistor voltage", "Resistor current"}
+      }
+      Probe {
+        Component     "R2"
+        Path          ""
+        Signals       {"Resistor voltage", "Resistor current"}
       }
     }
     Component {
@@ -449,7 +454,7 @@ Plecs {
       }
       Parameter {
         Variable      "DutyCycle"
-        Value         "0.4"
+        Value         "0.5"
         Show          off
       }
       Parameter {
@@ -473,7 +478,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "V"
-        Value         "3.5"
+        Value         "2.5"
         Show          on
       }
     }
@@ -501,7 +506,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "0.4"
+        Value         "0.1"
         Show          on
       }
     }
@@ -684,4 +689,4 @@ Plecs {
     }
   }
 }
-DemoSignature "2mAeXJhmBlHD4mpuzZ6Y9vqaLBy2EN5YUJdc9+xRX7M="
+DemoSignature "9rt0A4pBZ/xbhEtvp3ShmLdq8dTKXco+EvVM2qkRao8="
