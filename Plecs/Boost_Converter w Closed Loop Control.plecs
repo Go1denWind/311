@@ -71,7 +71,7 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [0, 23; 1920, 989]
+    Location      [0, 24; 1920, 990]
     ZoomFactor    1.30957
     SliderPosition [0, 97]
     ShowBrowser   off
@@ -149,8 +149,8 @@ Plecs {
       Location      [0, 23; 1920, 1011]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAYvw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANVAAAA"
+"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAVvw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANhAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -161,7 +161,7 @@ Plecs {
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "1"
+      Open          "0"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -309,26 +309,6 @@ Plecs {
         Component     "Rvb"
         Path          ""
         Signals       {"Resistor voltage"}
-      }
-    }
-    Component {
-      Type          Constant
-      Name          "Constant"
-      Show          on
-      Position      [755, 630]
-      Direction     right
-      Flipped       on
-      LabelPosition south
-      Frame         [-30, -10; 30, 10]
-      Parameter {
-        Variable      "Value"
-        Value         "2.5"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
       }
     }
     Component {
@@ -909,7 +889,7 @@ Plecs {
           LabelPosition east
           Parameter {
             Variable      "R"
-            Value         "7.5e3"
+            Value         "18e3"
             Show          on
           }
         }
@@ -923,7 +903,7 @@ Plecs {
           LabelPosition west
           Parameter {
             Variable      "C"
-            Value         "2.2e-9"
+            Value         "1e-9"
             Show          on
           }
           Parameter {
@@ -1392,6 +1372,78 @@ Plecs {
             Signals       {"COMP", "VFB", "OUT", "ISENS"}
           }
         }
+        Component {
+          Type          Scope
+          Name          "OpAmp_O3"
+          Show          on
+          Position      [315, 465]
+          Direction     down
+          Flipped       on
+          LabelPosition south
+          Frame         [-15, -15; 15, 15]
+          Location      [0, 23; 1920, 1011]
+          State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAb"
+"wBvAG0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAA"
+"AA/////wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAA"
+"AVvwBAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANh"
+"AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AA"
+"AAAAAAAAA=="
+          SavedViews    "AAAAAgAAAAA="
+          HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":173,\"Labels"
+"\":[\"Delta\",\"Min\",\"Max\"],\"VisualIdxs\":[3,5,6]}"
+          PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          Axes          "1"
+          TimeRange     "0.0"
+          ScrollingMode "1"
+          SingleTimeAxis "1"
+          Open          "0"
+          Ts            "-1"
+          SampleLimit   "0"
+          XAxisLabel    "Time / s"
+          ShowLegend    "1"
+          Axis {
+            Name          ""
+            AutoScale     1
+            MinValue      0
+            MaxValue      1
+            Signals       {}
+            SignalTypes   [ ]
+            Untangle      0
+            KeepBaseline  off
+            BaselineValue 0
+          }
+          Fourier {
+            SingleXAxis       on
+            AxisLabel         "Frequency / Hz"
+            Scaling           0
+            PhaseDisplay      0
+            ShowFourierLegend off
+            Axis {
+              Name          ""
+              AutoScale     1
+              MinValue      0
+              MaxValue      1
+              Signals       {}
+              Untangle      0
+              KeepBaseline  off
+              BaselineValue 0
+            }
+          }
+        }
+        Component {
+          Type          PlecsProbe
+          Name          "Vout3"
+          Show          on
+          Position      [395, 465]
+          Direction     right
+          Flipped       on
+          LabelPosition south
+          Probe {
+            Component     "C2"
+            Path          "UC3843 Spice"
+            Signals       {"Capacitor voltage"}
+          }
+        }
         Connection {
           Type          Wire
           SrcComponent  "Label4"
@@ -1594,6 +1646,13 @@ Plecs {
           DstComponent  "Netlist1"
           DstTerminal   1
         }
+        Connection {
+          Type          Signal
+          SrcComponent  "Vout3"
+          SrcTerminal   1
+          DstComponent  "OpAmp_O3"
+          DstTerminal   1
+        }
       }
     }
     Component {
@@ -1653,7 +1712,7 @@ Plecs {
       LabelPosition east
       Parameter {
         Variable      "R"
-        Value         "50"
+        Value         "5"
         Show          on
       }
     }
@@ -1846,11 +1905,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 24; 1920, 1039]
+      Location      [0, 24; 1920, 1048]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAYvw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANwAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAAN5AAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -1955,11 +2014,11 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 24; 1920, 1039]
+      Location      [0, 24; 1920, 1057]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAYvw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANwAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAAOCAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -2027,16 +2086,16 @@ Plecs {
       Flipped       off
       LabelPosition south
       Frame         [-15, -15; 15, 15]
-      Location      [0, 24; 1920, 1057]
+      Location      [0, 23; 1920, 1011]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAeAAAAAYvw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAAOCAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAB4AAAABEAP///wAAB4AAAANVAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":194,\"Labels\":[\""
-"Min\",\"Max\",\"Mean\"],\"VisualIdxs\":[5,6,8]}"
+      HeaderState   "{\"DefaultSecSize\":100,\"FirstSecSize\":194,\"Labels\":["
+"\"Min\",\"Max\",\"Mean\"],\"VisualIdxs\":[5,6,8]}"
       PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       Axes          "1"
       TimeRange     "0"
@@ -2088,6 +2147,62 @@ Plecs {
         Component     "Isens1"
         Path          ""
         Signals       {"Measured voltage"}
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "5V_dc1"
+      Show          on
+      Position      [945, 550]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "5"
+        Show          off
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rva1"
+      Show          on
+      Position      [850, 520]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "R"
+        Value         "100e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "Rva2"
+      Show          on
+      Position      [850, 575]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "R"
+        Value         "100e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          PlecsProbe
+      Name          "Vout7"
+      Show          on
+      Position      [745, 630]
+      Direction     right
+      Flipped       on
+      LabelPosition south
+      Probe {
+        Component     "Rva2"
+        Path          ""
+        Signals       {"Resistor voltage"}
       }
     }
     Connection {
@@ -2180,7 +2295,7 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Constant"
+      SrcComponent  "Vout7"
       SrcTerminal   1
       DstComponent  "Sum"
       DstTerminal   2
@@ -2396,6 +2511,29 @@ Plecs {
       SrcComponent  "Vout6"
       SrcTerminal   1
       DstComponent  "Scope3"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "5V_dc1"
+      SrcTerminal   2
+      Points        [945, 595]
+      DstComponent  "Rva2"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rva2"
+      SrcTerminal   1
+      DstComponent  "Rva1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Rva1"
+      SrcTerminal   1
+      Points        [945, 500]
+      DstComponent  "5V_dc1"
       DstTerminal   1
     }
   }
