@@ -71,7 +71,7 @@ Plecs {
   InvalidNetlistFunctionEvaluationMsg "1"
   IncompatibleInitialConditionMsg "2"
   Schematic {
-    Location      [10, 64; 1074, 824]
+    Location      [53, 120; 1117, 880]
     ZoomFactor    0.551236
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -338,7 +338,7 @@ Plecs {
       Type          Label
       Name          "Label5"
       Show          off
-      Position      [700, 355]
+      Position      [515, 355]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2287,82 +2287,6 @@ Plecs {
       LabelPosition east
     }
     Component {
-      Type          Voltmeter
-      Name          "Vm8"
-      Show          on
-      Position      [675, 395]
-      Direction     up
-      Flipped       off
-      LabelPosition west
-    }
-    Component {
-      Type          Ground
-      Name          "Ground27"
-      Show          off
-      Position      [675, 445]
-      Direction     up
-      Flipped       off
-      LabelPosition east
-    }
-    Component {
-      Type          Scope
-      Name          "Scope3"
-      Show          on
-      Position      [730, 395]
-      Direction     up
-      Flipped       off
-      LabelPosition south
-      Frame         [-15, -15; 15, 15]
-      Location      [347, 205; 697, 490]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
-"G0AQQByAGUAYQAAAAAA/////wAAADAA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGIA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABiAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAAAV4AAAD+AAAA"
-"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
-"AAAAA=="
-      SavedViews    "AAAAAgAAAAA="
-      HeaderState   "{\"DefaultSecSize\":0,\"FirstSecSize\":64,\"Labels\":[],"
-"\"VisualIdxs\":[]}"
-      PlotPalettes  "AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-      Axes          "1"
-      TimeRange     "0"
-      ScrollingMode "1"
-      SingleTimeAxis "1"
-      Open          "0"
-      Ts            "-1"
-      SampleLimit   "0"
-      XAxisLabel    "Time / s"
-      ShowLegend    "1"
-      Axis {
-        Name          ""
-        AutoScale     1
-        MinValue      0
-        MaxValue      1
-        Signals       {}
-        SignalTypes   [ ]
-        Untangle      0
-        KeepBaseline  off
-        BaselineValue 0
-      }
-      Fourier {
-        SingleXAxis       on
-        AxisLabel         "Frequency / Hz"
-        Scaling           0
-        PhaseDisplay      0
-        ShowFourierLegend off
-        Axis {
-          Name          ""
-          AutoScale     1
-          MinValue      0
-          MaxValue      1
-          Signals       {}
-          Untangle      0
-          KeepBaseline  off
-          BaselineValue 0
-        }
-      }
-    }
-    Component {
       Type          Scope
       Name          "Scope4"
       Show          on
@@ -2463,83 +2387,6 @@ Plecs {
       Parameter {
         Variable      "DataType"
         Value         "10"
-        Show          off
-      }
-    }
-    Component {
-      Type          Resistor
-      Name          "R19"
-      Show          on
-      Position      [575, 315]
-      Direction     up
-      Flipped       off
-      LabelPosition east
-      Parameter {
-        Variable      "R"
-        Value         "470e3"
-        Show          on
-      }
-    }
-    Component {
-      Type          Capacitor
-      Name          "C1"
-      Show          on
-      Position      [575, 235]
-      Direction     up
-      Flipped       on
-      LabelPosition east
-      Parameter {
-        Variable      "C"
-        Value         "47e-12"
-        Show          on
-      }
-      Parameter {
-        Variable      "v_init"
-        Value         "0"
-        Show          off
-      }
-    }
-    Component {
-      Type          Ground
-      Name          "Ground28"
-      Show          off
-      Position      [575, 195]
-      Direction     down
-      Flipped       off
-      LabelPosition west
-    }
-    Component {
-      Type          Label
-      Name          "Label30"
-      Show          off
-      Position      [625, 270]
-      Direction     right
-      Flipped       off
-      LabelPosition south
-      Parameter {
-        Variable      "Tag"
-        Value         "Vsens_aa"
-        Show          off
-      }
-      Parameter {
-        Variable      "Visibility"
-        Value         "2"
-        Show          off
-      }
-      Parameter {
-        Variable      "NoMatchingCounterpartAction"
-        Value         "2"
-        Show          off
-      }
-      Parameter {
-        Variable      "CustomMessage"
-        Value         ""
-        Show          off
-        Evaluate      on
-      }
-      Parameter {
-        Variable      "HighlightLevel"
-        Value         "0"
         Show          off
       }
     }
@@ -4266,7 +4113,7 @@ Plecs {
       Parameter {
         Variable      "R"
         Value         "470"
-        Show          off
+        Show          on
       }
     }
     Component {
@@ -4572,7 +4419,7 @@ Plecs {
       Type          Label
       Name          "Label40"
       Show          off
-      Position      [1215, 645]
+      Position      [1280, 645]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -6980,6 +6827,83 @@ Plecs {
         Show          off
       }
     }
+    Component {
+      Type          Resistor
+      Name          "R22"
+      Show          on
+      Position      [1240, 705]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "470e3"
+        Show          on
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "C4"
+      Show          on
+      Position      [1240, 785]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "47e-12"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Ground
+      Name          "Ground54"
+      Show          off
+      Position      [1240, 825]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+    }
+    Component {
+      Type          Label
+      Name          "Label59"
+      Show          off
+      Position      [1280, 750]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Tag"
+        Value         "Vsens_aa"
+        Show          off
+      }
+      Parameter {
+        Variable      "Visibility"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "NoMatchingCounterpartAction"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CustomMessage"
+        Value         ""
+        Show          off
+        Evaluate      on
+      }
+      Parameter {
+        Variable      "HighlightLevel"
+        Value         "0"
+        Show          off
+      }
+    }
     Connection {
       Type          Wire
       SrcComponent  "SC"
@@ -7013,22 +6937,8 @@ Plecs {
           DstTerminal   1
         }
         Branch {
-          Points        [575, 355]
-          Branch {
-            Points        [675, 355]
-            Branch {
-              DstComponent  "Label5"
-              DstTerminal   1
-            }
-            Branch {
-              DstComponent  "Vm8"
-              DstTerminal   1
-            }
-          }
-          Branch {
-            DstComponent  "R19"
-            DstTerminal   2
-          }
+          DstComponent  "Label5"
+          DstTerminal   1
         }
       }
       Branch {
@@ -7562,20 +7472,6 @@ Plecs {
       DstTerminal   1
     }
     Connection {
-      Type          Wire
-      SrcComponent  "Vm8"
-      SrcTerminal   2
-      DstComponent  "Ground27"
-      DstTerminal   1
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Vm8"
-      SrcTerminal   3
-      DstComponent  "Scope3"
-      DstTerminal   1
-    }
-    Connection {
       Type          Signal
       SrcComponent  "Vm7"
       SrcTerminal   3
@@ -7604,27 +7500,6 @@ Plecs {
       SrcTerminal   3
       DstComponent  "Goto4"
       DstTerminal   1
-    }
-    Connection {
-      Type          Wire
-      SrcComponent  "C1"
-      SrcTerminal   2
-      DstComponent  "Ground28"
-      DstTerminal   1
-    }
-    Connection {
-      Type          Wire
-      SrcComponent  "R19"
-      SrcTerminal   1
-      Points        [575, 270]
-      Branch {
-        DstComponent  "C1"
-        DstTerminal   1
-      }
-      Branch {
-        DstComponent  "Label30"
-        DstTerminal   1
-      }
     }
     Connection {
       Type          Wire
@@ -8173,8 +8048,15 @@ Plecs {
         DstTerminal   3
       }
       Branch {
-        DstComponent  "Label40"
-        DstTerminal   1
+        Points        [1240, 645]
+        Branch {
+          DstComponent  "Label40"
+          DstTerminal   1
+        }
+        Branch {
+          DstComponent  "R22"
+          DstTerminal   2
+        }
       }
     }
     Connection {
@@ -8823,6 +8705,27 @@ Plecs {
       DstComponent  "Mux2"
       DstTerminal   3
     }
+    Connection {
+      Type          Wire
+      SrcComponent  "C4"
+      SrcTerminal   2
+      DstComponent  "Ground54"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R22"
+      SrcTerminal   1
+      Points        [1240, 750]
+      Branch {
+        DstComponent  "C4"
+        DstTerminal   1
+      }
+      Branch {
+        DstComponent  "Label59"
+        DstTerminal   1
+      }
+    }
     Annotation {
       Name          "<html><body>\n<p>corner</p></body></html>"
       Position      [2965, 3315]
@@ -8931,7 +8834,7 @@ Plecs {
 "ulation, no need to buffer here.</span></p>\n<p><span style=\" color:#aa55ff;"
 "\">(judging with hysteresis version and</span></p>\n<p><span style=\" color:#"
 "aa55ff;\">seeing when the simulation stalls)</span></p></body></html>"
-      Position      [1295, 700]
+      Position      [1375, 530]
     } 
   }
 }
