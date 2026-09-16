@@ -36,8 +36,10 @@ void usart_transmit(uint8_t data) {
 
 void usart_transmit_array(char* msg) {
 	
+	// Only prints first character in Proteus for some reason
+	
 	// Loop through and transmit each byte in the array
-	for (uint8_t i = 0; i < strlen(msg); i++){
+	for (uint8_t i = 0; i < (uint8_t)(strlen(msg)); i++){
 		usart_transmit(msg[i]);
 	}
 }
