@@ -46,12 +46,23 @@ int main(void)
 	
     while (1)
     {
+		
 		// If one second has passed, print battery capacity to UART
-		if (usart_to_do) {
+		if (usart_to_do == 1) {
+			
+			// Toggle debug PB1 pin
+			PINB = (1 << PINB1);
+			
+			usart_transmit('2');
+			usart_transmit('3'); // only prints some of the time in Proteus
+			usart_transmit('4'); // never prints in Proteus.
+			
+			/*
 			sc_charge = get_sc_charge();
 			uint16_t number = sc_charge / 100;
 			usart_transmit_num(number, 3);
 			usart_transmit('\n');
+			*/
 			
 			// Clear USART flag
 			usart_to_do = 0;
@@ -75,9 +86,6 @@ ISR(TIMER0_COMPA_vect) {
 */
 
 ISR(TIMER1_COMPA_vect) {
-	
-	// Toggle debug PB1 pin
-	PINB = (1 << PINB1);
 	
 	// Set USART flag, main function will transmit diagnostics
 	usart_to_do = 1;
