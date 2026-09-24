@@ -38,20 +38,27 @@ int main(void)
 	
 	sei();
 	
-	// Set PB0 and PB1 to output (debugging)
-	DDRB |= (1 << DDB0) | (1 << DDB1);
+	// Configure I/O pins
+	DDRB |= (1 << DDB0) | (1 << DDB3) | (1 << DDB4) | (1 << DDB5);
+	DDRC &= ~(1 << DDC0) & ~(1 << DDC1) & ~(1 << DDC2) & ~(1 << DDC3);
+	DDRD |= (1 << DDD1); // TODO: check required I/O for SPI and RESET pins
 	
-	// Set USART TX pin to output
-	DDRD |= (1 << DDD1);
+	// Enable debug output pins
+	DDRB |= (1 << DDB1) | (1 << DDB2);
+	DDRC |= (1 << DDC4) | (1 << DDC5);
+	DDRD |= (1 << DDD2) | (1 << DDD3);
 	
     while (1)
     {
 		
+		// Toggle debug PB1 pin
+		PINB = (1 << PINB1);
+		
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
 			
-			// Toggle debug PB1 pin
-			PINB = (1 << PINB1);
+			// Toggle debug PB2 pin
+			PINB = (1 << PINB2);
 			
 			usart_transmit('2');
 			usart_transmit('3'); // only prints some of the time in Proteus
