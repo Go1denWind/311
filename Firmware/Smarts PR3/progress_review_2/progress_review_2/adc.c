@@ -25,7 +25,7 @@ volatile uint16_t adc_samples = 0;
 
 volatile float capacity = 0; // %
 
-volatile uint16_t number = 0; // debug
+volatile uint16_t number = 467; // debug
 
 void adc_init() {
 	
@@ -44,7 +44,7 @@ void adc_init() {
 	ADCSRA |= (1 << ADATE);
 	
 	// Disable digital input buffers on ADC pins, since only analog signals are being fed into the ADC pins
-	// DIDR0 = 0x3F;
+	DIDR0 = 0x3F;
 	
 	// Enable ADC and conversion complete interrupts
 	ADCSRA |= (1 << ADEN) | (1 << ADIE);
@@ -52,6 +52,40 @@ void adc_init() {
 	// Start first conversion
 	ADCSRA |= (1 << ADSC);
 
+}
+
+void adc_init_debug() {
+	
+	// Select Vcc as reference voltage
+	ADMUX |= (1 << REFS0);
+	
+	// Enable ADC
+	ADCSRA |= (1 << ADEN);
+	
+	// Set prescaler to /16 (i.e. ADC clock frequency of 125 kHz)
+	ADCSRA |= (1 << ADPS2);
+	
+}
+
+uint16_t adc_read_debug(uint8_t channel) {
+	
+	// Set ADC channel to read, using the given argument
+	ADMUX &= 0xF0;
+	ADMUX |= channel;
+	
+	// Start ADC conversion
+	ADCSRA |= (1 << ADSC);
+	
+	// When the conversion is complete, return the ADC result
+	while (1) {
+		
+		if (ADCSRA & (1 << ADIF)) {
+			ADCSRA |= (1 << ADIF); // clear flag
+			return ADC;
+		}
+		
+	}
+	
 }
 
 ISR(ADC_vect) {

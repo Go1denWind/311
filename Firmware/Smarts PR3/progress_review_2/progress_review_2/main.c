@@ -29,12 +29,15 @@ volatile uint8_t i = 0;
 
 volatile uint8_t usart_to_do = 0;
 
+volatile uint8_t debug = 0;
+
 int main(void)
 {
 	usart_init(12);
 	timer0_init();
 	timer1_init();
 	adc_init(); // NOTE: might block UART on Proteus
+	// adc_init_debug();
 	
 	sei();
 	
@@ -50,7 +53,7 @@ int main(void)
 	
     while (1)
     {
-		
+		/*
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
 			
@@ -58,15 +61,14 @@ int main(void)
 			PINB = (1 << PINB2);
 			
 			usart_transmit_array("C: ");
-			
-			capacity = get_capacity();
-			usart_transmit_num((uint16_t)(get_number()), 3);
+			usart_transmit_num(777, 3);
 			usart_transmit('\%');
 			usart_transmit('\n');
 			
 			// Clear USART flag
 			usart_to_do = 0;
 		}
+		*/
     }
 }
 
@@ -87,8 +89,12 @@ ISR(TIMER0_COMPA_vect) {
 
 ISR(TIMER1_COMPA_vect) {
 	
-	// Set USART flag, main function will transmit diagnostics
-	usart_to_do = 1;
+	PINB = (1 << PINB1);
 	
-	reset_adc_cycle();
+	usart_to_do = 5;
+	
+	// Set USART flag, main function will transmit diagnostics
+	// usart_to_do = 1;
+	
+	// reset_adc_cycle();
 }
