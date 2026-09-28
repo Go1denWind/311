@@ -37,9 +37,10 @@ volatile uint16_t temp_lookup[81] = {4314, 4283, 4249, 4212, 4170,
 volatile uint8_t temp_lookup_size = 80;
 
 volatile uint8_t adc_status = 0;
-// 0: sample voltage next
-// 1: sample current next
-// 2: sample temperature next
+// 0: sample temperature next
+// 1: sample voltage next
+// 2: sample current next
+// 3: sample touch oscillator next
 
 volatile uint16_t adc_samples = 0;
 
@@ -64,7 +65,7 @@ void adc_init() {
 	ADCSRA |= (1 << ADATE);
 	
 	// Disable digital input buffers on ADC pins, since only analog signals are being fed into the ADC pins
-	DIDR0 = 0x3F;
+	DIDR0 = 0x0F;
 	
 	// Enable ADC and conversion complete interrupts
 	ADCSRA |= (1 << ADEN) | (1 << ADIE);
@@ -110,16 +111,17 @@ uint16_t adc_read_debug(uint8_t channel) {
 
 ISR(ADC_vect) {
 	
+	// Manually interrupt flag bit so next rising edge of trigger source can be detected
+	TIFR0 = (1 << OCF0A);
+	
 	PINC = (1 << PINC4);
 	
 	number = ADC;
 	
-	/*
 	if (adc_samples >= 50) {
 		ADCSRA &= ~(1 << ADATE);
 		PORTC |= (1 << PORTC5);
 	}
-	*/
 	
 	// capacity = (vin_to_vsc(adc_to_vin(ADC)) - 2650) / 850.0 * 100;
 	
@@ -129,18 +131,20 @@ ISR(ADC_vect) {
 	
 }
 
-
-
-uint8_t voltage_next() {
+uint8_t temperature_next() {
 	return (adc_status == 0);
 }
 
-uint8_t current_next() {
+uint8_t voltage_next() {
 	return (adc_status == 1);
 }
 
-uint8_t temperature_next() {
+uint8_t current_next() {
 	return (adc_status == 2);
+}
+
+uint8_t touch_next() {
+	return (adc_status == 3);
 }
 
 uint16_t adc_to_vin(uint16_t count) {

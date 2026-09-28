@@ -69,5 +69,5 @@ ISR(TIMER1_COMPA_vect) {
 	// Set USART flag, main function will transmit diagnostics
 	usart_to_do = 1;
 	
-	// reset_adc_cycle();
+	reset_adc_cycle();
 }

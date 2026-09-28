@@ -14,9 +14,10 @@ void adc_init();
 void adc_init_debug();
 uint16_t adc_read_debug(uint8_t channel);
 
+uint8_t temperature_next();
 uint8_t voltage_next();
 uint8_t current_next();
-uint8_t temperature_next();
+uint8_t touch_next();
 
 uint16_t adc_to_vin(uint16_t count);
 
