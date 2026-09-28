@@ -44,7 +44,11 @@ volatile uint8_t adc_status = 0;
 
 volatile uint16_t adc_samples = 0;
 
-volatile float capacity = 0; // %
+volatile int8_t temperature = 0;
+volatile uint16_t voltage = 0;
+volatile int16_t current = 0;
+
+volatile float capacity = 0;
 
 volatile uint16_t number = 467; // debug
 
@@ -56,9 +60,8 @@ void adc_init() {
 	// Set prescaler to 128 (i.e. ADC clock frequency of 125 kHz)
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 	
-	// Read from ADC1 (voltage) initially
+	// Read from ADC0 (temperature) initially
 	ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-	ADMUX |= (1 << MUX0);
 	
 	// Set ADC conversions to occur every 8 ms (T/C0 compare match A)
 	ADCSRB |= (1 << ADTS1) | (1 << ADTS0);
@@ -114,20 +117,32 @@ ISR(ADC_vect) {
 	// Manually interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
-	PINC = (1 << PINC4);
-	
-	number = ADC;
-	
-	if (adc_samples >= 50) {
-		ADCSRA &= ~(1 << ADATE);
-		PORTC |= (1 << PORTC5);
+	if (temperature_next()) {
+		temperature = vin_to_tsc(adc_to_vin(ADC));
+		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+		ADMUX |= (1 << MUX0);
+	} else if (voltage_next()) {
+		voltage = vin_to_vsc(adc_to_vin(ADC));
+		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+		ADMUX |= (1 << MUX1);
+	} else if (current_next()) {
+		current = vin_to_isc(adc_to_vin(ADC));
+		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+		ADMUX |= (1 << MUX1) | (1 << MUX1);
+	} else if (touch_next()) {
+		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 	}
 	
-	// capacity = (vin_to_vsc(adc_to_vin(ADC)) - 2650) / 850.0 * 100;
-	
-	capacity = (float)ADC;
-	
+	adc_status++;
 	adc_samples++;
+	
+	if (adc_status >= 4) {
+		adc_status = 0;
+	}
+	
+	if (adc_samples >= 120) {
+		ADCSRA &= ~(1 << ADATE);
+	}
 	
 }
 
@@ -155,11 +170,13 @@ uint16_t vin_to_vsc(uint16_t vin) {
 	return (vin + V_SENS_OFFSET) / V_SENS_GAIN; // mV
 }
 
-uint16_t vin_to_isc(uint16_t vin) {
+int16_t vin_to_isc(uint16_t vin) {
 	return (vin - I_SENS_REF) / I_SENS_GAIN; // mA
 }
 
 int8_t vin_to_tsc(uint16_t vin) {
+	
+	// Find index of lookup value closest to V_in via "SAR-type" algorithm.
 	
 	uint8_t no_of_guesses = 0;
 	
@@ -170,7 +187,6 @@ int8_t vin_to_tsc(uint16_t vin) {
 	
 	uint8_t prev_guess;
 	
-	// Find index of lookup value closest to V_in via "SAR-type" algorithm.
 	while(1) {
 
 		no_of_guesses++;
@@ -199,6 +215,18 @@ int8_t vin_to_tsc(uint16_t vin) {
 	}
 	
 	return (int8_t)guess - 10;
+}
+
+int8_t get_temperature() {
+	return temperature;
+}
+
+uint16_t get_voltage() {
+	return voltage;
+}
+
+int16_t get_current() {
+	return current;
 }
 
 float get_capacity() {

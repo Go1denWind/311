@@ -56,7 +56,7 @@ int main(void)
 			
 			PINB = (1 << PINB1);
 			
-			usart_transmit_diagnostics(2750, 228, -27, 1000);
+			usart_transmit_diagnostics(get_voltage(), get_current(), get_temperature(), 1000);
 			
 			// Clear USART flag
 			usart_to_do = 0;

@@ -73,9 +73,20 @@ void usart_transmit_voltage(uint16_t number) {
 	usart_transmit_array(" V\n\r");
 }
 
-void usart_transmit_current(uint16_t number) {
+void usart_transmit_current(int16_t number) {
 	usart_transmit_array("Current:      ");
-	usart_transmit_num_3sf(number, 3);
+	
+	int16_t transmit_num;
+	
+	if (number < 0) {
+		usart_transmit('-');
+		transmit_num = number * -1;
+		} else {
+		usart_transmit(' ');
+		transmit_num = number;
+	}
+	
+	usart_transmit_num_3sf(transmit_num, 3);
 	usart_transmit_array(" mA\n\r");
 }
 
@@ -113,7 +124,7 @@ void usart_transmit_soc(uint16_t number) {
 	usart_transmit_array("\%\n\r");
 }
 
-void usart_transmit_diagnostics(uint16_t voltage, uint16_t current, int8_t temp, uint16_t soc) {
+void usart_transmit_diagnostics(uint16_t voltage, int16_t current, int8_t temp, uint16_t soc) {
 	usart_transmit_voltage(voltage);
 	usart_transmit_current(current);
 	usart_transmit_temp(temp);
