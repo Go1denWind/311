@@ -114,6 +114,8 @@ uint16_t adc_read_debug(uint8_t channel) {
 
 ISR(ADC_vect) {
 	
+	PINC = (1 << PINC4);
+	
 	// Manually interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
@@ -143,6 +145,8 @@ ISR(ADC_vect) {
 	if (adc_samples >= 120) {
 		ADCSRA &= ~(1 << ADATE);
 	}
+	
+	PINC = (1 << PINC4);
 	
 }
 
