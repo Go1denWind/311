@@ -22,7 +22,7 @@ uint16_t adc_to_vin(uint16_t count);
 
 uint16_t vin_to_vsc(uint16_t vin);
 uint16_t vin_to_isc(uint16_t vin);
-uint16_t vin_to_tsc(uint16_t vin);
+int8_t vin_to_tsc(uint16_t vin);
 
 float get_capacity();
 void reset_adc_cycle();

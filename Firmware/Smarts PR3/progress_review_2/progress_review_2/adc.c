@@ -9,12 +9,32 @@
 
 #include <avr/io.h>
 #include <stdint.h>
+#include <avr/interrupt.h>
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
 
 #define I_SENS_GAIN 6.8f // trans-resistance gain, mV/mA
 #define I_SENS_REF 2500.0f // mV
+
+volatile uint16_t temp_lookup[81] = {4314, 4283, 4249, 4212, 4170, 
+									4124, 4087, 4047, 4003, 3955, 
+									3903, 3860, 3815, 3765, 3712, 
+									3653, 3606, 3556, 3501, 3443, 
+									3380, 3329, 3276, 3219, 3157, 
+									3092, 3039, 2984, 2925, 2862, 
+									2796, 2742, 2686, 2627, 2565, 
+									2500, 2447, 2393, 2335, 2276, 
+									2213, 2162, 2109, 2054, 1997, 
+									1938, 1890, 1841, 1790, 1737, 
+									1683, 1640, 1595, 1550, 1503, 
+									1455, 1416, 1376, 1335, 1293, 
+									1251, 1216, 1181, 1145, 1108, 
+									1071, 1040, 1009, 978, 946, 
+									914, 888, 861, 834, 807, 
+									779, 757, 734, 711, 687, 
+									664};
+volatile uint8_t temp_lookup_size = 80;
 
 volatile uint8_t adc_status = 0;
 // 0: sample voltage next
@@ -32,8 +52,8 @@ void adc_init() {
 	// Select Vcc as reference voltage
 	ADMUX |= (1 << REFS0);
 	
-	// Set prescaler to 16 (i.e. ADC clock frequency of 125 kHz)
-	ADCSRA |= (1 << ADPS2);
+	// Set prescaler to 128 (i.e. ADC clock frequency of 125 kHz)
+	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 	
 	// Read from ADC1 (voltage) initially
 	ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
@@ -62,8 +82,8 @@ void adc_init_debug() {
 	// Enable ADC
 	ADCSRA |= (1 << ADEN);
 	
-	// Set prescaler to /16 (i.e. ADC clock frequency of 125 kHz)
-	ADCSRA |= (1 << ADPS2);
+	// Set prescaler to 128 (i.e. ADC clock frequency of 125 kHz)
+	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 	
 }
 
@@ -90,13 +110,13 @@ uint16_t adc_read_debug(uint8_t channel) {
 
 ISR(ADC_vect) {
 	
-	number = ADC;
 	
-	PINC = (1 << PINC4);
+	
+	number = ADC;
 	
 	if (adc_samples == 50) {
 		ADCSRA &= ~(1 << ADATE);
-		ADCSRA &= ~(1 << ADEN);
+		PINC = (1 << PINC5);
 	}
 	
 	// capacity = (vin_to_vsc(adc_to_vin(ADC)) - 2650) / 850.0 * 100;
@@ -106,6 +126,8 @@ ISR(ADC_vect) {
 	adc_samples++;
 	
 }
+
+
 
 uint8_t voltage_next() {
 	return (adc_status == 0);
@@ -131,10 +153,46 @@ uint16_t vin_to_isc(uint16_t vin) {
 	return (vin - I_SENS_REF) / I_SENS_GAIN; // mA
 }
 
-uint16_t vin_to_tsc(uint16_t vin) {
-	return 67;
+int8_t vin_to_tsc(uint16_t vin) {
 	
-	// TODO: implement temperature calculation.
+	uint8_t no_of_guesses = 0;
+	
+	uint8_t guess = 40;
+	
+	uint8_t min = 0;
+	uint8_t max = temp_lookup_size;
+	
+	uint8_t prev_guess;
+	
+	// Find index of lookup value closest to V_in via "SAR-type" algorithm.
+	while(1) {
+
+		no_of_guesses++;
+
+		prev_guess = guess;
+		
+		if (temp_lookup[guess] < vin) {
+			// If look-up value is too low, guess a lower index next time
+			max = guess;
+			guess = (guess + min) / 2;
+			} else if (temp_lookup[guess] == vin) {
+			break;
+			} else {
+			// If look-up value is too high, guess a higher index next time
+			min = guess;
+			guess = (guess + max) / 2;
+		}
+
+		if (prev_guess == guess) {
+			break;
+		}
+
+		if (no_of_guesses > 10) {
+			return -100; // return value "obviously" out of plausible range -- error has occurred.
+		}
+	}
+	
+	return (int8_t)guess - 10;
 }
 
 float get_capacity() {

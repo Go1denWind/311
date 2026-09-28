@@ -9,7 +9,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
-#define F_CPU 2000000UL
+#define F_CPU 16000000UL
 
 #include "uart.h"
 #include "timer0.h"
@@ -33,7 +33,8 @@ volatile uint8_t debug = 0;
 
 int main(void)
 {
-	usart_init(12);
+	
+	usart_init(12); // 76800 baud rate
 	timer0_init();
 	timer1_init();
 	adc_init(); // NOTE: might block UART on Proteus
@@ -53,48 +54,34 @@ int main(void)
 	
     while (1)
     {
-		/*
+		
+		PINC = (1 << PINC4);
+		
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
 			
-			// Toggle debug PB2 pin
-			PINB = (1 << PINB2);
+			PINB = (1 << PINB1);
+			
+			
 			
 			usart_transmit_array("C: ");
 			usart_transmit_num(777, 3);
 			usart_transmit('\%');
 			usart_transmit('\n');
+			usart_transmit('\r');
 			
 			// Clear USART flag
 			usart_to_do = 0;
 		}
-		*/
     }
 }
 
-/*
-ISR(TIMER0_COMPA_vect) {
-	
-	// Calculate new capacity via coulomb counting
-	capacity -= fake_samples[i] * T_SAMPLE;
-	
-	// Increment i to use next "fake" sample
-	i = (i + 1) % 4;
-	
-	// Toggle debug PB0 pin
-	PINB = (1 << PINB0);
-	
-}
-*/
-
 ISR(TIMER1_COMPA_vect) {
 	
-	PINB = (1 << PINB1);
-	
-	usart_to_do = 5;
+	PINB = (1 << PINB2);
 	
 	// Set USART flag, main function will transmit diagnostics
-	// usart_to_do = 1;
+	usart_to_do = 1;
 	
 	// reset_adc_cycle();
 }

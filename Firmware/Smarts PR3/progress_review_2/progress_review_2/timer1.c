@@ -15,11 +15,11 @@ void timer1_init() {
 	// CTC mode
 	TCCR1B |= (1 << WGM12);
 	
-	// Set prescaler to 64
-	TCCR1B |= (1 << CS11) | (1 << CS10);
+	// Set prescaler to 1024
+	TCCR1B |= (1 << CS12) | (1 << CS10);
 	
 	// Configure TC1 interrupts to trigger every 1 s (i.e. display diagnostics every 1 s)
-	OCR1A = 31249;
+	OCR1A = 15624;
 	
 	// Enable interrupts
 	TIMSK1 |= (1 << OCIE1A);
