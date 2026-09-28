@@ -110,14 +110,16 @@ uint16_t adc_read_debug(uint8_t channel) {
 
 ISR(ADC_vect) {
 	
-	
+	PINC = (1 << PINC4);
 	
 	number = ADC;
 	
-	if (adc_samples == 50) {
+	/*
+	if (adc_samples >= 50) {
 		ADCSRA &= ~(1 << ADATE);
-		PINC = (1 << PINC5);
+		PORTC |= (1 << PORTC5);
 	}
+	*/
 	
 	// capacity = (vin_to_vsc(adc_to_vin(ADC)) - 2650) / 850.0 * 100;
 	
@@ -200,6 +202,7 @@ float get_capacity() {
 }
 
 void reset_adc_cycle() {
+	
 	adc_samples = 0;
 	ADCSRA |= (1 << ADATE);
 }

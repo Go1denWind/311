@@ -44,7 +44,7 @@ void usart_transmit_array(char* msg) {
 	}
 }
 
-void usart_transmit_num(uint16_t number, uint8_t decimal_pos) {
+void usart_transmit_num_3sf(uint16_t number, uint8_t decimal_pos) {
 	
 	uint8_t digits[3];
 	
@@ -65,7 +65,59 @@ void usart_transmit_num(uint16_t number, uint8_t decimal_pos) {
 			usart_transmit('.');
 		}
 	}
-	
-	
-	
 }
+
+void usart_transmit_voltage(uint16_t number) {
+	usart_transmit_array("Voltage:      ");
+	usart_transmit_num_3sf(number/10, 0);
+	usart_transmit_array(" V\n\r");
+}
+
+void usart_transmit_current(uint16_t number) {
+	usart_transmit_array("Current:      ");
+	usart_transmit_num_3sf(number, 3);
+	usart_transmit_array(" mA\n\r");
+}
+
+void usart_transmit_temp(int8_t number) {
+	
+	usart_transmit_array("Temperature: ");
+	
+	int8_t transmit_num;
+	
+	if (number < 0) {
+		usart_transmit('-');
+		transmit_num = number * -1;
+	} else {
+		usart_transmit(' ');
+		transmit_num = number;
+	}
+	
+	usart_transmit(transmit_num/10 + '0');
+	usart_transmit(transmit_num%10 + '0');
+	
+	usart_transmit_array(" C\n\r");
+}
+
+void usart_transmit_soc(uint16_t number) {
+	usart_transmit_array("SOC:         ");
+	
+	if (number == 1000) {
+		usart_transmit('1');
+		usart_transmit_num_3sf(0, 1);
+	} else {
+		usart_transmit(' ');
+		usart_transmit_num_3sf(number, 1);
+	}
+	
+	usart_transmit_array("\%\n\r");
+}
+
+void usart_transmit_diagnostics(uint16_t voltage, uint16_t current, int8_t temp, uint16_t soc) {
+	usart_transmit_voltage(voltage);
+	usart_transmit_current(current);
+	usart_transmit_temp(temp);
+	usart_transmit_soc(soc);
+	usart_transmit_array("\n\r");
+}
+

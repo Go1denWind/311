@@ -18,9 +18,6 @@
 
 #define T_SAMPLE 0.008 // s
 
-// Assume initial full capacity (3.8 V)
-volatile float capacity; // %
-
 /*
 // Fake array of samples to loop through (in mA, supercap discharging)
 volatile double fake_samples[4] = {250, 250, 250, 250};
@@ -38,7 +35,6 @@ int main(void)
 	timer0_init();
 	timer1_init();
 	adc_init(); // NOTE: might block UART on Proteus
-	// adc_init_debug();
 	
 	sei();
 	
@@ -55,20 +51,12 @@ int main(void)
     while (1)
     {
 		
-		PINC = (1 << PINC4);
-		
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
 			
 			PINB = (1 << PINB1);
 			
-			
-			
-			usart_transmit_array("C: ");
-			usart_transmit_num(777, 3);
-			usart_transmit('\%');
-			usart_transmit('\n');
-			usart_transmit('\r');
+			usart_transmit_diagnostics(2750, 228, -27, 1000);
 			
 			// Clear USART flag
 			usart_to_do = 0;
@@ -77,8 +65,6 @@ int main(void)
 }
 
 ISR(TIMER1_COMPA_vect) {
-	
-	PINB = (1 << PINB2);
 	
 	// Set USART flag, main function will transmit diagnostics
 	usart_to_do = 1;
