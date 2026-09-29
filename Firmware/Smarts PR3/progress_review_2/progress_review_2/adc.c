@@ -48,9 +48,14 @@ volatile int8_t temperature = 0;
 volatile uint16_t voltage = 0;
 volatile int16_t current = 0;
 
-volatile float capacity = 0;
+// Status variables for touch detection
+volatile uint8_t osc_startup = 0; // set to 1 when first rising edge is detected.
+volatile uint8_t touch_curr = 0;
+volatile uint8_t touch_ready = 1; // equal 1 if electrode was not being touched in previous osc cycle
+volatile uint16_t adc_prev = 0;
+volatile uint16_t touch_count = 0;
 
-volatile uint16_t number = 467; // debug
+volatile float capacity = 0;
 
 void adc_init() {
 	
@@ -133,6 +138,39 @@ ISR(ADC_vect) {
 		ADMUX |= (1 << MUX1) | (1 << MUX1);
 	} else if (touch_next()) {
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+		
+		touch_count++;
+		
+		if ((ADC > 614) && (adc_prev < 410)) {
+			
+			if (osc_startup == 0) {
+				
+				osc_startup = 1;
+				touch_count = 0;
+				
+			} else {
+				
+				if (touch_count > 135) {
+					
+					touch_curr = 1;
+					
+					if (touch_ready) { // if this is a new touch
+						touch_ready = 0;
+						// Toggle output isolation switch
+						PIND = (1 << PIND4);
+					} else { // not being touched
+						touch_curr = 0;
+						touch_ready = 1; // prepare to detect new touch
+					}
+					
+					touch_count = 0;
+					
+				}
+			}
+		}
+		
+		adc_prev = ADC;
+		
 	}
 	
 	adc_status++;
@@ -241,8 +279,4 @@ void reset_adc_cycle() {
 	
 	adc_samples = 0;
 	ADCSRA |= (1 << ADATE);
-}
-
-uint16_t get_number() {
-	return number; // debug
 }

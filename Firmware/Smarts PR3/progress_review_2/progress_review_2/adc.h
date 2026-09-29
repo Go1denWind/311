@@ -32,6 +32,4 @@ float get_capacity();
 
 void reset_adc_cycle();
 
-uint16_t get_number();
-
 #endif /* ADC_H_ */
