@@ -139,9 +139,20 @@ ISR(ADC_vect) {
 	} else if (touch_next()) {
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		
+		PINC = (1 << PINC4);
+		
 		touch_count++;
 		
+		// debug
+		if (ADC > 614) {
+			PORTB |= (1 << PORTB2);
+		} else {
+			PORTB &= ~(1 << PORTB2);
+		}
+		
 		if ((ADC > 614) && (adc_prev < 410)) {
+			
+			PINB = (1 << PINB1);
 			
 			if (osc_startup == 0) {
 				
