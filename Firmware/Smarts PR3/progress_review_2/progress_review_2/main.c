@@ -40,8 +40,26 @@ int main(void)
 	DDRC |= (1 << DDC4) | (1 << DDC5);
 	DDRD |= (1 << DDD2) | (1 << DDD3);
 	
+	// TODO: update I/O registers to match new PCB layout
+	
     while (1)
     {
+		
+		// Update LEDs based on capacity reading
+		if (get_capacity() > 666) {
+			PORTD |= (1 << PORTD6) | (1 << PORTD7);
+			PORTB |= (1 << PORTB0);
+		} else if (get_capacity() > 333) {
+			PORTD &= ~(1 << PORTD6);
+			PORTD |= (1 << PORTD7);
+			PORTB |= (1 << PORTB0);
+		} else if (get_capacity() > 10) {
+			PORTD &= ~(1 << PORTD6) & ~(1 << PORTD7);
+			PORTB |= (1 << PORTB0);
+		} else {
+			PORTD &= ~(1 << PORTD6) & ~(1 << PORTD7);
+			PORTB &= ~(1 << PORTB0);
+		}
 		
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
