@@ -170,27 +170,16 @@ ISR(ADC_vect) {
 			} else if (capacity < 0) {
 				capacity = 0;
 			}
-			
-			// TODO: use floats instead of ints, rounding issues are bad here
 		}
 		
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-		ADMUX |= (1 << MUX1) | (1 << MUX1);
+		ADMUX |= (1 << MUX1) | (1 << MUX0);
 		
 	} else if (touch_next()) { // TODO: fix
 		
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		
-		PINC = (1 << PINC4);
-		
 		touch_count++;
-		
-		// debug
-		if (ADC > 614) {
-			PORTB |= (1 << PORTB2);
-		} else {
-			PORTB &= ~(1 << PORTB2);
-		}
 		
 		if ((ADC > 614) && (adc_prev < 410)) {
 			
@@ -203,22 +192,16 @@ ISR(ADC_vect) {
 				
 			} else {
 				
-				if (touch_count > 135) {
-					
-					touch_curr = 1;
-					
-					if (touch_ready) { // if this is a new touch
-						touch_ready = 0;
-						// Toggle output isolation switch
-						PIND = (1 << PIND4);
-					} else { // not being touched
-						touch_curr = 0;
-						touch_ready = 1; // prepare to detect new touch
-					}
-					
-					touch_count = 0;
-					
+				if ((touch_count > 33) && touch_ready) {
+					touch_ready = 0;
+					// Toggle output switch
+					PIND = (1 << PIND4);
+				} else {
+					touch_ready = 1; // prepare to detect new touch
 				}
+				
+				touch_count = 0;
+				
 			}
 		}
 		
