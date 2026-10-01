@@ -173,7 +173,7 @@ ISR(ADC_vect) {
 		} else {
 			// Otherwise, calculate new SOC from current sample (Coulumb counting)
 			no_load = 0;
-			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f);
+			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f); // TODO: change back to integer calculations to make this faster
 			
 			// Bound capacity between 0% and 100%
 			if (capacity > 1000) {
@@ -181,6 +181,8 @@ ISR(ADC_vect) {
 			} else if (capacity < 0) {
 				capacity = 0;
 			}
+			
+			// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 		}
 		
 		// Change ADC channel to measure touch oscillator

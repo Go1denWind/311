@@ -434,7 +434,7 @@ ISR(ADC_vect) {
 			// Otherwise, calculate new SOC from current sample (Coulumb counting)
 			no_load = 0;
      32e:	10 92 05 02 	sts	0x0205, r1	; 0x800205 <no_load>
-			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f);
+			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f); // TODO: change back to integer calculations to make this faster
      332:	80 91 fa 01 	lds	r24, 0x01FA	; 0x8001fa <current>
      336:	90 91 fb 01 	lds	r25, 0x01FB	; 0x8001fb <current+0x1>
      33a:	09 2e       	mov	r0, r25
@@ -525,7 +525,8 @@ ISR(ADC_vect) {
      40e:	10 92 fd 01 	sts	0x01FD, r1	; 0x8001fd <capacity+0x1>
      412:	10 92 fe 01 	sts	0x01FE, r1	; 0x8001fe <capacity+0x2>
      416:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <capacity+0x3>
-			}
+			
+			// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 		}
 		
 		// Change ADC channel to measure touch oscillator
