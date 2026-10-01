@@ -125,24 +125,30 @@ uint16_t adc_read_debug(uint8_t channel) {
 
 ISR(ADC_vect) {
 	
-	PINC = (1 << PINC4);
-	
 	// Manually interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
 	if (temperature_next()) {
+		
+		// Convert ADC sample to temperature and store result
 		temperature = vin_to_tsc(adc_to_vin(ADC));
+		
+		// Change ADC channel to measure voltage
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX0);
+		
 	} else if (voltage_next()) {
 		
+		// Convert ADC sample to voltage and store result
 		voltage = vin_to_vsc(adc_to_vin(ADC));
 		
+		// If MCU is starting up or no load is connected, calculate SOC from voltage
 		if ((soc_startup == 0) || (no_load == 1)) {
 			capacity = ((int16_t)voltage - 2650) / 850.0 * 1000; // % * 10
 			soc_startup = 1;
 		}
 		
+		// Bound capacity between 0% and 100%
 		if (capacity > 1000) {
 			capacity = 1000;
 			} else if (capacity < 0) {
@@ -152,19 +158,24 @@ ISR(ADC_vect) {
 		// TODO: what happens if load is connected in between previous current scan and this voltage scan?
 		// reading current then voltage within the cycle is better, but ponder further possible improvements?
 		
+		// Change ADC channel to measure current
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1);
 		
 	} else if (current_next()) {
 		
+		// Convert ADC sample to current and store result
 		current = vin_to_isc(adc_to_vin(ADC));
 		
 		if ((current < 3) && (current > -3)) {
+			// If no load is connected, let SOC be calculated from upcoming voltage sample
 			no_load = 1;
 		} else {
+			// Otherwise, calculate new SOC from current sample (Coulumb counting)
 			no_load = 0;
 			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f);
 			
+			// Bound capacity between 0% and 100%
 			if (capacity > 1000) {
 				capacity = 1000;
 			} else if (capacity < 0) {
@@ -172,55 +183,65 @@ ISR(ADC_vect) {
 			}
 		}
 		
+		// Change ADC channel to measure touch oscillator
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1) | (1 << MUX0);
 		
-	} else if (touch_next()) { // TODO: fix
+	} else if (touch_next()) {
 		
+		// Change ADC channel to measure temperature
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		
+		// Increment variable to measure length of oscillator period
 		touch_count++;
 		
-		if ((ADC > 614) && (adc_prev < 410)) {
-			
-			PINB = (1 << PINB1);
+		if ((ADC > 614) && (adc_prev < 410)) { // rising edge
 			
 			if (osc_startup == 0) {
 				
+				// If MCU is starting up, reset touch counter and do nothing else
 				osc_startup = 1;
 				touch_count = 0;
 				
 			} else {
 				
 				if ((touch_count > 33) && touch_ready) {
+					
+					// If electrode is being touched (i.e. larger oscillator period) and electrode was not being touched in previous oscillator cycle:
+					// Flag electrode as currently being touched
 					touch_ready = 0;
+					
 					// Toggle output switch
 					PIND = (1 << PIND4);
-				} else {
-					touch_ready = 1; // prepare to detect new touch
+					
+				} else if (touch_count < 30) {
+					
+					// If electrode is not being touched, flag electrode as current not being touched (prepare to detect new touch)
+					touch_ready = 1;
 				}
 				
+				// Reset counter
 				touch_count = 0;
 				
 			}
 		}
 		
+		// Store this ADC sample to compare with next ADC touch sample (to detect rising edges)
 		adc_prev = ADC;
 		
 	}
 	
+	// Update ADC status variable so appropriate processing is done for next sample
 	adc_status++;
-	adc_samples++;
-	
 	if (adc_status >= 4) {
 		adc_status = 0;
 	}
 	
+	// Stop after 120 samples and start again after one second (allow time for UART to transmit)
+	adc_samples++;
 	if (adc_samples >= 120) {
 		ADCSRA &= ~(1 << ADATE);
 	}
-	
-	PINC = (1 << PINC4);
 	
 }
 
