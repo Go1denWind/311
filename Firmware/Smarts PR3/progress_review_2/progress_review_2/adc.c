@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
+#define T_SAMPLE_CURRENT 0.032f // s
+
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
 
@@ -48,6 +50,9 @@ volatile int8_t temperature = 0;
 volatile uint16_t voltage = 0;
 volatile int16_t current = 0;
 
+volatile float capacity = 0; // % * 10
+// TODO: calculate capacity in terms of SOE instead of SOC?
+
 // Status variables for touch detection
 volatile uint8_t osc_startup = 0; // set to 1 when first rising edge is detected.
 volatile uint8_t touch_curr = 0;
@@ -55,7 +60,8 @@ volatile uint8_t touch_ready = 1; // equal 1 if electrode was not being touched 
 volatile uint16_t adc_prev = 0;
 volatile uint16_t touch_count = 0;
 
-volatile float capacity = 0;
+volatile uint8_t no_load = 0;
+volatile uint8_t soc_startup = 0;
 
 void adc_init() {
 	
@@ -129,14 +135,50 @@ ISR(ADC_vect) {
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX0);
 	} else if (voltage_next()) {
+		
 		voltage = vin_to_vsc(adc_to_vin(ADC));
+		
+		if ((soc_startup == 0) || (no_load == 1)) {
+			capacity = ((int16_t)voltage - 2650) / 850.0 * 1000; // % * 10
+			soc_startup = 1;
+		}
+		
+		if (capacity > 1000) {
+			capacity = 1000;
+			} else if (capacity < 0) {
+			capacity = 0;
+		}
+		
+		// TODO: what happens if load is connected in between previous current scan and this voltage scan?
+		// reading current then voltage within the cycle is better, but ponder further possible improvements?
+		
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1);
+		
 	} else if (current_next()) {
+		
 		current = vin_to_isc(adc_to_vin(ADC));
+		
+		if ((current < 3) && (current > -3)) {
+			no_load = 1;
+		} else {
+			no_load = 0;
+			capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f);
+			
+			if (capacity > 1000) {
+				capacity = 1000;
+			} else if (capacity < 0) {
+				capacity = 0;
+			}
+			
+			// TODO: use floats instead of ints, rounding issues are bad here
+		}
+		
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1) | (1 << MUX1);
-	} else if (touch_next()) {
+		
+	} else if (touch_next()) { // TODO: fix
+		
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		
 		PINC = (1 << PINC4);
@@ -224,7 +266,7 @@ uint16_t vin_to_vsc(uint16_t vin) {
 }
 
 int16_t vin_to_isc(uint16_t vin) {
-	return (vin - I_SENS_REF) / I_SENS_GAIN; // mA
+	return ((int16_t)vin - (int16_t)I_SENS_REF) / I_SENS_GAIN; // mA
 }
 
 int8_t vin_to_tsc(uint16_t vin) {
@@ -282,8 +324,8 @@ int16_t get_current() {
 	return current;
 }
 
-float get_capacity() {
-	return capacity;
+int16_t get_capacity() {
+	return (int16_t)capacity;
 }
 
 void reset_adc_cycle() {

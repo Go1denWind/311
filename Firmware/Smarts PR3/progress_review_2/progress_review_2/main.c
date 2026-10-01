@@ -16,14 +16,6 @@
 #include "timer1.h"
 #include "adc.h"
 
-#define T_SAMPLE 0.008 // s
-
-/*
-// Fake array of samples to loop through (in mA, supercap discharging)
-volatile double fake_samples[4] = {250, 250, 250, 250};
-volatile uint8_t i = 0;
-*/
-
 volatile uint8_t usart_to_do = 0;
 
 volatile uint8_t debug = 0;
@@ -54,7 +46,7 @@ int main(void)
 		// If one second has passed, print battery capacity to UART
 		if (usart_to_do == 1) {
 			
-			usart_transmit_diagnostics(get_voltage(), get_current(), get_temperature(), 1000);
+			usart_transmit_diagnostics(get_voltage(), get_current(), get_temperature(), get_capacity());
 			
 			// Clear USART flag
 			usart_to_do = 0;
@@ -68,4 +60,8 @@ ISR(TIMER1_COMPA_vect) {
 	usart_to_do = 1;
 	
 	reset_adc_cycle();
+	
+	// Manually interrupt flag bit so next rising edge of trigger source can be detected
+	TIFR0 = (1 << OCF0A);
+	
 }

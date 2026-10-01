@@ -28,7 +28,7 @@ int8_t vin_to_tsc(uint16_t vin);
 int8_t get_temperature();
 uint16_t get_voltage();
 int16_t get_current();
-float get_capacity();
+int16_t get_capacity();
 
 void reset_adc_cycle();
 
