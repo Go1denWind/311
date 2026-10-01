@@ -147,6 +147,51 @@ for k = 1:numel(ovFiles)
          'Units', 'normalized', 'FontSize', 11);
 end
 
+%% ---- Current sense: input (I_FB, C2) and output (I_FBF, C1) on the same axes ----
+% Each case has an input file (C2) and an output file (C1) captured on the same
+% time base. Add more rows here for the other Rl / Vin / duty combinations.
+cs = struct( ...
+    'fileI', {'5_25_I.CSV'}, ...   % input  (I_FB)
+    'fileO', {'5_25_O.CSV'}, ...   % output (I_FBF)
+    'Rl',    {5}, ...              % load [ohm]
+    'Vin',   {2.5}, ...            % input voltage [V]
+    'D',     {0.5});               % duty cycle
+
+for k = 1:numel(cs)
+    TI = readtable(cs(k).fileI, 'HeaderLines', 1, 'ReadVariableNames', false);
+    TO = readtable(cs(k).fileO, 'HeaderLines', 1, 'ReadVariableNames', false);
+    tI = TI{:,1};  vI = TI{:,2}*1e3;    % mV
+    tO = TO{:,1};  vO = TO{:,2}*1e3;    % mV
+
+    % Start the window on a rising edge of the output pulse (30% of smoothed range)
+    vs  = movmean(vO, 100);
+    thr = min(vs) + 0.3*(max(vs) - min(vs));
+    ie  = find(vs(1:end-1) < thr & vs(2:end) >= thr);
+    ie  = ie(tO(ie) + Twin <= tO(end));          % keep only edges with a full window after them
+    t0  = tO(ie(1));
+
+    selI = tI >= t0 & tI <= t0 + Twin;
+    selO = tO >= t0 & tO <= t0 + Twin;
+
+    % Means over the whole capture (an integer number of periods)
+    mI = mean(vI);  mO = mean(vO);
+
+    figure('Name', 'Current sense', 'Color', 'w', 'Position', [100 100 900 450]);
+    plot((tI(selI) - t0)*1e6, vI(selI), 'LineWidth', 1); hold on;
+    plot((tO(selO) - t0)*1e6, vO(selO), 'LineWidth', 1);
+    grid on;
+    xlim([0 Twin*1e6]);
+    xticks(0:Ts*1e6:Twin*1e6);
+    xlabel('Time (\mus)');
+    ylabel('Current sense signal (mV)');
+    title(sprintf('Current sense - R_L = %g\\Omega, V_{in} = %.1fV, D = %.1f', ...
+          cs(k).Rl, cs(k).Vin, cs(k).D));
+    legend('I_{FB} (input)', 'I_{FBF} (output)', 'Location', 'northeast');
+    text(0.03, 0.92, sprintf('I_{FB} mean = %.1f mV\nI_{FBF} mean = %.1f mV\nMean gain = %.2fx', ...
+         mI, mO, mO/mI), 'Units', 'normalized', 'FontSize', 9, ...
+         'VerticalAlignment', 'top', 'BackgroundColor', 'w', 'EdgeColor', [0.7 0.7 0.7]);
+end
+
 %% Local functions (must stay at the end of the script; need R2016b or newer)
 function tc = interpCross(t, y, L)
     i  = find(y >= L, 1);               % first sample at/above level L (rising)
