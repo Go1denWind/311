@@ -130,6 +130,14 @@ ISR(ADC_vect) {
 	
 	if (temperature_next()) {
 		
+		// Send signal to isolate supercap if temperature outside safe range
+		if ((ADC < 154) || (ADC > 870)) {
+			PORTD |= (1 << PORTD5);
+		} else {
+			PORTD &= ~(1 << PORTD5);
+			// NOTE: isolation state is held by a latch on the PCB, so potentially clearing this bit for the other samples should be OK
+		}
+		
 		// Convert ADC sample to temperature and store result
 		temperature = vin_to_tsc(adc_to_vin(ADC));
 		
@@ -138,6 +146,13 @@ ISR(ADC_vect) {
 		ADMUX |= (1 << MUX0);
 		
 	} else if (voltage_next()) {
+		
+		// Send signal to isolate supercap if temperature outside safe range
+		if ((ADC < 154) || (ADC > 870)) {
+			PORTD |= (1 << PORTD5);
+			} else {
+			PORTD &= ~(1 << PORTD5);
+		}
 		
 		// Convert ADC sample to voltage and store result
 		voltage = vin_to_vsc(adc_to_vin(ADC));
@@ -163,6 +178,13 @@ ISR(ADC_vect) {
 		ADMUX |= (1 << MUX1);
 		
 	} else if (current_next()) {
+		
+		// Send signal to isolate supercap if temperature outside safe range
+		if ((ADC < 154) || (ADC > 870)) {
+			PORTD |= (1 << PORTD5);
+			} else {
+			PORTD &= ~(1 << PORTD5);
+		}
 		
 		// Convert ADC sample to current and store result
 		current = vin_to_isc(adc_to_vin(ADC));
