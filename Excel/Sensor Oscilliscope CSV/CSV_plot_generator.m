@@ -41,10 +41,12 @@ end
 
 plot_data("U6_power_switch");
 title("U6 Output Pin Voltage for a Reactangular ON Pin Voltage");
+legend("ON Pin", "Output");
 grid on;
 
 plot_data("U10_power_switch_U6_held_closed");
 title("U10 Output Pin Voltage for a Reactangular ON Pin Voltage, U6 Held ON");
+legend("ON Pin", "Output");
 grid on;
 
 plot_data("touch_sensor_no_touch");
