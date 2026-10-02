@@ -60,7 +60,8 @@ ylim([0, 5]);
 title("Current Sensor Output Voltage, Charging 0.255 A");
 grid on;
 
-plot_data("voltage_sensor_ramp_input");
+% v2 has R29 = 1.2 kohm which is what is on the altium schematic.
+plot_data("voltage_sensor_ramp_input_v2");
 title("Voltage Sensor Output for a Ramp Input");
 grid on;
 
