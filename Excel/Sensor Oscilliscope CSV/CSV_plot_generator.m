@@ -66,7 +66,9 @@ grid on;
 % v2 has R29 = 1.2 kohm which is what is on the altium schematic.
 plot_data("voltage_sensor_ramp_input_v2");
 xlim([-0.6, -0.25]);
+yticks(0:0.5:6);
 title("Voltage Sensor Output for a Ramp Input");
+legend("Input", "Output");
 grid on;
 
 plot_data("window_comparator_current");
