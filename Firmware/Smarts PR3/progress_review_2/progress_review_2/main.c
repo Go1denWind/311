@@ -31,13 +31,13 @@ int main(void)
 	sei();
 	
 	// Configure I/O pins
-	DDRB |= (1 << DDB0) | (1 << DDB3) | (1 << DDB4) | (1 << DDB5);
+	DDRB |= (1 << DDB0);
 	DDRC &= ~(1 << DDC0) & ~(1 << DDC1) & ~(1 << DDC2) & ~(1 << DDC3);
-	DDRD |= (1 << DDD1) | (1 << DDD4) | (1 << DDD5) | (1 << DDD6) | (1 << DDD7); // TODO: check required I/O for SPI and RESET pins
+	DDRC |= (1 << DDC4) | (1 << DDC5);
+	DDRD |= (1 << DDD6) | (1 << DDD7);
 	
 	// Enable debug output pins
-	DDRB |= (1 << DDB1) | (1 << DDB2);
-	DDRC |= (1 << DDC4) | (1 << DDC5);
+	DDRB |= (1 << DDB4) | (1 << DDB5);
 	DDRD |= (1 << DDD2) | (1 << DDD3);
 	
 	// TODO: update I/O registers to match new PCB layout

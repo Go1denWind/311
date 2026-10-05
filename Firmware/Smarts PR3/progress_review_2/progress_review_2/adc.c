@@ -71,8 +71,9 @@ void adc_init() {
 	// Set prescaler to 128 (i.e. ADC clock frequency of 125 kHz)
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 	
-	// Read from ADC0 (temperature) initially
-	ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+	// Read from ADC1 (temperature) initially
+	ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1);
+	ADMUX |= (1 << MUX0);
 	
 	// Set ADC conversions to occur every 8 ms (T/C0 compare match A)
 	ADCSRB |= (1 << ADTS1) | (1 << ADTS0);
@@ -132,9 +133,9 @@ ISR(ADC_vect) {
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
-			PORTD |= (1 << PORTD5);
+			PORTC |= (1 << PORTC5);
 		} else {
-			PORTD &= ~(1 << PORTD5);
+			PORTC &= ~(1 << PORTC5);
 			// NOTE: isolation state is held by a latch on the PCB, so potentially clearing this bit for the other samples should be OK
 		}
 		
@@ -143,15 +144,15 @@ ISR(ADC_vect) {
 		
 		// Change ADC channel to measure voltage
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-		ADMUX |= (1 << MUX0);
+		ADMUX |= (1 << MUX1);
 		
 	} else if (voltage_next()) {
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
-			PORTD |= (1 << PORTD5);
+			PORTC |= (1 << PORTC5);
 			} else {
-			PORTD &= ~(1 << PORTD5);
+			PORTC &= ~(1 << PORTC5);
 		}
 		
 		// Convert ADC sample to voltage and store result
@@ -175,15 +176,15 @@ ISR(ADC_vect) {
 		
 		// Change ADC channel to measure current
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-		ADMUX |= (1 << MUX1);
+		ADMUX |= (1 << MUX1) | (1 << MUX0);
 		
 	} else if (current_next()) {
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
-			PORTD |= (1 << PORTD5);
+			PORTC |= (1 << PORTC5);
 			} else {
-			PORTD &= ~(1 << PORTD5);
+			PORTC &= ~(1 << PORTC5);
 		}
 		
 		// Convert ADC sample to current and store result
@@ -209,12 +210,12 @@ ISR(ADC_vect) {
 		
 		// Change ADC channel to measure touch oscillator
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-		ADMUX |= (1 << MUX1) | (1 << MUX0);
 		
 	} else if (touch_next()) {
 		
 		// Change ADC channel to measure temperature
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+		ADMUX |= (1 << MUX0);
 		
 		// Increment variable to measure length of oscillator period
 		touch_count++;
@@ -236,7 +237,7 @@ ISR(ADC_vect) {
 					touch_ready = 0;
 					
 					// Toggle output switch
-					PIND = (1 << PIND4);
+					PINC = (1 << PINC4);
 					
 				} else if (touch_count < 30) {
 					
