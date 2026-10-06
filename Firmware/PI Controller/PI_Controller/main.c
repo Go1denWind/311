@@ -6,40 +6,25 @@
  */ 
 
 #include <avr/io.h>
+#include <stdint.h>
+#include "pi_control.h"
+#include "adc.h"
+#include "timer.h"
 
-#define VOLTAGE_KI 10
-#define VOLTAGE_KP 100
-#define T_SAMPLE 1/20000
-#define PI_LIMIT 1590000
+#define V_REF 512 
 
-static float Int_out;
-static float PI_out;
-
-float sat_limit_controller	(float result){
-	if (result > PI_LIMIT){
-		return PI_LIMIT;
-	}
-	else if (result < -PI_LIMIT){
-		return -PI_LIMIT;
-	}
-	else{
-		return result;
-	}
-}
-
-void pi_controller (uint16_t V_out, uint16_t V_ref){
-	int32_t V_err = -((int32_t)V-ref - V_out);
-	int32_t Prop_out = Verr * VOLTAGE_KP;
-	Int_out = sat_limit_controller(Int_out + (float)V_err * VOLTAGE_KI * T_SAMPLE);
-	PI_out = sat_limit_controller(Prop_out + Int_out);
-}
+volatile static uint16_t ADC_VALUE = 0;
 
 int main(void)
 {
+    tc0_init_FPWM_100k();   //Initializing TC0 to generate a 100kHz 50% D PWM
+    adc_init();             //Initializing ADC with auto trigger mode
+    DDRB |= (1 << PB5);       // PB5 as output
     /* Replace with your application code */
     while (1) 
     {
-		pi_controller(V_out, V_ref);
+        ADC_VALUE = adc_read_channel_pool();
+        PINB = (1 << PB5);
+        OCR0B = pi_mapped(ADC_VALUE, V_REF);
     }
 }
-
