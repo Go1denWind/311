@@ -1841,7 +1841,7 @@ Plecs {
       Type          Ground
       Name          "Ground2"
       Show          off
-      Position      [670, 570]
+      Position      [670, 600]
       Direction     up
       Flipped       off
       LabelPosition east
@@ -2015,7 +2015,7 @@ Plecs {
       Type          Voltmeter
       Name          "Vm1"
       Show          on
-      Position      [670, 540]
+      Position      [670, 570]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -2383,6 +2383,7 @@ Plecs {
       Type          Wire
       SrcComponent  "Vm1"
       SrcTerminal   1
+      Points        [670, 520]
       DstComponent  "Rib3"
       DstTerminal   1
     }
@@ -2411,4 +2412,4 @@ Plecs {
     }
   }
 }
-DemoSignature "8TeMm5LPttibZA8t9V/UWPytb+mV5RtOHVPY8R+vLlQ="
+DemoSignature "jJXTUDm9riWwdLGzkIhpZAJQD+tZ7zeLh88cpD9zktE="
