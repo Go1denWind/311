@@ -3,6 +3,8 @@
 
 //This function configures the ADC to use AVCC as reference and read ADC0 in auto trigger mode
 void adc_init(void){
+	DDRC &= ~(1 << PC0); //PC0 as input
+	PORTC &= ~(1 << PC0); //pull-up disabled
 	ADMUX |= 1 << REFS0;  //AVCC set as reference, ADC0 selected and results are right adjusted
 	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE) | (0b110 << ADPS0);
 	//Enable ADC, start conversion, setup auto-trigger and set prescaler to 64
