@@ -84,41 +84,33 @@ for k = 1:numel(ovpFiles)
 end
 
 
-%% ---- WFM12: comparator / OVP test, rise time of the output ramp ----
-% Long capture (-1.84 ms to +10.16 ms, dt = 92 ns). The sudden drop to 0 V
-% (and restart) is ignored; the rise time is measured on the first ramp, from
-% 10% to 90% of the level reached just before the drop.
+%% ---- WFM12: comparator / OVP test, rise time of the output ----
+% Long capture (-1.84 ms to +10.16 ms, dt = 92 ns). The dip to 0 V (and the
+% jump back up) is treated as a measurement error and ignored: the rise time is
+% taken from 10% to 99% of the final settled level (the plateau on the right).
 T12 = readtable('WFM12.CSV', 'HeaderLines', 1, 'ReadVariableNames', false);
 t12 = T12{:,1};
 v12 = T12{:,2};
-vs12 = movmean(v12, 21);                % ~2 us smoothing for threshold crossings
+vs12 = movmean(v12, 201);               % ~18 us smoothing so noise doesn't trigger the crossings
 
-% Locate the drop only to know where the ramp ends (steepest falling edge)
-dv = diff(vs12);
-dv([1:15, end-14:end]) = 0;
-[~, iFall] = min(dv);
-tFall = t12(iFall);
-
-vLo = median(v12(t12 < -1.0e-3));                          % level before the ramp
-vHi = median(v12(t12 > tFall-20e-6 & t12 < tFall-5e-6));   % level reached by the ramp
+vLo = median(v12(t12 < -1.0e-3));               % level before the rise
+vHi = median(v12(t12 > t12(end) - 3e-3));       % final settled level (last 3 ms)
 lvl = @(f) vLo + f*(vHi - vLo);
 
-ramp = t12 < tFall - 5e-6;              % first ramp only
-tr = t12(ramp);  yr = vs12(ramp);
-t10 = interpCross(tr, yr, lvl(0.1));
-t90 = interpCross(tr, yr, lvl(0.9));
+t10 = interpCross(t12, vs12, lvl(0.10));        % first time the signal reaches 10%
+t99 = interpCross(t12, vs12, lvl(0.99));        % first time it reaches 99% of the final level
 
 figure('Name', 'WFM12', 'Color', 'w', 'Position', [100 100 900 450]);
 plot(t12*1e3, v12, 'LineWidth', 0.8); hold on;
-plot([t10 t90]*1e3, [lvl(0.1) lvl(0.9)], 'ro', 'MarkerFaceColor', 'r');
+plot([t10 t99]*1e3, [lvl(0.10) lvl(0.99)], 'ro', 'MarkerFaceColor', 'r');
 grid on;
 xlabel('Time (ms)');
 ylabel('C1 Voltage (V)');
 title('WFM12 - Comparator response to overvoltage');
-legend('C1', '10% / 90% points', 'Location', 'southeast');
-text(0.03, 0.92, sprintf('10-90%% rise time = %.2f ms', (t90 - t10)*1e3), ...
+legend('C1', '10% / 99% points', 'Location', 'southeast');
+text(0.03, 0.92, sprintf('10-99%% rise time = %.2f ms', (t99 - t10)*1e3), ...
      'Units', 'normalized', 'FontSize', 11);
-fprintf('WFM12: 10-90%% rise time = %.2f ms\n', (t90 - t10)*1e3);
+fprintf('WFM12: final level = %.2f V, 10-99%% rise time = %.2f ms\n', vHi, (t99 - t10)*1e3);
 
 %% ---- WFM13 / WFM14: output voltage with 6.0 V (no OVP) and 6.1 V (OVP) input ----
 % Long captures (-2.6 ms to +9.4 ms, dt = 92 ns) with no switching edges to
