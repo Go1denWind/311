@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
-#define T_SAMPLE_CURRENT 0.032f // s
+#define T_SAMPLE_CURRENT 0.0016f // s
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
@@ -63,6 +63,8 @@ volatile uint16_t touch_count = 0;
 volatile uint8_t no_load = 0;
 volatile uint8_t soc_startup = 0;
 
+volatile uint8_t usart_flag = 0;
+
 void adc_init() {
 	
 	// Select Vcc as reference voltage
@@ -90,46 +92,15 @@ void adc_init() {
 
 }
 
-void adc_init_debug() {
-	
-	// Select Vcc as reference voltage
-	ADMUX |= (1 << REFS0);
-	
-	// Enable ADC
-	ADCSRA |= (1 << ADEN);
-	
-	// Set prescaler to 128 (i.e. ADC clock frequency of 125 kHz)
-	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
-	
-}
-
-uint16_t adc_read_debug(uint8_t channel) {
-	
-	// Set ADC channel to read, using the given argument
-	ADMUX &= 0xF0;
-	ADMUX |= channel;
-	
-	// Start ADC conversion
-	ADCSRA |= (1 << ADSC);
-	
-	// When the conversion is complete, return the ADC result
-	while (1) {
-		
-		if (ADCSRA & (1 << ADIF)) {
-			ADCSRA |= (1 << ADIF); // clear flag
-			return ADC;
-		}
-		
-	}
-	
-}
-
 ISR(ADC_vect) {
 	
 	// Manually interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
-	if (temperature_next()) {
+	// debug
+	PIND = (1 << PIND2);
+	
+	if (temperature_next()) { // Proteus: 85 us
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
@@ -146,7 +117,7 @@ ISR(ADC_vect) {
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1);
 		
-	} else if (voltage_next()) {
+	} else if (voltage_next()) { // Proteus: 145 us if calculating SOC
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
@@ -178,7 +149,7 @@ ISR(ADC_vect) {
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		ADMUX |= (1 << MUX1) | (1 << MUX0);
 		
-	} else if (current_next()) {
+	} else if (current_next()) { // Proteus: 150 us if calculating SOC
 		
 		// Send signal to isolate supercap if temperature outside safe range
 		if ((ADC < 154) || (ADC > 870)) {
@@ -211,7 +182,7 @@ ISR(ADC_vect) {
 		// Change ADC channel to measure touch oscillator
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 		
-	} else if (touch_next()) {
+	} else if (touch_next()) { // Proteus: 4 us
 		
 		// Change ADC channel to measure temperature
 		ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
@@ -262,10 +233,11 @@ ISR(ADC_vect) {
 		adc_status = 0;
 	}
 	
-	// Stop after 120 samples and start again after one second (allow time for UART to transmit)
+	// Stop after 120 samples and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
-	if (adc_samples >= 120) {
+	if (adc_samples >= 2400) {
 		ADCSRA &= ~(1 << ADATE);
+		usart_flag = 1;
 	}
 	
 }
@@ -361,4 +333,12 @@ void reset_adc_cycle() {
 	
 	adc_samples = 0;
 	ADCSRA |= (1 << ADATE);
+}
+
+uint8_t usart_to_do() {
+	return usart_flag;
+}
+
+void usart_stop() {
+	usart_flag = 0;
 }

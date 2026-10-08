@@ -16,17 +16,13 @@
 #include "timer1.h"
 #include "adc.h"
 
-volatile uint8_t usart_to_do = 0;
-
-volatile uint8_t debug = 0;
-
 int main(void)
 {
 	
 	usart_init(12); // 76800 baud rate
 	timer0_init();
 	timer1_init();
-	adc_init(); // NOTE: might block UART on Proteus
+	adc_init();
 	
 	sei();
 	
@@ -62,20 +58,17 @@ int main(void)
 		}
 		
 		// If one second has passed, print battery capacity to UART
-		if (usart_to_do == 1) {
+		if (usart_to_do()) {
 			
 			usart_transmit_diagnostics(get_voltage(), get_current(), get_temperature(), get_capacity());
 			
 			// Clear USART flag
-			usart_to_do = 0;
+			usart_stop();
 		}
     }
 }
 
 ISR(TIMER1_COMPA_vect) {
-	
-	// Set USART flag, main function will transmit diagnostics
-	usart_to_do = 1;
 	
 	reset_adc_cycle();
 	
