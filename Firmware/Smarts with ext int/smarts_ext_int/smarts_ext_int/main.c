@@ -14,7 +14,6 @@
 #include "uart.h"
 #include "timer0.h"
 #include "timer1.h"
-#include "timer2.h"
 #include "ext_int.h"
 #include "adc.h"
 
@@ -35,6 +34,8 @@ volatile uint16_t touch_count = 0;
 volatile uint8_t no_load = 0;
 volatile uint8_t soc_startup = 0;
 
+volatile uint8_t touch_flag = 0;
+
 uint16_t count;
 
 
@@ -45,6 +46,7 @@ int main(void)
 	timer0_init();
 	timer1_init();
 	adc_init();
+	ext_int_init();
 	
 	sei();
 	
@@ -158,25 +160,63 @@ int main(void)
 					// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 				}
 				
-				// Change ADC channel to measure touch oscillator
-				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
+				// Change ADC channel to measure temperature
+				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1);
+				ADMUX |= (1 << MUX0);
+				
+				// Temporarily disable ADC interrupts (clear trigger source)
+				ADCSRA &= ~(1 << ADATE);
+				
+				// Enable compare match 0A interrupt
+				TIMSK0 |= (1 << OCIE0A);
+				
+				// Mark touch oscillator sensing as "to-do"
+				touch_flag = 1;
 				
 			}
 			
 			// NOTE: maybe have touch as its own stage within a cycle like before, but use external interrupts instead of ADC?
 			
-			update_adc_status();
-			dsp_stop(); // don't do calculations until next sample is received
+			// Don't do calculations until next sample is received
+			dsp_stop(); 
 			
 		}
     }
+}
+
+ISR(TIMER0_COMPA_vect) {
+	
+	if (touch_flag == 1) { // if touch oscillator is to be measured
+		
+		// Enable interrupts on INT0 pin
+		EIMSK |= (1 << INT0);
+		
+	} else { // if oscillator measurements are to be stopped
+		
+		// Disable interrupts on INT0 pin
+		EIMSK &= ~(1 << INT0);
+		
+		// Disable compare match 0A interrupt
+		TIMSK0 &= ~(1 << OCIE0A);
+		
+		// Enable ADC interrupts (set trigger source)
+		ADCSRA |= (1 << ADATE);
+		
+		// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
+		TIFR0 = (1 << OCF0A);
+		
+	}
+	
+	// Stop oscillator measurements at next 400 us interrupt
+	touch_flag = 0;
+	
 }
 
 ISR(TIMER1_COMPA_vect) {
 	
 	reset_adc_cycle();
 	
-	// Manually interrupt flag bit so next rising edge of trigger source can be detected
+	// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
 }

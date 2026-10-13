@@ -53,6 +53,20 @@ Discarded input sections
  .text          0x00000000        0x0 timer.o
  .data          0x00000000        0x0 timer.o
  .bss           0x00000000        0x0 timer.o
+ .text          0x00000000        0x0 uart.o
+ .data          0x00000000        0x0 uart.o
+ .bss           0x00000000        0x0 uart.o
+ .text.UART_init_interrupt
+                0x00000000       0x22 uart.o
+ .debug_info    0x00000000       0x99 uart.o
+ .debug_abbrev  0x00000000       0x51 uart.o
+ .debug_aranges
+                0x00000000       0x20 uart.o
+ .debug_ranges  0x00000000       0x10 uart.o
+ .debug_line    0x00000000       0xad uart.o
+ .debug_str     0x00000000      0x1c3 uart.o
+ .comment       0x00000000       0x31 uart.o
+ .debug_frame   0x00000000       0x24 uart.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -154,6 +168,7 @@ LOAD adc.o
 LOAD main.o
 LOAD pi_control.o
 LOAD timer.o
+LOAD uart.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP

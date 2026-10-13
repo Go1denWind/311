@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
-#define T_SAMPLE_CURRENT 0.0012f // s
+#define T_SAMPLE_CURRENT 0.002f // s
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
@@ -38,10 +38,11 @@ volatile uint16_t temp_lookup[81] = {4314, 4283, 4249, 4212, 4170,
 									664};
 volatile uint8_t temp_lookup_size = 80;
 
-volatile uint8_t adc_status = 0;
+volatile uint8_t adc_status = 3;
 // 0: sample temperature next
 // 1: sample voltage next
 // 2: sample current next
+// 3: "sample" touch next (handled by external interrupts and T/C2)
 
 volatile uint16_t adc_samples = 0;
 
@@ -77,15 +78,22 @@ void adc_init() {
 
 ISR(ADC_vect) {
 	
-	// Manually interrupt flag bit so next rising edge of trigger source can be detected
+	// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
 	
 	// Mark calculations as "to-do", for main routine
 	dsp_flag = 1;
 	
+	// Update ADC status variable so appropriate processing is done for next sample
+	adc_status++;
+	if (adc_status >= 3) {
+		adc_status = 0;
+	}
+	
 	// Stop after 2400 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
-	if (adc_samples >= 2400) {
+	// if (adc_samples >= 2400) {
+	if (adc_samples >= 1200) { // debug
 		ADCSRA &= ~(1 << ADATE);
 		usart_flag = 1;
 	}
@@ -188,9 +196,9 @@ float isc_to_soc(int16_t isc, float capacity) {
 	// Bound capacity between 0% and 100%
 	if (soc > 1000) {
 		return 1000;
-		} else if (soc < 0) {
+	} else if (soc < 0) {
 		return 0;
-		} else {
+	} else {
 		return soc;
 	}
 }

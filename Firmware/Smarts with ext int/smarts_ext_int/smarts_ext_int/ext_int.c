@@ -16,7 +16,4 @@ void ext_int_init() {
 	// Configure INT0 interrupts to trigger on rising edge
 	EICRA |= (1 << ISC00) | (1 << ISC01);
 	
-	// Enable interrupts on INT0 pin
-	EIMSK |= (1 << INT0);
-	
 }
