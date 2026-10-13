@@ -1,0 +1,36 @@
+/*
+ * adc.h
+ *
+ * Created: 18-Aug-26 9:54:06 AM
+ *  Author: Caleb Tran
+ */ 
+
+#ifndef ADC_H_
+#define ADC_H_
+
+#include <stdint.h>
+
+void adc_init();
+
+uint8_t temperature_next();
+uint8_t voltage_next();
+uint8_t current_next();
+uint8_t touch_next();
+
+uint16_t adc_to_vin(uint16_t count);
+
+uint16_t vin_to_vsc(uint16_t vin);
+int16_t vin_to_isc(uint16_t vin);
+int8_t vin_to_tsc(uint16_t vin);
+
+int8_t get_temperature();
+uint16_t get_voltage();
+int16_t get_current();
+int16_t get_capacity();
+
+void reset_adc_cycle();
+
+uint8_t usart_to_do();
+void usart_stop();
+
+#endif /* ADC_H_ */
