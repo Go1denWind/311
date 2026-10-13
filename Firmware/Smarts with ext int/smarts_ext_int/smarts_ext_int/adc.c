@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
-#define T_SAMPLE_CURRENT 0.0016f // s
+#define T_SAMPLE_CURRENT 0.0012f // s
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
@@ -42,28 +42,8 @@ volatile uint8_t adc_status = 0;
 // 0: sample temperature next
 // 1: sample voltage next
 // 2: sample current next
-// 3: sample touch oscillator next
 
 volatile uint16_t adc_samples = 0;
-
-/*
-volatile int8_t temperature = 0;
-volatile uint16_t voltage = 0;
-volatile int16_t current = 0;
-
-volatile float capacity = 0; // % * 10
-// TODO: calculate capacity in terms of SOE instead of SOC?
-
-// Status variables for touch detection
-volatile uint8_t osc_startup = 0; // set to 1 when first rising edge is detected.
-volatile uint8_t touch_curr = 0;
-volatile uint8_t touch_ready = 1; // equal 1 if electrode was not being touched in previous osc cycle
-volatile uint16_t adc_prev = 0;
-volatile uint16_t touch_count = 0;
-
-volatile uint8_t no_load = 0;
-volatile uint8_t soc_startup = 0;
-*/
 
 volatile uint8_t dsp_flag = 0;
 volatile uint8_t usart_flag = 0;
@@ -103,7 +83,7 @@ ISR(ADC_vect) {
 	// Mark calculations as "to-do", for main routine
 	dsp_flag = 1;
 	
-	// Stop after 120 samples and start UART, sampling will resume at the next 1 second interrupt
+	// Stop after 2400 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
 	if (adc_samples >= 2400) {
 		ADCSRA &= ~(1 << ADATE);
@@ -116,7 +96,7 @@ void update_adc_status() {
 	
 	// Update ADC status variable so appropriate processing is done for next sample
 	adc_status++;
-	if (adc_status >= 4) {
+	if (adc_status >= 3) {
 		adc_status = 0;
 	}
 	
@@ -132,10 +112,6 @@ uint8_t voltage_next() {
 
 uint8_t current_next() {
 	return (adc_status == 2);
-}
-
-uint8_t touch_next() {
-	return (adc_status == 3);
 }
 
 uint16_t adc_to_vin(uint16_t count) {
@@ -218,24 +194,6 @@ float isc_to_soc(int16_t isc, float capacity) {
 		return soc;
 	}
 }
-
-/*
-int8_t get_temperature() {
-	return temperature;
-}
-
-uint16_t get_voltage() {
-	return voltage;
-}
-
-int16_t get_current() {
-	return current;
-}
-
-int16_t get_capacity() {
-	return (int16_t)capacity;
-}
-*/
 
 void reset_adc_cycle() {
 	

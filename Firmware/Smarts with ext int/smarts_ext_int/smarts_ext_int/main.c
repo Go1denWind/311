@@ -14,8 +14,9 @@
 #include "uart.h"
 #include "timer0.h"
 #include "timer1.h"
+#include "timer2.h"
+#include "ext_int.h"
 #include "adc.h"
-
 
 volatile int8_t temperature = 0;
 volatile uint16_t voltage = 0;
@@ -33,8 +34,6 @@ volatile uint16_t touch_count = 0;
 
 volatile uint8_t no_load = 0;
 volatile uint8_t soc_startup = 0;
-
-#define T_SAMPLE_CURRENT 0.0016f // s
 
 uint16_t count;
 
@@ -129,13 +128,6 @@ int main(void)
 					soc_startup = 1;
 				}
 				
-				// Bound capacity between 0% and 100%
-				if (capacity > 1000) {
-					capacity = 1000;
-				} else if (capacity < 0) {
-					capacity = 0;
-				}
-				
 				// TODO: what happens if load is connected in between previous current scan and this voltage scan?
 				// reading current then voltage within the cycle is better, but ponder further possible improvements?
 				
@@ -169,53 +161,12 @@ int main(void)
 				// Change ADC channel to measure touch oscillator
 				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 				
-			} else if (touch_next()) { // Proteus: 4 us
-				
-				// Change ADC channel to measure temperature
-				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-				ADMUX |= (1 << MUX0);
-				
-				// Increment variable to measure length of oscillator period
-				touch_count++;
-				
-				if ((count > 614) && (adc_prev < 410)) { // rising edge
-					
-					if (osc_startup == 0) {
-						
-						// If MCU is starting up, reset touch counter and do nothing else
-						osc_startup = 1;
-						touch_count = 0;
-						
-						} else {
-						
-						if ((touch_count > 33) && touch_ready) {
-							
-							// If electrode is being touched (i.e. larger oscillator period) and electrode was not being touched in previous oscillator cycle:
-							// Flag electrode as currently being touched
-							touch_ready = 0;
-							
-							// Toggle output switch
-							PINC = (1 << PINC4);
-							
-							} else if (touch_count < 30) {
-							
-							// If electrode is not being touched, flag electrode as current not being touched (prepare to detect new touch)
-							touch_ready = 1;
-						}
-						
-						// Reset counter
-						touch_count = 0;
-						
-					}
-				}
-				
-				// Store this ADC sample to compare with next ADC touch sample (to detect rising edges)
-				adc_prev = count;
-				
 			}
 			
+			// NOTE: maybe have touch as its own stage within a cycle like before, but use external interrupts instead of ADC?
+			
 			update_adc_status();
-			dsp_stop();
+			dsp_stop(); // don't do calculations until next sample is received
 			
 		}
     }

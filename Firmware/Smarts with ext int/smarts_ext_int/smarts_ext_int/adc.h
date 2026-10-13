@@ -17,7 +17,6 @@ void update_adc_status();
 uint8_t temperature_next();
 uint8_t voltage_next();
 uint8_t current_next();
-uint8_t touch_next();
 
 uint16_t adc_to_vin(uint16_t count);
 
@@ -27,11 +26,6 @@ int8_t vin_to_tsc(uint16_t vin);
 
 float vsc_to_soc(uint16_t vsc);
 float isc_to_soc(int16_t isc, float capacity);
-
-int8_t get_temperature();
-uint16_t get_voltage();
-int16_t get_current();
-int16_t get_capacity();
 
 void reset_adc_cycle();
 
