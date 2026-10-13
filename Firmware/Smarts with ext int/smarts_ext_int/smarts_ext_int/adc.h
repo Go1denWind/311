@@ -33,4 +33,7 @@ void reset_adc_cycle();
 uint8_t usart_to_do();
 void usart_stop();
 
+uint8_t dsp_to_do();
+void dsp_stop();
+
 #endif /* ADC_H_ */
