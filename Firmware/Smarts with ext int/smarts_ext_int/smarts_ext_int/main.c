@@ -25,6 +25,7 @@ volatile float capacity = 0; // % * 10
 // TODO: calculate capacity in terms of SOE instead of SOC?
 
 // Status variables for touch detection
+volatile uint8_t touch_flag;
 volatile uint8_t osc_startup = 0; // set to 1 when first rising edge is detected.
 volatile uint8_t touch_curr = 0;
 volatile uint8_t touch_ready = 1; // equal 1 if electrode was not being touched in previous osc cycle
@@ -34,7 +35,7 @@ volatile uint16_t touch_count = 0;
 volatile uint8_t no_load = 0;
 volatile uint8_t soc_startup = 0;
 
-volatile uint8_t touch_flag = 0;
+
 
 uint16_t count;
 
@@ -205,6 +206,8 @@ ISR(TIMER0_COMPA_vect) {
 		// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 		TIFR0 = (1 << OCF0A);
 		
+		// TODO: any calculations and toggle the output here in the code.
+		
 	}
 	
 	// Stop oscillator measurements at next 400 us interrupt
@@ -218,5 +221,12 @@ ISR(TIMER1_COMPA_vect) {
 	
 	// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 	TIFR0 = (1 << OCF0A);
+	
+}
+
+ISR(INT0_vect) {
+	
+	// Count number of rising edges in oscillator output, in 400 us.
+	touch_count++;
 	
 }
