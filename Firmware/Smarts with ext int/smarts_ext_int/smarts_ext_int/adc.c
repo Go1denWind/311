@@ -103,17 +103,21 @@ ISR(ADC_vect) {
 	// Mark calculations as "to-do", for main routine
 	dsp_flag = 1;
 	
-	// Update ADC status variable so appropriate processing is done for next sample
-	adc_status++;
-	if (adc_status >= 4) {
-		adc_status = 0;
-	}
-	
 	// Stop after 120 samples and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
 	if (adc_samples >= 2400) {
 		ADCSRA &= ~(1 << ADATE);
 		usart_flag = 1;
+	}
+	
+}
+
+void update_adc_status() {
+	
+	// Update ADC status variable so appropriate processing is done for next sample
+	adc_status++;
+	if (adc_status >= 4) {
+		adc_status = 0;
 	}
 	
 }
@@ -187,6 +191,32 @@ int8_t vin_to_tsc(uint16_t vin) {
 	}
 	
 	return (int8_t)guess - 10;
+}
+
+float vsc_to_soc(uint16_t vsc) {
+	float soc = ((int16_t)vsc - 2650) / 850.0 * 1000; // % * 10
+	
+	// Bound capacity between 0% and 100%
+	if (soc > 1000) {
+		return 1000;
+	} else if (soc < 0) {
+		return 0;
+	} else {
+		return soc;
+	}
+}
+
+float isc_to_soc(int16_t isc, float capacity) {
+	float soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+	
+	// Bound capacity between 0% and 100%
+	if (soc > 1000) {
+		return 1000;
+		} else if (soc < 0) {
+		return 0;
+		} else {
+		return soc;
+	}
 }
 
 /*

@@ -125,14 +125,14 @@ int main(void)
 				
 				// If MCU is starting up or no load is connected, calculate SOC from voltage
 				if ((soc_startup == 0) || (no_load == 1)) {
-					capacity = ((int16_t)voltage - 2650) / 850.0 * 1000; // % * 10
+					capacity = vsc_to_soc(voltage);
 					soc_startup = 1;
 				}
 				
 				// Bound capacity between 0% and 100%
 				if (capacity > 1000) {
 					capacity = 1000;
-					} else if (capacity < 0) {
+				} else if (capacity < 0) {
 					capacity = 0;
 				}
 				
@@ -161,14 +161,7 @@ int main(void)
 					} else {
 					// Otherwise, calculate new SOC from current sample (Coulumb counting)
 					no_load = 0;
-					capacity += (((float)current * T_SAMPLE_CURRENT) / 25.5f); // TODO: change back to integer calculations to make this faster
-					
-					// Bound capacity between 0% and 100%
-					if (capacity > 1000) {
-						capacity = 1000;
-						} else if (capacity < 0) {
-						capacity = 0;
-					}
+					capacity = isc_to_soc(current, capacity);
 					
 					// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 				}
@@ -221,6 +214,7 @@ int main(void)
 				
 			}
 			
+			update_adc_status();
 			dsp_stop();
 			
 		}
