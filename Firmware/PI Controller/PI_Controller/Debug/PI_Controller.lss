@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000000d8  00000000  00000000  00001d04  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000451  00000000  00000000  00001ddc  2**0
+ 10 .debug_str    000004a9  00000000  00000000  00001ddc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000013a  00000000  00000000  0000222d  2**0
+ 11 .debug_loc    0000013a  00000000  00000000  00002285  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  00002367  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  000023bf  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -149,6 +149,12 @@ Disassembly of section .text:
  114:	ee cf       	rjmp	.-36     	; 0xf2 <main+0xe>
 
 00000116 <sat_limit_controller>:
+#define OCR 159
+
+static float Int_out;
+static float PI_out;
+
+float sat_limit_controller (float result){
  116:	0f 93       	push	r16
  118:	1f 93       	push	r17
  11a:	cf 93       	push	r28
@@ -157,6 +163,7 @@ Disassembly of section .text:
  120:	17 2f       	mov	r17, r23
  122:	d8 2f       	mov	r29, r24
  124:	c9 2f       	mov	r28, r25
+    if (result > PI_LIMIT){
  126:	20 e0       	ldi	r18, 0x00	; 0
  128:	30 e0       	ldi	r19, 0x00	; 0
  12a:	40 e4       	ldi	r20, 0x40	; 64
@@ -164,6 +171,9 @@ Disassembly of section .text:
  12e:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <__gesf2>
  132:	18 16       	cp	r1, r24
  134:	8c f0       	brlt	.+34     	; 0x158 <sat_limit_controller+0x42>
+        return PI_LIMIT;
+    }
+    else if (result < -PI_LIMIT){
  136:	20 e0       	ldi	r18, 0x00	; 0
  138:	30 e0       	ldi	r19, 0x00	; 0
  13a:	40 e4       	ldi	r20, 0x40	; 64
@@ -175,15 +185,28 @@ Disassembly of section .text:
  146:	0e 94 85 01 	call	0x30a	; 0x30a <__cmpsf2>
  14a:	88 23       	and	r24, r24
  14c:	4c f4       	brge	.+18     	; 0x160 <sat_limit_controller+0x4a>
+        return -PI_LIMIT;
  14e:	00 e0       	ldi	r16, 0x00	; 0
  150:	10 e0       	ldi	r17, 0x00	; 0
  152:	d0 e4       	ldi	r29, 0x40	; 64
  154:	c2 ec       	ldi	r28, 0xC2	; 194
  156:	04 c0       	rjmp	.+8      	; 0x160 <sat_limit_controller+0x4a>
+static float Int_out;
+static float PI_out;
+
+float sat_limit_controller (float result){
+    if (result > PI_LIMIT){
+        return PI_LIMIT;
  158:	00 e0       	ldi	r16, 0x00	; 0
  15a:	10 e0       	ldi	r17, 0x00	; 0
  15c:	d0 e4       	ldi	r29, 0x40	; 64
  15e:	c2 e4       	ldi	r28, 0x42	; 66
+        return -PI_LIMIT;
+    }
+    else{
+        return result;
+    }
+}
  160:	60 2f       	mov	r22, r16
  162:	71 2f       	mov	r23, r17
  164:	8d 2f       	mov	r24, r29
@@ -195,11 +218,14 @@ Disassembly of section .text:
  170:	08 95       	ret
 
 00000172 <pi_mapped>:
+
+uint8_t pi_mapped (uint16_t V_out, uint16_t V_ref){
  172:	cf 92       	push	r12
  174:	df 92       	push	r13
  176:	ef 92       	push	r14
  178:	ff 92       	push	r15
  17a:	9b 01       	movw	r18, r22
+	int32_t V_err = -((int32_t)V_ref - V_out); //Calculating error voltage
  17c:	a0 e0       	ldi	r26, 0x00	; 0
  17e:	b0 e0       	ldi	r27, 0x00	; 0
  180:	bc 01       	movw	r22, r24
@@ -208,6 +234,8 @@ Disassembly of section .text:
  186:	73 0b       	sbc	r23, r19
  188:	81 09       	sbc	r24, r1
  18a:	91 09       	sbc	r25, r1
+	int32_t Prop_out = V_err * VOLTAGE_KP; //Proportional error term
+	Int_out = sat_limit_controller(Int_out + (float)V_err * VOLTAGE_KI * T_SAMPLE); //Calculating integral term and limiting to PI_LIMIT
  18c:	0e 94 bb 01 	call	0x376	; 0x376 <__floatsisf>
  190:	6b 01       	movw	r12, r22
  192:	7c 01       	movw	r14, r24
@@ -233,10 +261,12 @@ Disassembly of section .text:
  1cc:	70 93 03 01 	sts	0x0103, r23	; 0x800103 <Int_out+0x1>
  1d0:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <Int_out+0x2>
  1d4:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <Int_out+0x3>
+	PI_out = sat_limit_controller(Prop_out + Int_out); //Calculating PI_out and limiting by PI_LIMIT
  1d8:	c7 01       	movw	r24, r14
  1da:	b6 01       	movw	r22, r12
  1dc:	0e 94 19 01 	call	0x232	; 0x232 <__addsf3>
  1e0:	0e 94 8b 00 	call	0x116	; 0x116 <sat_limit_controller>
+	uint8_t PI_out_mapped = (uint8_t) ((PI_out * (0.6f*(float)OCR/(2.0f * PI_LIMIT))) + ((float)OCR/2.0f) - 0.5f);
  1e4:	27 e6       	ldi	r18, 0x67	; 103
  1e6:	36 e6       	ldi	r19, 0x66	; 102
  1e8:	4e e7       	ldi	r20, 0x7E	; 126
@@ -251,9 +281,10 @@ Disassembly of section .text:
  1fe:	30 e0       	ldi	r19, 0x00	; 0
  200:	40 e0       	ldi	r20, 0x00	; 0
  202:	5f e3       	ldi	r21, 0x3F	; 63
- 204:	0e 94 19 01 	call	0x232	; 0x232 <__addsf3>
+ 204:	0e 94 18 01 	call	0x230	; 0x230 <__subsf3>
  208:	0e 94 8a 01 	call	0x314	; 0x314 <__fixunssfsi>
  20c:	86 2f       	mov	r24, r22
+	return PI_out_mapped;
  20e:	ff 90       	pop	r15
  210:	ef 90       	pop	r14
  212:	df 90       	pop	r13
