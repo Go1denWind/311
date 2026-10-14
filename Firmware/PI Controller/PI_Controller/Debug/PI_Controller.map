@@ -1,7 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                              pi_control.o (__subsf3)
+                              pi_control.o (__addsf3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o) (__addsf3x)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
@@ -64,7 +64,7 @@ Discarded input sections
                 0x00000000       0x20 uart.o
  .debug_ranges  0x00000000       0x10 uart.o
  .debug_line    0x00000000       0xad uart.o
- .debug_str     0x00000000      0x1a4 uart.o
+ .debug_str     0x00000000      0x1c3 uart.o
  .comment       0x00000000       0x31 uart.o
  .debug_frame   0x00000000       0x24 uart.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -606,16 +606,16 @@ END GROUP
  .debug_frame   0x00000058       0x5c pi_control.o
  .debug_frame   0x000000b4       0x24 timer.o
 
-.debug_str      0x00000000      0x4a9
+.debug_str      0x00000000      0x451
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x190 adc.o
                                 0x1c4 (size before relaxing)
  .debug_str     0x00000398       0x38 main.o
                                 0x1f1 (size before relaxing)
- .debug_str     0x000003d0       0xcc pi_control.o
-                                0x1f9 (size before relaxing)
- .debug_str     0x0000049c        0xd timer.o
+ .debug_str     0x000003d0       0x74 pi_control.o
+                                0x218 (size before relaxing)
+ .debug_str     0x00000444        0xd timer.o
                                 0x1b1 (size before relaxing)
 
 .debug_loc      0x00000000      0x13a
