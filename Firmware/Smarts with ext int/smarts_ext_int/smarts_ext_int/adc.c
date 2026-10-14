@@ -12,6 +12,7 @@
 #include <avr/interrupt.h>
 
 #define T_SAMPLE_CURRENT 0.002f // s
+#define T_SAMPLE_CURRENT_LONG 0.040f // s
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
@@ -90,10 +91,10 @@ ISR(ADC_vect) {
 		adc_status = 0;
 	}
 	
-	// Stop after 2400 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
+	// Stop after 1440 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
-	// if (adc_samples >= 2400) {
-	if (adc_samples >= 1200) { // debug
+	if (adc_samples >= 1440) {
+	// if (adc_samples >= 60) { // debug
 		ADCSRA &= ~(1 << ADATE);
 		usart_flag = 1;
 	}
@@ -191,7 +192,14 @@ float vsc_to_soc(uint16_t vsc) {
 }
 
 float isc_to_soc(int16_t isc, float capacity) {
-	float soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+	
+	float soc;
+	
+	if (adc_samples < 6) {
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 25.5f;
+	} else {
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+	}
 	
 	// Bound capacity between 0% and 100%
 	if (soc > 1000) {
