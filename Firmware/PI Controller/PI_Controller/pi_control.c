@@ -27,6 +27,6 @@ uint8_t pi_mapped (uint16_t V_out, uint16_t V_ref){
 	int32_t Prop_out = V_err * VOLTAGE_KP; //Proportional error term
 	Int_out = sat_limit_controller(Int_out + (float)V_err * VOLTAGE_KI * T_SAMPLE); //Calculating integral term and limiting to PI_LIMIT
 	PI_out = sat_limit_controller(Prop_out + Int_out); //Calculating PI_out and limiting by PI_LIMIT
-	uint8_t PI_out_mapped = (uint8_t) ((PI_out * (0.6f*(float)OCR/(2.0f * PI_LIMIT))) + ((float)OCR/2.0f) + 0.5f);
+	uint8_t PI_out_mapped = (uint8_t) ((PI_out * (0.6f*(float)OCR/(2.0f * PI_LIMIT))) + ((float)OCR/2.0f) - 0.5f);
 	return PI_out_mapped;
 }

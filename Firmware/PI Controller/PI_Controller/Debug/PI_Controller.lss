@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000000d8  00000000  00000000  00001d04  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000451  00000000  00000000  00001ddc  2**0
+ 10 .debug_str    000004a9  00000000  00000000  00001ddc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000013a  00000000  00000000  0000222d  2**0
+ 11 .debug_loc    0000013a  00000000  00000000  00002285  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  00002367  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  000023bf  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -88,94 +88,58 @@ Disassembly of section .text:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <adc_init>:
-#include <avr/io.h>
-#include <stdint.h>
-
-//This function configures the ADC to use AVCC as reference and read ADC0 in auto trigger mode
-void adc_init(void){
-	DDRC &= ~(1 << PC0); //PC0 as input
   90:	87 b1       	in	r24, 0x07	; 7
   92:	8e 7f       	andi	r24, 0xFE	; 254
   94:	87 b9       	out	0x07, r24	; 7
-	PORTC &= ~(1 << PC0); //pull-up disabled
   96:	88 b1       	in	r24, 0x08	; 8
   98:	8e 7f       	andi	r24, 0xFE	; 254
   9a:	88 b9       	out	0x08, r24	; 8
-	ADMUX |= 1 << REFS0;  //AVCC set as reference, ADC0 selected and results are right adjusted
   9c:	ec e7       	ldi	r30, 0x7C	; 124
   9e:	f0 e0       	ldi	r31, 0x00	; 0
   a0:	80 81       	ld	r24, Z
   a2:	80 64       	ori	r24, 0x40	; 64
   a4:	80 83       	st	Z, r24
-	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE) | (0b110 << ADPS0);
   a6:	ea e7       	ldi	r30, 0x7A	; 122
   a8:	f0 e0       	ldi	r31, 0x00	; 0
   aa:	80 81       	ld	r24, Z
   ac:	86 6e       	ori	r24, 0xE6	; 230
   ae:	80 83       	st	Z, r24
-	//Enable ADC, start conversion, setup auto-trigger and set prescaler to 64
-	ADCSRB |= (0b100 << ADTS0);   //Use TC0 overflow as auto- trigger source
   b0:	eb e7       	ldi	r30, 0x7B	; 123
   b2:	f0 e0       	ldi	r31, 0x00	; 0
   b4:	80 81       	ld	r24, Z
   b6:	84 60       	ori	r24, 0x04	; 4
   b8:	80 83       	st	Z, r24
-	DIDR0 = 1 << ADC0D;   //ADC0 buffer disabled
   ba:	81 e0       	ldi	r24, 0x01	; 1
   bc:	80 93 7e 00 	sts	0x007E, r24	; 0x80007e <__TEXT_REGION_LENGTH__+0x7f807e>
   c0:	08 95       	ret
 
 000000c2 <adc_read_channel_pool>:
-}
-
-//This function reads an ADC channel and return results
-uint16_t adc_read_channel_pool(void){
-	while ((ADCSRA & (1 << ADIF)) == 0) { //ADIF bit is checked to see if it is 0
   c2:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
   c6:	84 ff       	sbrs	r24, 4
   c8:	fc cf       	rjmp	.-8      	; 0xc2 <adc_read_channel_pool>
-		;                                   //If ADIF bit is not 1, wait until it becomes 1
-	}
-	ADCSRA |= 1 << ADIF;                  //Clear the ADIF flag
   ca:	ea e7       	ldi	r30, 0x7A	; 122
   cc:	f0 e0       	ldi	r31, 0x00	; 0
   ce:	80 81       	ld	r24, Z
   d0:	80 61       	ori	r24, 0x10	; 16
   d2:	80 83       	st	Z, r24
-	TIFR0 |= 1 << TOV0;                     //Clear the TC0 overflow flag
   d4:	85 b3       	in	r24, 0x15	; 21
   d6:	81 60       	ori	r24, 0x01	; 1
   d8:	85 bb       	out	0x15, r24	; 21
-	return ADC;                           //Returning the ADC value
   da:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
   de:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
   e2:	08 95       	ret
 
 000000e4 <main>:
-
-volatile static uint16_t ADC_VALUE = 0;
-
-int main(void)
-{
-    tc0_init_FPWM_100k();   //Initializing TC0 to generate a 100kHz 50% D PWM
   e4:	0e 94 0c 01 	call	0x218	; 0x218 <tc0_init_FPWM_100k>
-    adc_init();             //Initializing ADC with auto trigger mode
   e8:	0e 94 48 00 	call	0x90	; 0x90 <adc_init>
-    DDRB |= (1 << PB5);       // PB5 as output
   ec:	84 b1       	in	r24, 0x04	; 4
   ee:	80 62       	ori	r24, 0x20	; 32
   f0:	84 b9       	out	0x04, r24	; 4
-    /* Replace with your application code */
-    while (1) 
-    {
-        ADC_VALUE = adc_read_channel_pool();
   f2:	0e 94 61 00 	call	0xc2	; 0xc2 <adc_read_channel_pool>
   f6:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
   fa:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
-        PINB = (1 << PB5);
   fe:	80 e2       	ldi	r24, 0x20	; 32
  100:	83 b9       	out	0x03, r24	; 3
-        OCR0B = pi_mapped(ADC_VALUE, V_REF);
  102:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
  106:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
  10a:	60 e0       	ldi	r22, 0x00	; 0
@@ -302,7 +266,7 @@ uint8_t pi_mapped (uint16_t V_out, uint16_t V_ref){
  1da:	b6 01       	movw	r22, r12
  1dc:	0e 94 19 01 	call	0x232	; 0x232 <__addsf3>
  1e0:	0e 94 8b 00 	call	0x116	; 0x116 <sat_limit_controller>
-	uint8_t PI_out_mapped = (uint8_t) ((PI_out * (0.6f*(float)OCR/(2.0f * PI_LIMIT))) + ((float)OCR/2.0f) + 0.5f);
+	uint8_t PI_out_mapped = (uint8_t) ((PI_out * (0.6f*(float)OCR/(2.0f * PI_LIMIT))) + ((float)OCR/2.0f) - 0.5f);
  1e4:	27 e6       	ldi	r18, 0x67	; 103
  1e6:	36 e6       	ldi	r19, 0x66	; 102
  1e8:	4e e7       	ldi	r20, 0x7E	; 126
@@ -317,7 +281,7 @@ uint8_t pi_mapped (uint16_t V_out, uint16_t V_ref){
  1fe:	30 e0       	ldi	r19, 0x00	; 0
  200:	40 e0       	ldi	r20, 0x00	; 0
  202:	5f e3       	ldi	r21, 0x3F	; 63
- 204:	0e 94 19 01 	call	0x232	; 0x232 <__addsf3>
+ 204:	0e 94 18 01 	call	0x230	; 0x230 <__subsf3>
  208:	0e 94 8a 01 	call	0x314	; 0x314 <__fixunssfsi>
  20c:	86 2f       	mov	r24, r22
 	return PI_out_mapped;
@@ -328,24 +292,14 @@ uint8_t pi_mapped (uint16_t V_out, uint16_t V_ref){
  216:	08 95       	ret
 
 00000218 <tc0_init_FPWM_100k>:
-#include <avr/io.h>
-#include <stdint.h>
-
-//This function configures TC0 to operate in fast PWM mode with a 100kHz frequency and a 50% D
-void tc0_init_FPWM_100k(void){
-	TCCR0A = 2<<COM0B0 | 3<<WGM00;    //WGM0[2..0] set to 111 for Fast PWM mode & COM0B[1..0] for clear on match with OCR0B
  218:	83 e2       	ldi	r24, 0x23	; 35
  21a:	84 bd       	out	0x24, r24	; 36
-	TCCR0B = 1<<WGM02 | 1<<CS00;      //WGM[2..0] to 111 and CS0[2..0] set to 001 for a clock divider of 1
  21c:	89 e0       	ldi	r24, 0x09	; 9
  21e:	85 bd       	out	0x25, r24	; 37
-	OCR0A = 159;                      //Loading OCR0A with 159 to setup a 100kHz PWM
  220:	8f e9       	ldi	r24, 0x9F	; 159
  222:	87 bd       	out	0x27, r24	; 39
-	OCR0B = 79;                       //Loading OCR0B with 79 to setup 50% D
  224:	8f e4       	ldi	r24, 0x4F	; 79
  226:	88 bd       	out	0x28, r24	; 40
-	DDRD |= 1<<PIND5;                 //PD5 setup as an output to generate PWM
  228:	8a b1       	in	r24, 0x0a	; 10
  22a:	80 62       	ori	r24, 0x20	; 32
  22c:	8a b9       	out	0x0a, r24	; 10
