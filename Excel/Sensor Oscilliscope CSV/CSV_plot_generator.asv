@@ -88,17 +88,23 @@ xlim([0, 0.012]);
 title("Temperature Sensor Window Comparator Output Voltage for a Sinusoidal Input");
 grid on;
 
+plot_data("window_comparator_100kHz_oscillating_input");
+title("Window Comparator Output Voltage for a 100 kHz Sinusoidal Input");
+subtitle("Note output voltage delay");
+legend("Input", "Output");
+grid on;
+
 plot_data("latch_test_1");
 title("SR Latch: Isolation Switch Input Signal and S for R held LOW");
-legend("Set Pin", "Switch Input");
+legend("Set Pin", "Isolation Switch Input");
 grid on;
 
 plot_data("latch_test_2");
 title("SR Latch: Isolation Switch Input Signal and S for R pulsed HIGH");
-legend("Set Pin", "Switch Input");
+subtitle("Note: Isolation switch input is latched LOW prior to R being pulsed HIGH");
+legend("Set Pin", "Isolation Switch Input");
 grid on;
 
-plot_data("window_comparator_100kHz_oscillating_input");
-title("");
-legend("Set Pin", "Switch Input");
-grid on;
+plot_data("sr_latch_test_3");
+title("SR Latch: Isolation Switch Input signal and S for R pulsed HIGH");
+subtitle("Note: Set pin input oscillates at 0.1 Hz. This was done to confirm that the switch input remains high after R ")

@@ -104,3 +104,9 @@ title("SR Latch: Isolation Switch Input Signal and S for R pulsed HIGH");
 subtitle("Note: Isolation switch input is latched LOW prior to R being pulsed HIGH");
 legend("Set Pin", "Isolation Switch Input");
 grid on;
+
+plot_data("sr_latch_test_3");
+title("SR Latch: Isolation Switch Input signal and S for R pulsed HIGH");
+subtitle("Note: Set pin input oscillates at 0.1 Hz. This was done to confirm that the switch input remains high after R is pulsed HIGH.")
+legend("Set pin", "Isolation Switch Input");
+grid on;
