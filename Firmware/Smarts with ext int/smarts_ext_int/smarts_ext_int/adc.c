@@ -196,9 +196,9 @@ float isc_to_soc(int16_t isc, float capacity) {
 	float soc;
 	
 	if (adc_samples < 6) {
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 25.5f;
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 127.5f;
 	} else {
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 127.5f; // TODO: change back to integer calculations to make this faster
 	}
 	
 	// Bound capacity between 0% and 100%

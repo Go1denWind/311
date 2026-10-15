@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000003e4  00000000  00000000  00003d68  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000070a  00000000  00000000  0000414c  2**0
+ 10 .debug_str    00000679  00000000  00000000  0000414c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ae7  00000000  00000000  00004856  2**0
+ 11 .debug_loc    00000ae7  00000000  00000000  000047c5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000138  00000000  00000000  0000533d  2**0
+ 12 .debug_ranges 00000138  00000000  00000000  000052ac  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -539,7 +539,7 @@ float isc_to_soc(int16_t isc, float capacity) {
  30c:	26 30       	cpi	r18, 0x06	; 6
  30e:	31 05       	cpc	r19, r1
  310:	d8 f4       	brcc	.+54     	; 0x348 <isc_to_soc+0x58>
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 25.5f;
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 127.5f;
  312:	bc 01       	movw	r22, r24
  314:	99 0f       	add	r25, r25
  316:	88 0b       	sbc	r24, r24
@@ -552,8 +552,8 @@ float isc_to_soc(int16_t isc, float capacity) {
  326:	0e 94 24 07 	call	0xe48	; 0xe48 <__mulsf3>
  32a:	20 e0       	ldi	r18, 0x00	; 0
  32c:	30 e0       	ldi	r19, 0x00	; 0
- 32e:	4c ec       	ldi	r20, 0xCC	; 204
- 330:	51 e4       	ldi	r21, 0x41	; 65
+ 32e:	4f ef       	ldi	r20, 0xFF	; 255
+ 330:	52 e4       	ldi	r21, 0x42	; 66
  332:	0e 94 c5 05 	call	0xb8a	; 0xb8a <__divsf3>
  336:	a7 01       	movw	r20, r14
  338:	96 01       	movw	r18, r12
@@ -564,7 +564,7 @@ float isc_to_soc(int16_t isc, float capacity) {
  344:	c9 2f       	mov	r28, r25
  346:	1c c0       	rjmp	.+56     	; 0x380 <isc_to_soc+0x90>
 	} else {
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 127.5f; // TODO: change back to integer calculations to make this faster
  348:	bc 01       	movw	r22, r24
  34a:	99 0f       	add	r25, r25
  34c:	88 0b       	sbc	r24, r24
@@ -577,8 +577,8 @@ float isc_to_soc(int16_t isc, float capacity) {
  35c:	0e 94 24 07 	call	0xe48	; 0xe48 <__mulsf3>
  360:	20 e0       	ldi	r18, 0x00	; 0
  362:	30 e0       	ldi	r19, 0x00	; 0
- 364:	4c ec       	ldi	r20, 0xCC	; 204
- 366:	51 e4       	ldi	r21, 0x41	; 65
+ 364:	4f ef       	ldi	r20, 0xFF	; 255
+ 366:	52 e4       	ldi	r21, 0x42	; 66
  368:	0e 94 c5 05 	call	0xb8a	; 0xb8a <__divsf3>
  36c:	9b 01       	movw	r18, r22
  36e:	ac 01       	movw	r20, r24
@@ -622,7 +622,7 @@ float isc_to_soc(int16_t isc, float capacity) {
  3b2:	d0 e0       	ldi	r29, 0x00	; 0
  3b4:	c0 e0       	ldi	r28, 0x00	; 0
  3b6:	04 c0       	rjmp	.+8      	; 0x3c0 <isc_to_soc+0xd0>
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 127.5f; // TODO: change back to integer calculations to make this faster
 	}
 	
 	// Bound capacity between 0% and 100%
@@ -1333,29 +1333,56 @@ ISR(INT0_vect) {
  802:	18 95       	reti
 
 00000804 <timer0_init>:
+#include <avr/interrupt.h>
+
+void timer0_init() {
+	
+	// CTC mode
+	TCCR0A |= (1 << WGM01);
  804:	84 b5       	in	r24, 0x24	; 36
  806:	82 60       	ori	r24, 0x02	; 2
  808:	84 bd       	out	0x24, r24	; 36
+	
+	// Set prescaler to 64
+	TCCR0B |= (1 << CS01) | (1 << CS00);
  80a:	85 b5       	in	r24, 0x25	; 37
  80c:	83 60       	ori	r24, 0x03	; 3
  80e:	85 bd       	out	0x25, r24	; 37
+	
+	// Trigger ADC samples every 400 us (i.e. take an ADC sample every 400 us)
+	OCR0A = 99;
  810:	83 e6       	ldi	r24, 0x63	; 99
  812:	87 bd       	out	0x27, r24	; 39
  814:	08 95       	ret
 
 00000816 <timer1_init>:
+#include <stdint.h>
+
+void timer1_init() {
+	
+	// CTC mode
+	TCCR1B |= (1 << WGM12);
  816:	e1 e8       	ldi	r30, 0x81	; 129
  818:	f0 e0       	ldi	r31, 0x00	; 0
  81a:	80 81       	ld	r24, Z
  81c:	88 60       	ori	r24, 0x08	; 8
  81e:	80 83       	st	Z, r24
+	
+	// Set prescaler to 1024
+	TCCR1B |= (1 << CS12) | (1 << CS10);
  820:	80 81       	ld	r24, Z
  822:	85 60       	ori	r24, 0x05	; 5
  824:	80 83       	st	Z, r24
+	
+	// Configure TC1 interrupts to trigger every 1 s (i.e. display diagnostics every 1 s)
+	OCR1A = 15624;
  826:	88 e0       	ldi	r24, 0x08	; 8
  828:	9d e3       	ldi	r25, 0x3D	; 61
  82a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
  82e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+	
+	// Enable interrupts
+	TIMSK1 |= (1 << OCIE1A);
  832:	ef e6       	ldi	r30, 0x6F	; 111
  834:	f0 e0       	ldi	r31, 0x00	; 0
  836:	80 81       	ld	r24, Z
@@ -1364,12 +1391,24 @@ ISR(INT0_vect) {
  83c:	08 95       	ret
 
 0000083e <usart_init>:
+#include "uart.h"
+
+void usart_init(uint16_t ubrr) {
+	
+	// Enable USART transmitter
+	UCSR0B |= (1 << TXEN0);
  83e:	e1 ec       	ldi	r30, 0xC1	; 193
  840:	f0 e0       	ldi	r31, 0x00	; 0
  842:	20 81       	ld	r18, Z
  844:	28 60       	ori	r18, 0x08	; 8
  846:	20 83       	st	Z, r18
+	
+	// Extract 8 LSBs and write them to UBRR0L
+	UBRR0L = ubrr % 256;
  848:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+	
+	// Extract 4 MSBs and write them to UBRR0H
+	UBRR0H |= (ubrr / 256);
  84c:	e5 ec       	ldi	r30, 0xC5	; 197
  84e:	f0 e0       	ldi	r31, 0x00	; 0
  850:	80 81       	ld	r24, Z
@@ -1378,24 +1417,51 @@ ISR(INT0_vect) {
  856:	08 95       	ret
 
 00000858 <usart_transmit>:
+
+void usart_transmit(uint8_t data) {
+	
+	while (1) {
+		
+		if (UCSR0A & (1 << UDRE0)) {
  858:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
  85c:	95 ff       	sbrs	r25, 5
  85e:	fc cf       	rjmp	.-8      	; 0x858 <usart_transmit>
+			
+			// Write data to UDR0 register to transmit if ready, then exit the function
+			UDR0 = data;
  860:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
  864:	08 95       	ret
 
 00000866 <usart_transmit_array>:
+			continue;
+		}
+	}
+}
+
+void usart_transmit_array(char* msg) {
  866:	1f 93       	push	r17
  868:	cf 93       	push	r28
  86a:	df 93       	push	r29
  86c:	ec 01       	movw	r28, r24
+	
+	// Only prints first character in Proteus for some reason
+	
+	// Loop through and transmit each byte in the array
+	for (uint8_t i = 0; i < (uint8_t)(strlen(msg)); i++){
  86e:	10 e0       	ldi	r17, 0x00	; 0
  870:	07 c0       	rjmp	.+14     	; 0x880 <usart_transmit_array+0x1a>
+		usart_transmit(msg[i]);
  872:	fe 01       	movw	r30, r28
  874:	e1 0f       	add	r30, r17
  876:	f1 1d       	adc	r31, r1
  878:	80 81       	ld	r24, Z
  87a:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+void usart_transmit_array(char* msg) {
+	
+	// Only prints first character in Proteus for some reason
+	
+	// Loop through and transmit each byte in the array
+	for (uint8_t i = 0; i < (uint8_t)(strlen(msg)); i++){
  87e:	1f 5f       	subi	r17, 0xFF	; 255
  880:	81 2f       	mov	r24, r17
  882:	90 e0       	ldi	r25, 0x00	; 0
@@ -1410,12 +1476,17 @@ ISR(INT0_vect) {
  894:	8e 17       	cp	r24, r30
  896:	9f 07       	cpc	r25, r31
  898:	64 f3       	brlt	.-40     	; 0x872 <usart_transmit_array+0xc>
+		usart_transmit(msg[i]);
+	}
+}
  89a:	df 91       	pop	r29
  89c:	cf 91       	pop	r28
  89e:	1f 91       	pop	r17
  8a0:	08 95       	ret
 
 000008a2 <usart_transmit_num_3sf>:
+
+void usart_transmit_num_3sf(uint16_t number, uint8_t decimal_pos) {
  8a2:	ef 92       	push	r14
  8a4:	ff 92       	push	r15
  8a6:	0f 93       	push	r16
@@ -1428,6 +1499,11 @@ ISR(INT0_vect) {
  8b4:	de b7       	in	r29, 0x3e	; 62
  8b6:	ac 01       	movw	r20, r24
  8b8:	06 2f       	mov	r16, r22
+	
+	uint8_t digits[3];
+	
+	// Separate each digit from 'number'
+	digits[0] = number / 100;
  8ba:	7c 01       	movw	r14, r24
  8bc:	f6 94       	lsr	r15
  8be:	e7 94       	ror	r14
@@ -1441,6 +1517,7 @@ ISR(INT0_vect) {
  8d0:	f6 95       	lsr	r31
  8d2:	e7 95       	ror	r30
  8d4:	e9 83       	std	Y+1, r30	; 0x01
+	number %= 100;
  8d6:	24 e6       	ldi	r18, 0x64	; 100
  8d8:	2e 9f       	mul	r18, r30
  8da:	c0 01       	movw	r24, r0
@@ -1449,6 +1526,8 @@ ISR(INT0_vect) {
  8e0:	11 24       	eor	r1, r1
  8e2:	48 1b       	sub	r20, r24
  8e4:	59 0b       	sbc	r21, r25
+	
+	digits[1] = number / 10;
  8e6:	9a 01       	movw	r18, r20
  8e8:	ad ec       	ldi	r26, 0xCD	; 205
  8ea:	bc ec       	ldi	r27, 0xCC	; 204
@@ -1461,6 +1540,7 @@ ISR(INT0_vect) {
  8fa:	f6 95       	lsr	r31
  8fc:	e7 95       	ror	r30
  8fe:	ea 83       	std	Y+2, r30	; 0x02
+	digits[2] = number % 10;
  900:	cf 01       	movw	r24, r30
  902:	88 0f       	add	r24, r24
  904:	99 1f       	adc	r25, r25
@@ -1475,8 +1555,13 @@ ISR(INT0_vect) {
  916:	4e 1b       	sub	r20, r30
  918:	5f 0b       	sbc	r21, r31
  91a:	4b 83       	std	Y+3, r20	; 0x03
+	
+	for (uint8_t i = 0; i < 3; i++) {
  91c:	10 e0       	ldi	r17, 0x00	; 0
  91e:	10 c0       	rjmp	.+32     	; 0x940 <__stack+0x41>
+		
+		// Transmit digit
+		usart_transmit(digits[i] + '0');
  920:	e1 e0       	ldi	r30, 0x01	; 1
  922:	f0 e0       	ldi	r31, 0x00	; 0
  924:	ec 0f       	add	r30, r28
@@ -1486,13 +1571,29 @@ ISR(INT0_vect) {
  92c:	80 81       	ld	r24, Z
  92e:	80 5d       	subi	r24, 0xD0	; 208
  930:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		
+		// Transmit decimal place after the required digit
+		if (i == decimal_pos) {
  934:	10 13       	cpse	r17, r16
  936:	03 c0       	rjmp	.+6      	; 0x93e <__stack+0x3f>
+			usart_transmit('.');
  938:	8e e2       	ldi	r24, 0x2E	; 46
  93a:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+	number %= 100;
+	
+	digits[1] = number / 10;
+	digits[2] = number % 10;
+	
+	for (uint8_t i = 0; i < 3; i++) {
  93e:	1f 5f       	subi	r17, 0xFF	; 255
  940:	13 30       	cpi	r17, 0x03	; 3
  942:	70 f3       	brcs	.-36     	; 0x920 <__stack+0x21>
+		// Transmit decimal place after the required digit
+		if (i == decimal_pos) {
+			usart_transmit('.');
+		}
+	}
+}
  944:	0f 90       	pop	r0
  946:	0f 90       	pop	r0
  948:	0f 90       	pop	r0
@@ -1505,12 +1606,16 @@ ISR(INT0_vect) {
  956:	08 95       	ret
 
 00000958 <usart_transmit_voltage>:
+
+void usart_transmit_voltage(uint16_t number) {
  958:	cf 93       	push	r28
  95a:	df 93       	push	r29
  95c:	ec 01       	movw	r28, r24
+	usart_transmit_array("Voltage:     ");
  95e:	85 ea       	ldi	r24, 0xA5	; 165
  960:	91 e0       	ldi	r25, 0x01	; 1
  962:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+	usart_transmit_num_3sf(number/10, 0);
  966:	9e 01       	movw	r18, r28
  968:	ad ec       	ldi	r26, 0xCD	; 205
  96a:	bc ec       	ldi	r27, 0xCC	; 204
@@ -1523,55 +1628,90 @@ ISR(INT0_vect) {
  97a:	96 95       	lsr	r25
  97c:	87 95       	ror	r24
  97e:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
+	usart_transmit_array(" V\n\r");
  982:	83 eb       	ldi	r24, 0xB3	; 179
  984:	91 e0       	ldi	r25, 0x01	; 1
  986:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+}
  98a:	df 91       	pop	r29
  98c:	cf 91       	pop	r28
  98e:	08 95       	ret
 
 00000990 <usart_transmit_current>:
+
+void usart_transmit_current(int16_t number) {
  990:	cf 93       	push	r28
  992:	df 93       	push	r29
  994:	ec 01       	movw	r28, r24
+	usart_transmit_array("Current:     ");
  996:	88 eb       	ldi	r24, 0xB8	; 184
  998:	91 e0       	ldi	r25, 0x01	; 1
  99a:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+	
+	int16_t transmit_num;
+	
+	if (number < 0) {
  99e:	dd 23       	and	r29, r29
  9a0:	3c f4       	brge	.+14     	; 0x9b0 <usart_transmit_current+0x20>
+		usart_transmit('-');
  9a2:	8d e2       	ldi	r24, 0x2D	; 45
  9a4:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		transmit_num = number * -1;
  9a8:	d1 95       	neg	r29
  9aa:	c1 95       	neg	r28
  9ac:	d1 09       	sbc	r29, r1
  9ae:	03 c0       	rjmp	.+6      	; 0x9b6 <usart_transmit_current+0x26>
+		} else {
+		usart_transmit(' ');
  9b0:	80 e2       	ldi	r24, 0x20	; 32
  9b2:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		transmit_num = number;
+	}
+	
+	usart_transmit_num_3sf(transmit_num, 3);
  9b6:	63 e0       	ldi	r22, 0x03	; 3
  9b8:	ce 01       	movw	r24, r28
  9ba:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
+	usart_transmit_array(" mA\n\r");
  9be:	86 ec       	ldi	r24, 0xC6	; 198
  9c0:	91 e0       	ldi	r25, 0x01	; 1
  9c2:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+}
  9c6:	df 91       	pop	r29
  9c8:	cf 91       	pop	r28
  9ca:	08 95       	ret
 
 000009cc <usart_transmit_temp>:
+
+void usart_transmit_temp(int8_t number) {
  9cc:	cf 93       	push	r28
  9ce:	df 93       	push	r29
  9d0:	d8 2f       	mov	r29, r24
+	
+	usart_transmit_array("Temperature:  ");
  9d2:	8c ec       	ldi	r24, 0xCC	; 204
  9d4:	91 e0       	ldi	r25, 0x01	; 1
  9d6:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+	
+	int8_t transmit_num;
+	
+	if (number < 0) {
  9da:	dd 23       	and	r29, r29
  9dc:	2c f4       	brge	.+10     	; 0x9e8 <usart_transmit_temp+0x1c>
+		usart_transmit('-');
  9de:	8d e2       	ldi	r24, 0x2D	; 45
  9e0:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		transmit_num = number * -1;
  9e4:	d1 95       	neg	r29
  9e6:	03 c0       	rjmp	.+6      	; 0x9ee <usart_transmit_temp+0x22>
+	} else {
+		usart_transmit(' ');
  9e8:	80 e2       	ldi	r24, 0x20	; 32
  9ea:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		transmit_num = number;
+	}
+	
+	usart_transmit(transmit_num/10 + '0');
  9ee:	c7 e6       	ldi	r28, 0x67	; 103
  9f0:	dc 02       	muls	r29, r28
  9f2:	c1 2d       	mov	r28, r1
@@ -1583,6 +1723,7 @@ ISR(INT0_vect) {
  9fe:	80 e3       	ldi	r24, 0x30	; 48
  a00:	8c 0f       	add	r24, r28
  a02:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+	usart_transmit(transmit_num%10 + '0');
  a06:	cc 0f       	add	r28, r28
  a08:	8c 2f       	mov	r24, r28
  a0a:	88 0f       	add	r24, r24
@@ -1592,44 +1733,63 @@ ISR(INT0_vect) {
  a12:	8c 1b       	sub	r24, r28
  a14:	80 5d       	subi	r24, 0xD0	; 208
  a16:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+	
+	usart_transmit_array(" C\n\r");
  a1a:	8b ed       	ldi	r24, 0xDB	; 219
  a1c:	91 e0       	ldi	r25, 0x01	; 1
  a1e:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+}
  a22:	df 91       	pop	r29
  a24:	cf 91       	pop	r28
  a26:	08 95       	ret
 
 00000a28 <usart_transmit_soc>:
+
+void usart_transmit_soc(int16_t number) {
  a28:	cf 93       	push	r28
  a2a:	df 93       	push	r29
  a2c:	ec 01       	movw	r28, r24
+	usart_transmit_array("SOC:        ");
  a2e:	80 ee       	ldi	r24, 0xE0	; 224
  a30:	91 e0       	ldi	r25, 0x01	; 1
  a32:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+	
+	if (number == 1000) {
  a36:	c8 3e       	cpi	r28, 0xE8	; 232
  a38:	83 e0       	ldi	r24, 0x03	; 3
  a3a:	d8 07       	cpc	r29, r24
  a3c:	49 f4       	brne	.+18     	; 0xa50 <usart_transmit_soc+0x28>
+		usart_transmit('1');
  a3e:	81 e3       	ldi	r24, 0x31	; 49
  a40:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		usart_transmit_num_3sf(0, 1);
  a44:	61 e0       	ldi	r22, 0x01	; 1
  a46:	80 e0       	ldi	r24, 0x00	; 0
  a48:	90 e0       	ldi	r25, 0x00	; 0
  a4a:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
  a4e:	07 c0       	rjmp	.+14     	; 0xa5e <usart_transmit_soc+0x36>
+	} else {
+		usart_transmit(' ');
  a50:	80 e2       	ldi	r24, 0x20	; 32
  a52:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
+		usart_transmit_num_3sf(number, 1);
  a56:	61 e0       	ldi	r22, 0x01	; 1
  a58:	ce 01       	movw	r24, r28
  a5a:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
+	}
+	
+	usart_transmit_array(" \%\n\r");
  a5e:	8d ee       	ldi	r24, 0xED	; 237
  a60:	91 e0       	ldi	r25, 0x01	; 1
  a62:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+}
  a66:	df 91       	pop	r29
  a68:	cf 91       	pop	r28
  a6a:	08 95       	ret
 
 00000a6c <usart_transmit_diagnostics>:
+
+void usart_transmit_diagnostics(uint16_t voltage, int16_t current, int8_t temp, int16_t soc) {
  a6c:	ef 92       	push	r14
  a6e:	ff 92       	push	r15
  a70:	1f 93       	push	r17
@@ -1638,16 +1798,22 @@ ISR(INT0_vect) {
  a76:	7b 01       	movw	r14, r22
  a78:	14 2f       	mov	r17, r20
  a7a:	e9 01       	movw	r28, r18
+	usart_transmit_voltage(voltage);
  a7c:	0e 94 ac 04 	call	0x958	; 0x958 <usart_transmit_voltage>
+	usart_transmit_current(current);
  a80:	c7 01       	movw	r24, r14
  a82:	0e 94 c8 04 	call	0x990	; 0x990 <usart_transmit_current>
+	usart_transmit_temp(temp);
  a86:	81 2f       	mov	r24, r17
  a88:	0e 94 e6 04 	call	0x9cc	; 0x9cc <usart_transmit_temp>
+	usart_transmit_soc(soc);
  a8c:	ce 01       	movw	r24, r28
  a8e:	0e 94 14 05 	call	0xa28	; 0xa28 <usart_transmit_soc>
+	usart_transmit_array("\n\r");
  a92:	8f ee       	ldi	r24, 0xEF	; 239
  a94:	91 e0       	ldi	r25, 0x01	; 1
  a96:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
+}
  a9a:	df 91       	pop	r29
  a9c:	cf 91       	pop	r28
  a9e:	1f 91       	pop	r17
