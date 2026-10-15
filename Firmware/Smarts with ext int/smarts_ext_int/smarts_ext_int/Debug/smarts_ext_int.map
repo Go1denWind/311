@@ -606,7 +606,7 @@ END GROUP
  *(.fini0)
                 0x00000f44                _etext = .
 
-.data           0x00800100       0xf2 load address 0x00000f44
+.data           0x00800100      0x11a load address 0x00000f44
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -617,67 +617,67 @@ END GROUP
                 0x00800101        0x1 adc.o
                 0x00800101                temp_lookup_size
  .data.temp_lookup
-                0x00800102       0xa2 adc.o
+                0x00800102       0xca adc.o
                 0x00800102                temp_lookup
  .data.touch_ready
-                0x008001a4        0x1 main.o
-                0x008001a4                touch_ready
+                0x008001cc        0x1 main.o
+                0x008001cc                touch_ready
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x008001a5       0x4d uart.o
+                0x008001cd       0x4d uart.o
                                  0x50 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008001f2                . = ALIGN (0x2)
-                0x008001f2                _edata = .
-                0x008001f2                PROVIDE (__data_end, .)
+                0x0080021a                . = ALIGN (0x2)
+                0x0080021a                _edata = .
+                0x0080021a                PROVIDE (__data_end, .)
 
-.bss            0x008001f2       0x15
-                0x008001f2                PROVIDE (__bss_start, .)
+.bss            0x0080021a       0x15
+                0x0080021a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.usart_flag
-                0x008001f2        0x1 adc.o
-                0x008001f2                usart_flag
- .bss.dsp_flag  0x008001f3        0x1 adc.o
-                0x008001f3                dsp_flag
+                0x0080021a        0x1 adc.o
+                0x0080021a                usart_flag
+ .bss.dsp_flag  0x0080021b        0x1 adc.o
+                0x0080021b                dsp_flag
  .bss.adc_samples
-                0x008001f4        0x2 adc.o
-                0x008001f4                adc_samples
+                0x0080021c        0x2 adc.o
+                0x0080021c                adc_samples
  .bss.soc_startup
-                0x008001f6        0x1 main.o
-                0x008001f6                soc_startup
- .bss.no_load   0x008001f7        0x1 main.o
-                0x008001f7                no_load
+                0x0080021e        0x1 main.o
+                0x0080021e                soc_startup
+ .bss.no_load   0x0080021f        0x1 main.o
+                0x0080021f                no_load
  .bss.touch_consec
-                0x008001f8        0x1 main.o
-                0x008001f8                touch_consec
+                0x00800220        0x1 main.o
+                0x00800220                touch_consec
  .bss.touch_count
-                0x008001f9        0x2 main.o
-                0x008001f9                touch_count
- .bss.capacity  0x008001fb        0x4 main.o
-                0x008001fb                capacity
- .bss.current   0x008001ff        0x2 main.o
-                0x008001ff                current
- .bss.voltage   0x00800201        0x2 main.o
-                0x00800201                voltage
+                0x00800221        0x2 main.o
+                0x00800221                touch_count
+ .bss.capacity  0x00800223        0x4 main.o
+                0x00800223                capacity
+ .bss.current   0x00800227        0x2 main.o
+                0x00800227                current
+ .bss.voltage   0x00800229        0x2 main.o
+                0x00800229                voltage
  .bss.temperature
-                0x00800203        0x1 main.o
-                0x00800203                temperature
+                0x0080022b        0x1 main.o
+                0x0080022b                temperature
  *(COMMON)
- COMMON         0x00800204        0x3 main.o
-                0x00800204                touch_flag
-                0x00800205                count
-                0x00800207                PROVIDE (__bss_end, .)
+ COMMON         0x0080022c        0x3 main.o
+                0x0080022c                touch_flag
+                0x0080022d                count
+                0x0080022f                PROVIDE (__bss_end, .)
                 0x00000f44                __data_load_start = LOADADDR (.data)
-                0x00001036                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000105e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800207        0x0
+.noinit         0x0080022f        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800207                _end = .
+                0x0080022f                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0

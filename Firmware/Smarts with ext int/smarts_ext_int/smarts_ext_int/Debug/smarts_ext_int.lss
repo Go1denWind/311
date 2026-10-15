@@ -3,31 +3,31 @@ smarts_ext_int.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         000000f2  00800100  00000f44  00000fd8  2**0
+  0 .data         0000011a  00800100  00000f44  00000fd8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         00000f44  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000015  008001f2  008001f2  000010ca  2**0
+  2 .bss          00000015  0080021a  0080021a  000010f2  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000010ca  2**0
+  3 .comment      00000030  00000000  00000000  000010f2  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000010fc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001124  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000198  00000000  00000000  0000113c  2**0
+  5 .debug_aranges 00000198  00000000  00000000  00001164  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000146b  00000000  00000000  000012d4  2**0
+  6 .debug_info   0000146b  00000000  00000000  000012fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009ea  00000000  00000000  0000273f  2**0
+  7 .debug_abbrev 000009ea  00000000  00000000  00002767  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000c3e  00000000  00000000  00003129  2**0
+  8 .debug_line   00000c3e  00000000  00000000  00003151  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000003e4  00000000  00000000  00003d68  2**2
+  9 .debug_frame  000003e4  00000000  00000000  00003d90  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000679  00000000  00000000  0000414c  2**0
+ 10 .debug_str    00000679  00000000  00000000  00004174  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ae7  00000000  00000000  000047c5  2**0
+ 11 .debug_loc    00000ae7  00000000  00000000  000047ed  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000138  00000000  00000000  000052ac  2**0
+ 12 .debug_ranges 00000138  00000000  00000000  000052d4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -69,7 +69,7 @@ Disassembly of section .text:
   72:	cd bf       	out	0x3d, r28	; 61
 
 00000074 <__do_copy_data>:
-  74:	11 e0       	ldi	r17, 0x01	; 1
+  74:	12 e0       	ldi	r17, 0x02	; 2
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
   7a:	e4 e4       	ldi	r30, 0x44	; 68
@@ -77,21 +77,21 @@ Disassembly of section .text:
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	a2 3f       	cpi	r26, 0xF2	; 242
+  84:	aa 31       	cpi	r26, 0x1A	; 26
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
   8a:	22 e0       	ldi	r18, 0x02	; 2
-  8c:	a2 ef       	ldi	r26, 0xF2	; 242
-  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  8c:	aa e1       	ldi	r26, 0x1A	; 26
+  8e:	b2 e0       	ldi	r27, 0x02	; 2
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
 00000092 <.do_clear_bss_loop>:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	a7 30       	cpi	r26, 0x07	; 7
+  94:	af 32       	cpi	r26, 0x2F	; 47
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
   9a:	0e 94 09 02 	call	0x412	; 0x412 <main>
@@ -155,7 +155,7 @@ void update_adc_status() {
   fe:	82 e0       	ldi	r24, 0x02	; 2
  100:	85 bb       	out	0x15, r24	; 21
  102:	81 e0       	ldi	r24, 0x01	; 1
- 104:	80 93 f3 01 	sts	0x01F3, r24	; 0x8001f3 <dsp_flag>
+ 104:	80 93 1b 02 	sts	0x021B, r24	; 0x80021b <dsp_flag>
  108:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
  10c:	8f 5f       	subi	r24, 0xFF	; 255
  10e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
@@ -163,13 +163,13 @@ void update_adc_status() {
  116:	83 30       	cpi	r24, 0x03	; 3
  118:	10 f0       	brcs	.+4      	; 0x11e <__vector_21+0x34>
  11a:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
- 11e:	80 91 f4 01 	lds	r24, 0x01F4	; 0x8001f4 <adc_samples>
- 122:	90 91 f5 01 	lds	r25, 0x01F5	; 0x8001f5 <adc_samples+0x1>
+ 11e:	80 91 1c 02 	lds	r24, 0x021C	; 0x80021c <adc_samples>
+ 122:	90 91 1d 02 	lds	r25, 0x021D	; 0x80021d <adc_samples+0x1>
  126:	01 96       	adiw	r24, 0x01	; 1
- 128:	90 93 f5 01 	sts	0x01F5, r25	; 0x8001f5 <adc_samples+0x1>
- 12c:	80 93 f4 01 	sts	0x01F4, r24	; 0x8001f4 <adc_samples>
- 130:	80 91 f4 01 	lds	r24, 0x01F4	; 0x8001f4 <adc_samples>
- 134:	90 91 f5 01 	lds	r25, 0x01F5	; 0x8001f5 <adc_samples+0x1>
+ 128:	90 93 1d 02 	sts	0x021D, r25	; 0x80021d <adc_samples+0x1>
+ 12c:	80 93 1c 02 	sts	0x021C, r24	; 0x80021c <adc_samples>
+ 130:	80 91 1c 02 	lds	r24, 0x021C	; 0x80021c <adc_samples>
+ 134:	90 91 1d 02 	lds	r25, 0x021D	; 0x80021d <adc_samples+0x1>
  138:	80 3a       	cpi	r24, 0xA0	; 160
  13a:	95 40       	sbci	r25, 0x05	; 5
  13c:	40 f0       	brcs	.+16     	; 0x14e <__vector_21+0x64>
@@ -179,7 +179,7 @@ void update_adc_status() {
  144:	8f 7d       	andi	r24, 0xDF	; 223
  146:	80 83       	st	Z, r24
  148:	81 e0       	ldi	r24, 0x01	; 1
- 14a:	80 93 f2 01 	sts	0x01F2, r24	; 0x8001f2 <__data_end>
+ 14a:	80 93 1a 02 	sts	0x021A, r24	; 0x80021a <__data_end>
  14e:	ff 91       	pop	r31
  150:	ef 91       	pop	r30
  152:	9f 91       	pop	r25
@@ -303,7 +303,7 @@ int8_t vin_to_tsc(uint16_t vin) {
  202:	bc 01       	movw	r22, r24
 	uint8_t no_of_guesses = 0;
 	
-	uint8_t guess = 40;
+	uint8_t guess = 50;
 	
 	uint8_t min = 0;
 	uint8_t max = temp_lookup_size;
@@ -311,7 +311,7 @@ int8_t vin_to_tsc(uint16_t vin) {
 	
 	uint8_t no_of_guesses = 0;
 	
-	uint8_t guess = 40;
+	uint8_t guess = 50;
 	
 	uint8_t min = 0;
  208:	80 e0       	ldi	r24, 0x00	; 0
@@ -320,8 +320,8 @@ int8_t vin_to_tsc(uint16_t vin) {
 	
 	uint8_t no_of_guesses = 0;
 	
-	uint8_t guess = 40;
- 20a:	98 e2       	ldi	r25, 0x28	; 40
+	uint8_t guess = 50;
+ 20a:	92 e3       	ldi	r25, 0x32	; 50
 
 int8_t vin_to_tsc(uint16_t vin) {
 	
@@ -416,8 +416,8 @@ int8_t vin_to_tsc(uint16_t vin) {
 		}
 	}
 	
-	return (int8_t)guess - 10;
- 264:	86 ef       	ldi	r24, 0xF6	; 246
+	return (int8_t)guess - 20;
+ 264:	8c ee       	ldi	r24, 0xEC	; 236
  266:	82 0f       	add	r24, r18
  268:	08 95       	ret
 		if (prev_guess == guess) {
@@ -430,7 +430,7 @@ int8_t vin_to_tsc(uint16_t vin) {
 		}
 	}
 	
-	return (int8_t)guess - 10;
+	return (int8_t)guess - 20;
 }
  26c:	08 95       	ret
 
@@ -534,8 +534,8 @@ float isc_to_soc(int16_t isc, float capacity) {
 	float soc;
 	
 	if (adc_samples < 6) {
- 304:	20 91 f4 01 	lds	r18, 0x01F4	; 0x8001f4 <adc_samples>
- 308:	30 91 f5 01 	lds	r19, 0x01F5	; 0x8001f5 <adc_samples+0x1>
+ 304:	20 91 1c 02 	lds	r18, 0x021C	; 0x80021c <adc_samples>
+ 308:	30 91 1d 02 	lds	r19, 0x021D	; 0x80021d <adc_samples+0x1>
  30c:	26 30       	cpi	r18, 0x06	; 6
  30e:	31 05       	cpc	r19, r1
  310:	d8 f4       	brcc	.+54     	; 0x348 <isc_to_soc+0x58>
@@ -657,8 +657,8 @@ float isc_to_soc(int16_t isc, float capacity) {
 void reset_adc_cycle() {
 	
 	adc_samples = 0;
- 3da:	10 92 f5 01 	sts	0x01F5, r1	; 0x8001f5 <adc_samples+0x1>
- 3de:	10 92 f4 01 	sts	0x01F4, r1	; 0x8001f4 <adc_samples>
+ 3da:	10 92 1d 02 	sts	0x021D, r1	; 0x80021d <adc_samples+0x1>
+ 3de:	10 92 1c 02 	sts	0x021C, r1	; 0x80021c <adc_samples>
 	ADCSRA |= (1 << ADATE);
  3e2:	ea e7       	ldi	r30, 0x7A	; 122
  3e4:	f0 e0       	ldi	r31, 0x00	; 0
@@ -672,7 +672,7 @@ void reset_adc_cycle() {
 
 uint8_t usart_to_do() {
 	return usart_flag;
- 3ee:	80 91 f2 01 	lds	r24, 0x01F2	; 0x8001f2 <__data_end>
+ 3ee:	80 91 1a 02 	lds	r24, 0x021A	; 0x80021a <__data_end>
 }
  3f2:	08 95       	ret
 
@@ -680,7 +680,7 @@ uint8_t usart_to_do() {
 
 void usart_stop() {
 	usart_flag = 0;
- 3f4:	10 92 f2 01 	sts	0x01F2, r1	; 0x8001f2 <__data_end>
+ 3f4:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <__data_end>
  3f8:	08 95       	ret
 
 000003fa <dsp_to_do>:
@@ -688,7 +688,7 @@ void usart_stop() {
 
 uint8_t dsp_to_do() {
 	return dsp_flag;
- 3fa:	80 91 f3 01 	lds	r24, 0x01F3	; 0x8001f3 <dsp_flag>
+ 3fa:	80 91 1b 02 	lds	r24, 0x021B	; 0x80021b <dsp_flag>
 }
  3fe:	08 95       	ret
 
@@ -696,7 +696,7 @@ uint8_t dsp_to_do() {
 
 void dsp_stop() {
 	dsp_flag = 0;
- 400:	10 92 f3 01 	sts	0x01F3, r1	; 0x8001f3 <dsp_flag>
+ 400:	10 92 1b 02 	sts	0x021B, r1	; 0x80021b <dsp_flag>
  404:	08 95       	ret
 
 00000406 <ext_int_init>:
@@ -772,10 +772,10 @@ int main(void)
 		
 		// Update LEDs based on capacity reading
 		if (capacity > 666) {
- 456:	60 91 fb 01 	lds	r22, 0x01FB	; 0x8001fb <capacity>
- 45a:	70 91 fc 01 	lds	r23, 0x01FC	; 0x8001fc <capacity+0x1>
- 45e:	80 91 fd 01 	lds	r24, 0x01FD	; 0x8001fd <capacity+0x2>
- 462:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <capacity+0x3>
+ 456:	60 91 23 02 	lds	r22, 0x0223	; 0x800223 <capacity>
+ 45a:	70 91 24 02 	lds	r23, 0x0224	; 0x800224 <capacity+0x1>
+ 45e:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <capacity+0x2>
+ 462:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <capacity+0x3>
  466:	20 e0       	ldi	r18, 0x00	; 0
  468:	30 e8       	ldi	r19, 0x80	; 128
  46a:	46 e2       	ldi	r20, 0x26	; 38
@@ -793,10 +793,10 @@ int main(void)
  480:	85 b9       	out	0x05, r24	; 5
  482:	37 c0       	rjmp	.+110    	; 0x4f2 <main+0xe0>
 		} else if (capacity > 333) {
- 484:	60 91 fb 01 	lds	r22, 0x01FB	; 0x8001fb <capacity>
- 488:	70 91 fc 01 	lds	r23, 0x01FC	; 0x8001fc <capacity+0x1>
- 48c:	80 91 fd 01 	lds	r24, 0x01FD	; 0x8001fd <capacity+0x2>
- 490:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <capacity+0x3>
+ 484:	60 91 23 02 	lds	r22, 0x0223	; 0x800223 <capacity>
+ 488:	70 91 24 02 	lds	r23, 0x0224	; 0x800224 <capacity+0x1>
+ 48c:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <capacity+0x2>
+ 490:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <capacity+0x3>
  494:	20 e0       	ldi	r18, 0x00	; 0
  496:	30 e8       	ldi	r19, 0x80	; 128
  498:	46 ea       	ldi	r20, 0xA6	; 166
@@ -818,10 +818,10 @@ int main(void)
  4b4:	85 b9       	out	0x05, r24	; 5
  4b6:	1d c0       	rjmp	.+58     	; 0x4f2 <main+0xe0>
 		} else if (capacity > 10) {
- 4b8:	60 91 fb 01 	lds	r22, 0x01FB	; 0x8001fb <capacity>
- 4bc:	70 91 fc 01 	lds	r23, 0x01FC	; 0x8001fc <capacity+0x1>
- 4c0:	80 91 fd 01 	lds	r24, 0x01FD	; 0x8001fd <capacity+0x2>
- 4c4:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <capacity+0x3>
+ 4b8:	60 91 23 02 	lds	r22, 0x0223	; 0x800223 <capacity>
+ 4bc:	70 91 24 02 	lds	r23, 0x0224	; 0x800224 <capacity+0x1>
+ 4c0:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <capacity+0x2>
+ 4c4:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <capacity+0x3>
  4c8:	20 e0       	ldi	r18, 0x00	; 0
  4ca:	30 e0       	ldi	r19, 0x00	; 0
  4cc:	40 e2       	ldi	r20, 0x20	; 32
@@ -856,15 +856,15 @@ int main(void)
  4f8:	e1 f0       	breq	.+56     	; 0x532 <main+0x120>
 			
 			usart_transmit_diagnostics(voltage, current, temperature, capacity);
- 4fa:	60 91 fb 01 	lds	r22, 0x01FB	; 0x8001fb <capacity>
- 4fe:	70 91 fc 01 	lds	r23, 0x01FC	; 0x8001fc <capacity+0x1>
- 502:	80 91 fd 01 	lds	r24, 0x01FD	; 0x8001fd <capacity+0x2>
- 506:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <capacity+0x3>
- 50a:	f0 90 03 02 	lds	r15, 0x0203	; 0x800203 <temperature>
- 50e:	00 91 ff 01 	lds	r16, 0x01FF	; 0x8001ff <current>
- 512:	10 91 00 02 	lds	r17, 0x0200	; 0x800200 <current+0x1>
- 516:	c0 91 01 02 	lds	r28, 0x0201	; 0x800201 <voltage>
- 51a:	d0 91 02 02 	lds	r29, 0x0202	; 0x800202 <voltage+0x1>
+ 4fa:	60 91 23 02 	lds	r22, 0x0223	; 0x800223 <capacity>
+ 4fe:	70 91 24 02 	lds	r23, 0x0224	; 0x800224 <capacity+0x1>
+ 502:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <capacity+0x2>
+ 506:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <capacity+0x3>
+ 50a:	f0 90 2b 02 	lds	r15, 0x022B	; 0x80022b <temperature>
+ 50e:	00 91 27 02 	lds	r16, 0x0227	; 0x800227 <current>
+ 512:	10 91 28 02 	lds	r17, 0x0228	; 0x800228 <current+0x1>
+ 516:	c0 91 29 02 	lds	r28, 0x0229	; 0x800229 <voltage>
+ 51a:	d0 91 2a 02 	lds	r29, 0x022A	; 0x80022a <voltage+0x1>
  51e:	0e 94 37 06 	call	0xc6e	; 0xc6e <__fixsfsi>
  522:	9b 01       	movw	r18, r22
  524:	4f 2d       	mov	r20, r15
@@ -887,8 +887,8 @@ int main(void)
 			count = ADC;
  53c:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
  540:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
- 544:	90 93 06 02 	sts	0x0206, r25	; 0x800206 <count+0x1>
- 548:	80 93 05 02 	sts	0x0205, r24	; 0x800205 <count>
+ 544:	90 93 2e 02 	sts	0x022E, r25	; 0x80022e <count+0x1>
+ 548:	80 93 2d 02 	sts	0x022D, r24	; 0x80022d <count>
 			
 			if (temperature_next()) { // Proteus: 85 us
  54c:	0e 94 b1 00 	call	0x162	; 0x162 <temperature_next>
@@ -897,8 +897,8 @@ int main(void)
 				
 				// Send signal to isolate supercap if temperature outside safe range
 				if ((count < 154) || (count > 870)) {
- 554:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 558:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 554:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 558:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  55c:	8a 59       	subi	r24, 0x9A	; 154
  55e:	91 09       	sbc	r25, r1
  560:	8d 3c       	cpi	r24, 0xCD	; 205
@@ -919,11 +919,11 @@ int main(void)
 				
 				// Convert ADC sample to temperature and store result
 				temperature = vin_to_tsc(adc_to_vin(count));
- 574:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 578:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 574:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 578:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  57c:	0e 94 c5 00 	call	0x18a	; 0x18a <adc_to_vin>
  580:	0e 94 01 01 	call	0x202	; 0x202 <vin_to_tsc>
- 584:	80 93 03 02 	sts	0x0203, r24	; 0x800203 <temperature>
+ 584:	80 93 2b 02 	sts	0x022B, r24	; 0x80022b <temperature>
 				
 				// Change ADC channel to measure voltage
 				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
@@ -945,8 +945,8 @@ int main(void)
 				
 				// Send signal to isolate supercap if temperature outside safe range
 				if ((count < 154) || (count > 870)) {
- 5a2:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 5a6:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 5a2:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 5a6:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  5aa:	8a 59       	subi	r24, 0x9A	; 154
  5ac:	91 09       	sbc	r25, r1
  5ae:	8d 3c       	cpi	r24, 0xCD	; 205
@@ -966,32 +966,32 @@ int main(void)
 				
 				// Convert ADC sample to voltage and store result
 				voltage = vin_to_vsc(adc_to_vin(count));
- 5c2:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 5c6:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 5c2:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 5c6:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  5ca:	0e 94 c5 00 	call	0x18a	; 0x18a <adc_to_vin>
  5ce:	0e 94 da 00 	call	0x1b4	; 0x1b4 <vin_to_vsc>
- 5d2:	90 93 02 02 	sts	0x0202, r25	; 0x800202 <voltage+0x1>
- 5d6:	80 93 01 02 	sts	0x0201, r24	; 0x800201 <voltage>
+ 5d2:	90 93 2a 02 	sts	0x022A, r25	; 0x80022a <voltage+0x1>
+ 5d6:	80 93 29 02 	sts	0x0229, r24	; 0x800229 <voltage>
 				
 				// If MCU is starting up or no load is connected, calculate SOC from voltage
 				if ((soc_startup == 0) || (no_load == 1)) {
- 5da:	80 91 f6 01 	lds	r24, 0x01F6	; 0x8001f6 <soc_startup>
+ 5da:	80 91 1e 02 	lds	r24, 0x021E	; 0x80021e <soc_startup>
  5de:	88 23       	and	r24, r24
  5e0:	21 f0       	breq	.+8      	; 0x5ea <main+0x1d8>
- 5e2:	80 91 f7 01 	lds	r24, 0x01F7	; 0x8001f7 <no_load>
+ 5e2:	80 91 1f 02 	lds	r24, 0x021F	; 0x80021f <no_load>
  5e6:	81 30       	cpi	r24, 0x01	; 1
  5e8:	89 f4       	brne	.+34     	; 0x60c <main+0x1fa>
 					capacity = vsc_to_soc(voltage);
- 5ea:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <voltage>
- 5ee:	90 91 02 02 	lds	r25, 0x0202	; 0x800202 <voltage+0x1>
+ 5ea:	80 91 29 02 	lds	r24, 0x0229	; 0x800229 <voltage>
+ 5ee:	90 91 2a 02 	lds	r25, 0x022A	; 0x80022a <voltage+0x1>
  5f2:	0e 94 37 01 	call	0x26e	; 0x26e <vsc_to_soc>
- 5f6:	60 93 fb 01 	sts	0x01FB, r22	; 0x8001fb <capacity>
- 5fa:	70 93 fc 01 	sts	0x01FC, r23	; 0x8001fc <capacity+0x1>
- 5fe:	80 93 fd 01 	sts	0x01FD, r24	; 0x8001fd <capacity+0x2>
- 602:	90 93 fe 01 	sts	0x01FE, r25	; 0x8001fe <capacity+0x3>
+ 5f6:	60 93 23 02 	sts	0x0223, r22	; 0x800223 <capacity>
+ 5fa:	70 93 24 02 	sts	0x0224, r23	; 0x800224 <capacity+0x1>
+ 5fe:	80 93 25 02 	sts	0x0225, r24	; 0x800225 <capacity+0x2>
+ 602:	90 93 26 02 	sts	0x0226, r25	; 0x800226 <capacity+0x3>
 					soc_startup = 1;
  606:	81 e0       	ldi	r24, 0x01	; 1
- 608:	80 93 f6 01 	sts	0x01F6, r24	; 0x8001f6 <soc_startup>
+ 608:	80 93 1e 02 	sts	0x021E, r24	; 0x80021e <soc_startup>
 				
 				// TODO: what happens if load is connected in between previous current scan and this voltage scan?
 				// reading current then voltage within the cycle is better, but ponder further possible improvements?
@@ -1017,8 +1017,8 @@ int main(void)
 				
 				// Send signal to isolate supercap if temperature outside safe range
 				if ((count < 154) || (count > 870)) {
- 628:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 62c:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 628:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 62c:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  630:	8a 59       	subi	r24, 0x9A	; 154
  632:	91 09       	sbc	r25, r1
  634:	8d 3c       	cpi	r24, 0xCD	; 205
@@ -1038,44 +1038,44 @@ int main(void)
 				
 				// Convert ADC sample to current and store result
 				current = vin_to_isc(adc_to_vin(count));
- 648:	80 91 05 02 	lds	r24, 0x0205	; 0x800205 <count>
- 64c:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <count+0x1>
+ 648:	80 91 2d 02 	lds	r24, 0x022D	; 0x80022d <count>
+ 64c:	90 91 2e 02 	lds	r25, 0x022E	; 0x80022e <count+0x1>
  650:	0e 94 c5 00 	call	0x18a	; 0x18a <adc_to_vin>
  654:	0e 94 ef 00 	call	0x1de	; 0x1de <vin_to_isc>
- 658:	90 93 00 02 	sts	0x0200, r25	; 0x800200 <current+0x1>
- 65c:	80 93 ff 01 	sts	0x01FF, r24	; 0x8001ff <current>
+ 658:	90 93 28 02 	sts	0x0228, r25	; 0x800228 <current+0x1>
+ 65c:	80 93 27 02 	sts	0x0227, r24	; 0x800227 <current>
 				
 				if ((current < 3) && (current > -3)) {
- 660:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <current>
- 664:	90 91 00 02 	lds	r25, 0x0200	; 0x800200 <current+0x1>
+ 660:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <current>
+ 664:	90 91 28 02 	lds	r25, 0x0228	; 0x800228 <current+0x1>
  668:	03 97       	sbiw	r24, 0x03	; 3
  66a:	5c f4       	brge	.+22     	; 0x682 <main+0x270>
- 66c:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <current>
- 670:	90 91 00 02 	lds	r25, 0x0200	; 0x800200 <current+0x1>
+ 66c:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <current>
+ 670:	90 91 28 02 	lds	r25, 0x0228	; 0x800228 <current+0x1>
  674:	8e 3f       	cpi	r24, 0xFE	; 254
  676:	9f 4f       	sbci	r25, 0xFF	; 255
  678:	24 f0       	brlt	.+8      	; 0x682 <main+0x270>
 					// If no load is connected, let SOC be calculated from upcoming voltage sample
 					no_load = 1;
  67a:	81 e0       	ldi	r24, 0x01	; 1
- 67c:	80 93 f7 01 	sts	0x01F7, r24	; 0x8001f7 <no_load>
+ 67c:	80 93 1f 02 	sts	0x021F, r24	; 0x80021f <no_load>
  680:	18 c0       	rjmp	.+48     	; 0x6b2 <main+0x2a0>
 					} else {
 					// Otherwise, calculate new SOC from current sample (Coulumb counting)
 					no_load = 0;
- 682:	10 92 f7 01 	sts	0x01F7, r1	; 0x8001f7 <no_load>
+ 682:	10 92 1f 02 	sts	0x021F, r1	; 0x80021f <no_load>
 					capacity = isc_to_soc(current, capacity);
- 686:	40 91 fb 01 	lds	r20, 0x01FB	; 0x8001fb <capacity>
- 68a:	50 91 fc 01 	lds	r21, 0x01FC	; 0x8001fc <capacity+0x1>
- 68e:	60 91 fd 01 	lds	r22, 0x01FD	; 0x8001fd <capacity+0x2>
- 692:	70 91 fe 01 	lds	r23, 0x01FE	; 0x8001fe <capacity+0x3>
- 696:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <current>
- 69a:	90 91 00 02 	lds	r25, 0x0200	; 0x800200 <current+0x1>
+ 686:	40 91 23 02 	lds	r20, 0x0223	; 0x800223 <capacity>
+ 68a:	50 91 24 02 	lds	r21, 0x0224	; 0x800224 <capacity+0x1>
+ 68e:	60 91 25 02 	lds	r22, 0x0225	; 0x800225 <capacity+0x2>
+ 692:	70 91 26 02 	lds	r23, 0x0226	; 0x800226 <capacity+0x3>
+ 696:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <current>
+ 69a:	90 91 28 02 	lds	r25, 0x0228	; 0x800228 <current+0x1>
  69e:	0e 94 78 01 	call	0x2f0	; 0x2f0 <isc_to_soc>
- 6a2:	60 93 fb 01 	sts	0x01FB, r22	; 0x8001fb <capacity>
- 6a6:	70 93 fc 01 	sts	0x01FC, r23	; 0x8001fc <capacity+0x1>
- 6aa:	80 93 fd 01 	sts	0x01FD, r24	; 0x8001fd <capacity+0x2>
- 6ae:	90 93 fe 01 	sts	0x01FE, r25	; 0x8001fe <capacity+0x3>
+ 6a2:	60 93 23 02 	sts	0x0223, r22	; 0x800223 <capacity>
+ 6a6:	70 93 24 02 	sts	0x0224, r23	; 0x800224 <capacity+0x1>
+ 6aa:	80 93 25 02 	sts	0x0225, r24	; 0x800225 <capacity+0x2>
+ 6ae:	90 93 26 02 	sts	0x0226, r25	; 0x800226 <capacity+0x3>
 					
 					// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 				}
@@ -1111,7 +1111,7 @@ int main(void)
 				// Mark touch oscillator sensing as "to-do"
 				touch_flag = 1;
  6d6:	81 e0       	ldi	r24, 0x01	; 1
- 6d8:	80 93 04 02 	sts	0x0204, r24	; 0x800204 <touch_flag>
+ 6d8:	80 93 2c 02 	sts	0x022C, r24	; 0x80022c <touch_flag>
 			}
 			
 			// NOTE: maybe have touch as its own stage within a cycle like before, but use external interrupts instead of ADC?
@@ -1139,7 +1139,7 @@ ISR(TIMER0_COMPA_vect) {
  6f2:	ff 93       	push	r31
 	
 	if (touch_flag == 1) { // if touch oscillator is to be measured
- 6f4:	80 91 04 02 	lds	r24, 0x0204	; 0x800204 <touch_flag>
+ 6f4:	80 91 2c 02 	lds	r24, 0x022C	; 0x80022c <touch_flag>
  6f8:	81 30       	cpi	r24, 0x01	; 1
  6fa:	31 f4       	brne	.+12     	; 0x708 <__vector_14+0x26>
 		
@@ -1151,7 +1151,7 @@ ISR(TIMER0_COMPA_vect) {
 		
 		// Stop oscillator measurements at next 400 us interrupt
 		touch_flag = 0; // NOTE: uncomment this for real time testing
- 702:	10 92 04 02 	sts	0x0204, r1	; 0x800204 <touch_flag>
+ 702:	10 92 2c 02 	sts	0x022C, r1	; 0x80022c <touch_flag>
  706:	38 c0       	rjmp	.+112    	; 0x778 <__vector_14+0x96>
 		*/
 		
@@ -1185,24 +1185,24 @@ ISR(TIMER0_COMPA_vect) {
  724:	85 bb       	out	0x15, r24	; 21
 		
 		if ((touch_count < 40) && touch_ready) { // real-time: touch_count < 40
- 726:	80 91 f9 01 	lds	r24, 0x01F9	; 0x8001f9 <touch_count>
- 72a:	90 91 fa 01 	lds	r25, 0x01FA	; 0x8001fa <touch_count+0x1>
+ 726:	80 91 21 02 	lds	r24, 0x0221	; 0x800221 <touch_count>
+ 72a:	90 91 22 02 	lds	r25, 0x0222	; 0x800222 <touch_count+0x1>
  72e:	88 97       	sbiw	r24, 0x28	; 40
  730:	98 f4       	brcc	.+38     	; 0x758 <__vector_14+0x76>
- 732:	80 91 a4 01 	lds	r24, 0x01A4	; 0x8001a4 <touch_ready>
+ 732:	80 91 cc 01 	lds	r24, 0x01CC	; 0x8001cc <touch_ready>
  736:	88 23       	and	r24, r24
  738:	79 f0       	breq	.+30     	; 0x758 <__vector_14+0x76>
 			
 			// If electrode is being touched (i.e. less rising edges in one 400 us cycle) and electrode was not being touched in previous oscillator cycle:
 			
 			if (touch_consec >= 5) { // Only toggle switch if a longer oscillation period is detected for several consecutive touch "cycles" (e.g. for 5 * 2 ms)
- 73a:	80 91 f8 01 	lds	r24, 0x01F8	; 0x8001f8 <touch_consec>
+ 73a:	80 91 20 02 	lds	r24, 0x0220	; 0x800220 <touch_consec>
  73e:	85 30       	cpi	r24, 0x05	; 5
  740:	28 f0       	brcs	.+10     	; 0x74c <__vector_14+0x6a>
 				
 				// Flag electrode as currently being touched
 				touch_ready = 0;
- 742:	10 92 a4 01 	sts	0x01A4, r1	; 0x8001a4 <touch_ready>
+ 742:	10 92 cc 01 	sts	0x01CC, r1	; 0x8001cc <touch_ready>
 				
 				// Toggle output switch
 				PINC = (1 << PINC4);
@@ -1214,17 +1214,17 @@ ISR(TIMER0_COMPA_vect) {
 				
 				// Count number of consecutive cycles where a longer period has been detected
 				touch_consec++;
- 74c:	80 91 f8 01 	lds	r24, 0x01F8	; 0x8001f8 <touch_consec>
+ 74c:	80 91 20 02 	lds	r24, 0x0220	; 0x800220 <touch_consec>
  750:	8f 5f       	subi	r24, 0xFF	; 255
- 752:	80 93 f8 01 	sts	0x01F8, r24	; 0x8001f8 <touch_consec>
+ 752:	80 93 20 02 	sts	0x0220, r24	; 0x800220 <touch_consec>
  756:	0c c0       	rjmp	.+24     	; 0x770 <__vector_14+0x8e>
 				
 			}
 			
 			
 			} else if (touch_count > 65) { // real-time: touch_count > 65
- 758:	80 91 f9 01 	lds	r24, 0x01F9	; 0x8001f9 <touch_count>
- 75c:	90 91 fa 01 	lds	r25, 0x01FA	; 0x8001fa <touch_count+0x1>
+ 758:	80 91 21 02 	lds	r24, 0x0221	; 0x800221 <touch_count>
+ 75c:	90 91 22 02 	lds	r25, 0x0222	; 0x800222 <touch_count+0x1>
  760:	82 34       	cpi	r24, 0x42	; 66
  762:	91 05       	cpc	r25, r1
  764:	28 f0       	brcs	.+10     	; 0x770 <__vector_14+0x8e>
@@ -1232,17 +1232,17 @@ ISR(TIMER0_COMPA_vect) {
 			// If electrode is not being touched, flag electrode as current not being touched (prepare to detect new touch)
 			touch_ready = 1;
  766:	81 e0       	ldi	r24, 0x01	; 1
- 768:	80 93 a4 01 	sts	0x01A4, r24	; 0x8001a4 <touch_ready>
+ 768:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <touch_ready>
 			
 			touch_consec = 0;
- 76c:	10 92 f8 01 	sts	0x01F8, r1	; 0x8001f8 <touch_consec>
+ 76c:	10 92 20 02 	sts	0x0220, r1	; 0x800220 <touch_consec>
 			
 		}
 		
 		// Reset counter
 		touch_count = 0;
- 770:	10 92 fa 01 	sts	0x01FA, r1	; 0x8001fa <touch_count+0x1>
- 774:	10 92 f9 01 	sts	0x01F9, r1	; 0x8001f9 <touch_count>
+ 770:	10 92 22 02 	sts	0x0222, r1	; 0x800222 <touch_count+0x1>
+ 774:	10 92 21 02 	sts	0x0221, r1	; 0x800221 <touch_count>
 		
 	}
 	
@@ -1318,11 +1318,11 @@ ISR(INT0_vect) {
 	
 	// Count number of rising edges in oscillator output, in 400 us.
 	touch_count++;
- 7e4:	80 91 f9 01 	lds	r24, 0x01F9	; 0x8001f9 <touch_count>
- 7e8:	90 91 fa 01 	lds	r25, 0x01FA	; 0x8001fa <touch_count+0x1>
+ 7e4:	80 91 21 02 	lds	r24, 0x0221	; 0x800221 <touch_count>
+ 7e8:	90 91 22 02 	lds	r25, 0x0222	; 0x800222 <touch_count+0x1>
  7ec:	01 96       	adiw	r24, 0x01	; 1
- 7ee:	90 93 fa 01 	sts	0x01FA, r25	; 0x8001fa <touch_count+0x1>
- 7f2:	80 93 f9 01 	sts	0x01F9, r24	; 0x8001f9 <touch_count>
+ 7ee:	90 93 22 02 	sts	0x0222, r25	; 0x800222 <touch_count+0x1>
+ 7f2:	80 93 21 02 	sts	0x0221, r24	; 0x800221 <touch_count>
 	
  7f6:	9f 91       	pop	r25
  7f8:	8f 91       	pop	r24
@@ -1612,7 +1612,7 @@ void usart_transmit_voltage(uint16_t number) {
  95a:	df 93       	push	r29
  95c:	ec 01       	movw	r28, r24
 	usart_transmit_array("Voltage:     ");
- 95e:	85 ea       	ldi	r24, 0xA5	; 165
+ 95e:	8d ec       	ldi	r24, 0xCD	; 205
  960:	91 e0       	ldi	r25, 0x01	; 1
  962:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 	usart_transmit_num_3sf(number/10, 0);
@@ -1629,7 +1629,7 @@ void usart_transmit_voltage(uint16_t number) {
  97c:	87 95       	ror	r24
  97e:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
 	usart_transmit_array(" V\n\r");
- 982:	83 eb       	ldi	r24, 0xB3	; 179
+ 982:	8b ed       	ldi	r24, 0xDB	; 219
  984:	91 e0       	ldi	r25, 0x01	; 1
  986:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 }
@@ -1644,7 +1644,7 @@ void usart_transmit_current(int16_t number) {
  992:	df 93       	push	r29
  994:	ec 01       	movw	r28, r24
 	usart_transmit_array("Current:     ");
- 996:	88 eb       	ldi	r24, 0xB8	; 184
+ 996:	80 ee       	ldi	r24, 0xE0	; 224
  998:	91 e0       	ldi	r25, 0x01	; 1
  99a:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 	
@@ -1673,7 +1673,7 @@ void usart_transmit_current(int16_t number) {
  9b8:	ce 01       	movw	r24, r28
  9ba:	0e 94 51 04 	call	0x8a2	; 0x8a2 <usart_transmit_num_3sf>
 	usart_transmit_array(" mA\n\r");
- 9be:	86 ec       	ldi	r24, 0xC6	; 198
+ 9be:	8e ee       	ldi	r24, 0xEE	; 238
  9c0:	91 e0       	ldi	r25, 0x01	; 1
  9c2:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 }
@@ -1689,7 +1689,7 @@ void usart_transmit_temp(int8_t number) {
  9d0:	d8 2f       	mov	r29, r24
 	
 	usart_transmit_array("Temperature:  ");
- 9d2:	8c ec       	ldi	r24, 0xCC	; 204
+ 9d2:	84 ef       	ldi	r24, 0xF4	; 244
  9d4:	91 e0       	ldi	r25, 0x01	; 1
  9d6:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 	
@@ -1735,8 +1735,8 @@ void usart_transmit_temp(int8_t number) {
  a16:	0e 94 2c 04 	call	0x858	; 0x858 <usart_transmit>
 	
 	usart_transmit_array(" C\n\r");
- a1a:	8b ed       	ldi	r24, 0xDB	; 219
- a1c:	91 e0       	ldi	r25, 0x01	; 1
+ a1a:	83 e0       	ldi	r24, 0x03	; 3
+ a1c:	92 e0       	ldi	r25, 0x02	; 2
  a1e:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 }
  a22:	df 91       	pop	r29
@@ -1750,8 +1750,8 @@ void usart_transmit_soc(int16_t number) {
  a2a:	df 93       	push	r29
  a2c:	ec 01       	movw	r28, r24
 	usart_transmit_array("SOC:        ");
- a2e:	80 ee       	ldi	r24, 0xE0	; 224
- a30:	91 e0       	ldi	r25, 0x01	; 1
+ a2e:	88 e0       	ldi	r24, 0x08	; 8
+ a30:	92 e0       	ldi	r25, 0x02	; 2
  a32:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 	
 	if (number == 1000) {
@@ -1779,8 +1779,8 @@ void usart_transmit_soc(int16_t number) {
 	}
 	
 	usart_transmit_array(" \%\n\r");
- a5e:	8d ee       	ldi	r24, 0xED	; 237
- a60:	91 e0       	ldi	r25, 0x01	; 1
+ a5e:	85 e1       	ldi	r24, 0x15	; 21
+ a60:	92 e0       	ldi	r25, 0x02	; 2
  a62:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 }
  a66:	df 91       	pop	r29
@@ -1810,8 +1810,8 @@ void usart_transmit_diagnostics(uint16_t voltage, int16_t current, int8_t temp, 
  a8c:	ce 01       	movw	r24, r28
  a8e:	0e 94 14 05 	call	0xa28	; 0xa28 <usart_transmit_soc>
 	usart_transmit_array("\n\r");
- a92:	8f ee       	ldi	r24, 0xEF	; 239
- a94:	91 e0       	ldi	r25, 0x01	; 1
+ a92:	87 e1       	ldi	r24, 0x17	; 23
+ a94:	92 e0       	ldi	r25, 0x02	; 2
  a96:	0e 94 33 04 	call	0x866	; 0x866 <usart_transmit_array>
 }
  a9a:	df 91       	pop	r29
