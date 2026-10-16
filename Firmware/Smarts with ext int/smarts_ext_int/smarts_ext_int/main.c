@@ -26,11 +26,11 @@ volatile float capacity = 0; // % * 10
 
 // Status variables for touch detection
 volatile uint8_t touch_flag;
-volatile uint8_t osc_startup = 0; // set to 1 when first rising edge is detected.
-volatile uint8_t touch_curr = 0;
 volatile uint8_t touch_ready = 1; // equal 1 if electrode was not being touched in previous osc cycle
-volatile uint16_t adc_prev = 0;
 volatile uint16_t touch_count = 0;
+volatile uint8_t touch_consec = 0;
+
+volatile uint8_t touch_cycles = 0; // debug (for Proteus simulation only)
 
 volatile uint8_t no_load = 0;
 volatile uint8_t soc_startup = 0;
@@ -55,11 +55,12 @@ int main(void)
 	DDRB |= (1 << DDB0);
 	DDRC &= ~(1 << DDC0) & ~(1 << DDC1) & ~(1 << DDC2) & ~(1 << DDC3);
 	DDRC |= (1 << DDC4) | (1 << DDC5);
+	DDRD &= ~(1 << DDD2);
 	DDRD |= (1 << DDD6) | (1 << DDD7);
 	
 	// Enable debug output pins
 	DDRB |= (1 << DDB4) | (1 << DDB5);
-	DDRD |= (1 << DDD2) | (1 << DDD3);
+	DDRD |= (1 << DDD3);
 	
 	// TODO: update I/O registers to match new PCB layout
 	
@@ -150,7 +151,7 @@ int main(void)
 				// Convert ADC sample to current and store result
 				current = vin_to_isc(adc_to_vin(count));
 				
-				if ((current < 3) && (current > -3)) {
+				if ((current < 8) && (current > -8)) {
 					// If no load is connected, let SOC be calculated from upcoming voltage sample
 					no_load = 1;
 					} else {
@@ -192,6 +193,19 @@ ISR(TIMER0_COMPA_vect) {
 		// Enable interrupts on INT0 pin
 		EIMSK |= (1 << INT0);
 		
+		// Stop oscillator measurements at next 400 us interrupt
+		touch_flag = 0; // NOTE: uncomment this for real time testing
+		
+		// NOTE: comment this block for real time testing
+		/*
+		touch_cycles++;
+		
+		if (touch_cycles >= 100) { // 40 ms touch sensing cycle instead of 400 us.
+			touch_flag = 0;
+			touch_cycles = 0;
+		}
+		*/
+		
 	} else { // if oscillator measurements are to be stopped
 		
 		// Disable interrupts on INT0 pin
@@ -206,12 +220,39 @@ ISR(TIMER0_COMPA_vect) {
 		// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 		TIFR0 = (1 << OCF0A);
 		
-		// TODO: any calculations and toggle the output here in the code.
+		if ((touch_count < 40) && touch_ready) { // real-time: touch_count < 40
+			
+			// If electrode is being touched (i.e. less rising edges in one 400 us cycle) and electrode was not being touched in previous oscillator cycle:
+			
+			if (touch_consec >= 5) { // Only toggle switch if a longer oscillation period is detected for several consecutive touch "cycles" (e.g. for 5 * 2 ms)
+				
+				// Flag electrode as currently being touched
+				touch_ready = 0;
+				
+				// Toggle output switch
+				PINC = (1 << PINC4);
+				
+			} else {
+				
+				// Count number of consecutive cycles where a longer period has been detected
+				touch_consec++;
+				
+			}
+			
+			
+			} else if (touch_count > 65) { // real-time: touch_count > 65
+			
+			// If electrode is not being touched, flag electrode as current not being touched (prepare to detect new touch)
+			touch_ready = 1;
+			
+			touch_consec = 0;
+			
+		}
+		
+		// Reset counter
+		touch_count = 0;
 		
 	}
-	
-	// Stop oscillator measurements at next 400 us interrupt
-	touch_flag = 0;
 	
 }
 

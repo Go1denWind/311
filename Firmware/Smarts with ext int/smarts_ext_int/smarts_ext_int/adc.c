@@ -12,6 +12,7 @@
 #include <avr/interrupt.h>
 
 #define T_SAMPLE_CURRENT 0.002f // s
+#define T_SAMPLE_CURRENT_LONG 0.040f // s
 
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
@@ -19,7 +20,9 @@
 #define I_SENS_GAIN 6.8f // trans-resistance gain, mV/mA
 #define I_SENS_REF 2500.0f // mV
 
-volatile uint16_t temp_lookup[81] = {4314, 4283, 4249, 4212, 4170, 
+volatile uint16_t temp_lookup[101] = {4599, 4579, 4556, 4531, 4503,
+									4471, 4446, 4418, 4387, 4353,
+									4314, 4283, 4249, 4212, 4170, 
 									4124, 4087, 4047, 4003, 3955, 
 									3903, 3860, 3815, 3765, 3712, 
 									3653, 3606, 3556, 3501, 3443, 
@@ -35,8 +38,10 @@ volatile uint16_t temp_lookup[81] = {4314, 4283, 4249, 4212, 4170,
 									1071, 1040, 1009, 978, 946, 
 									914, 888, 861, 834, 807, 
 									779, 757, 734, 711, 687, 
-									664};
-volatile uint8_t temp_lookup_size = 80;
+									664, 644, 625, 605, 586,
+									566, 549, 533, 56, 499,
+									482};
+volatile uint8_t temp_lookup_size = 100;
 
 volatile uint8_t adc_status = 3;
 // 0: sample temperature next
@@ -90,10 +95,10 @@ ISR(ADC_vect) {
 		adc_status = 0;
 	}
 	
-	// Stop after 2400 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
+	// Stop after 1440 samples (960 ms) and start UART, sampling will resume at the next 1 second interrupt
 	adc_samples++;
-	// if (adc_samples >= 2400) {
-	if (adc_samples >= 1200) { // debug
+	if (adc_samples >= 1440) {
+	// if (adc_samples >= 60) { // debug
 		ADCSRA &= ~(1 << ADATE);
 		usart_flag = 1;
 	}
@@ -140,7 +145,7 @@ int8_t vin_to_tsc(uint16_t vin) {
 	
 	uint8_t no_of_guesses = 0;
 	
-	uint8_t guess = 40;
+	uint8_t guess = 50;
 	
 	uint8_t min = 0;
 	uint8_t max = temp_lookup_size;
@@ -174,7 +179,7 @@ int8_t vin_to_tsc(uint16_t vin) {
 		}
 	}
 	
-	return (int8_t)guess - 10;
+	return (int8_t)guess - 20;
 }
 
 float vsc_to_soc(uint16_t vsc) {
@@ -191,7 +196,14 @@ float vsc_to_soc(uint16_t vsc) {
 }
 
 float isc_to_soc(int16_t isc, float capacity) {
-	float soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 25.5f; // TODO: change back to integer calculations to make this faster
+	
+	float soc;
+	
+	if (adc_samples < 6) {
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 127.5f;
+	} else {
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 127.5f; // TODO: change back to integer calculations to make this faster
+	}
 	
 	// Bound capacity between 0% and 100%
 	if (soc > 1000) {
