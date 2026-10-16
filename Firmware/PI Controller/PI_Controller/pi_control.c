@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-#define VOLTAGE_KI 300
-#define VOLTAGE_KP 1
+#define VOLTAGE_KI 60.0f
+#define VOLTAGE_KP 0.1f
 #define T_SAMPLE (1.0f/10000.0f)
 #define PI_LIMIT 48
 #define OCR 159
