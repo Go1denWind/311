@@ -1045,14 +1045,14 @@ int main(void)
  658:	90 93 28 02 	sts	0x0228, r25	; 0x800228 <current+0x1>
  65c:	80 93 27 02 	sts	0x0227, r24	; 0x800227 <current>
 				
-				if ((current < 3) && (current > -3)) {
+				if ((current < 8) && (current > -8)) {
  660:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <current>
  664:	90 91 28 02 	lds	r25, 0x0228	; 0x800228 <current+0x1>
- 668:	03 97       	sbiw	r24, 0x03	; 3
+ 668:	08 97       	sbiw	r24, 0x08	; 8
  66a:	5c f4       	brge	.+22     	; 0x682 <main+0x270>
  66c:	80 91 27 02 	lds	r24, 0x0227	; 0x800227 <current>
  670:	90 91 28 02 	lds	r25, 0x0228	; 0x800228 <current+0x1>
- 674:	8e 3f       	cpi	r24, 0xFE	; 254
+ 674:	89 3f       	cpi	r24, 0xF9	; 249
  676:	9f 4f       	sbci	r25, 0xFF	; 255
  678:	24 f0       	brlt	.+8      	; 0x682 <main+0x270>
 					// If no load is connected, let SOC be calculated from upcoming voltage sample
