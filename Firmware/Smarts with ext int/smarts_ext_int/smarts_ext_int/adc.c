@@ -17,8 +17,12 @@
 #define V_SENS_GAIN 3.48485f // voltage gain, mV/mV
 #define V_SENS_OFFSET 8471.07f // mV
 
-#define I_SENS_GAIN 6.8f // trans-resistance gain, mV/mA
+#define I_SENS_GAIN 1.0f // trans-resistance gain, mV/mA
 #define I_SENS_REF 2500.0f // mV
+
+#define V_EMPTY 2650.0f // mV
+#define V_FULL 3500.0f // mV
+#define CAPACITANCE 600.0f // F
 
 volatile uint16_t temp_lookup[101] = {4599, 4579, 4556, 4531, 4503,
 									4471, 4446, 4418, 4387, 4353,
@@ -183,7 +187,7 @@ int8_t vin_to_tsc(uint16_t vin) {
 }
 
 float vsc_to_soc(uint16_t vsc) {
-	float soc = ((int16_t)vsc - 2650) / 850.0 * 1000; // % * 10
+	float soc = ((int16_t)vsc - V_EMPTY) / (V_FULL - V_EMPTY) * 1000; // % * 10
 	
 	// Bound capacity between 0% and 100%
 	if (soc > 1000) {
@@ -200,9 +204,9 @@ float isc_to_soc(int16_t isc, float capacity) {
 	float soc;
 	
 	if (adc_samples < 6) {
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / 127.5f;
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT_LONG) / ((V_FULL - V_EMPTY) * CAPACITANCE / 1000);
 	} else {
-		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / 127.5f; // TODO: change back to integer calculations to make this faster
+		soc = capacity + ((float)isc * T_SAMPLE_CURRENT) / ((V_FULL - V_EMPTY) * CAPACITANCE / 1000); // TODO: change back to integer calculations to make this faster
 	}
 	
 	// Bound capacity between 0% and 100%
