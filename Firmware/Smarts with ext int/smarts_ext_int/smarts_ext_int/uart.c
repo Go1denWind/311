@@ -86,6 +86,14 @@ void usart_transmit_current(int16_t number) {
 		transmit_num = number;
 	}
 	
+	uint8_t thousands = transmit_num / 1000;
+	
+	if (thousands != 0) {
+		usart_transmit(thousands + '0');
+	}
+	
+	transmit_num = transmit_num % 1000;
+	
 	usart_transmit_num_3sf(transmit_num, 3);
 	usart_transmit_array(" mA\n\r");
 }
