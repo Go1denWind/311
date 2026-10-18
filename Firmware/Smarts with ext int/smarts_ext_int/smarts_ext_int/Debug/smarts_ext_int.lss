@@ -281,7 +281,7 @@ uint16_t vin_to_vsc(uint16_t vin) {
 int16_t vin_to_isc(uint16_t vin) {
 	return ((int16_t)vin - (int16_t)I_SENS_REF) / I_SENS_GAIN; // mA
 }
- 1de:	84 5c       	subi	r24, 0xC4	; 196
+ 1de:	82 59       	subi	r24, 0x92	; 146
  1e0:	99 40       	sbci	r25, 0x09	; 9
  1e2:	08 95       	ret
 

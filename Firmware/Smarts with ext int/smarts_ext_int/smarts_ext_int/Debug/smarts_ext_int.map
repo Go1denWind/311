@@ -846,17 +846,17 @@ END GROUP
 .debug_str      0x00000000      0x710
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x2c3 adc.o
-                                0x31d (size before relaxing)
- .debug_str     0x000004cb       0x83 ext_int.o
+ .debug_str     0x00000208      0x29d adc.o
+                                0x2f7 (size before relaxing)
+ .debug_str     0x000004a5       0x1c ext_int.o
                                 0x19d (size before relaxing)
- .debug_str     0x0000054e       0xcf main.o
+ .debug_str     0x000004c1       0xcf main.o
                                 0x34a (size before relaxing)
- .debug_str     0x0000061d        0xe timer0.o
+ .debug_str     0x00000590        0xe timer0.o
                                 0x19b (size before relaxing)
- .debug_str     0x0000062b        0xe timer1.o
+ .debug_str     0x0000059e        0xe timer1.o
                                 0x1a4 (size before relaxing)
- .debug_str     0x00000639       0xd7 uart.o
+ .debug_str     0x000005ac      0x164 uart.o
                                 0x2df (size before relaxing)
 
 .debug_loc      0x00000000      0xb03
