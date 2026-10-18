@@ -220,7 +220,7 @@ ISR(TIMER0_COMPA_vect) {
 		// Manually clear interrupt flag bit so next rising edge of trigger source can be detected
 		TIFR0 = (1 << OCF0A);
 		
-		if ((touch_count < 40) && touch_ready) { // real-time: touch_count < 40
+		if ((touch_count < 8) && touch_ready) { // real-time: touch_count < 8
 			
 			// If electrode is being touched (i.e. less rising edges in one 400 us cycle) and electrode was not being touched in previous oscillator cycle:
 			
@@ -240,7 +240,7 @@ ISR(TIMER0_COMPA_vect) {
 			}
 			
 			
-			} else if (touch_count > 65) { // real-time: touch_count > 65
+			} else if (touch_count > 15) { // real-time: touch_count > 15
 			
 			// If electrode is not being touched, flag electrode as current not being touched (prepare to detect new touch)
 			touch_ready = 1;
