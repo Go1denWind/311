@@ -18,7 +18,7 @@
 #define V_SENS_OFFSET 8471.07f // mV
 
 #define I_SENS_GAIN 1.0f // trans-resistance gain, mV/mA
-#define I_SENS_REF 2450.0f // mV
+#define I_SENS_REF 2500.0f // mV
 
 #define V_EMPTY 2650.0f // mV
 #define V_FULL 3500.0f // mV

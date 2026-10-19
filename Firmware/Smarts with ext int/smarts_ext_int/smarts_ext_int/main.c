@@ -151,7 +151,7 @@ int main(void)
 				// Convert ADC sample to current and store result
 				current = vin_to_isc(adc_to_vin(count));
 				
-				if ((current < 8) && (current > -8)) {
+				if ((current < 80) && (current > -80)) {
 					// If no load is connected, let SOC be calculated from upcoming voltage sample
 					no_load = 1;
 					} else {
