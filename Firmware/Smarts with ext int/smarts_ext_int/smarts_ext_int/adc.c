@@ -123,11 +123,11 @@ uint8_t temperature_next() {
 	return (adc_status == 0);
 }
 
-uint8_t voltage_next() {
+uint8_t current_next() {
 	return (adc_status == 1);
 }
 
-uint8_t current_next() {
+uint8_t voltage_next() {
 	return (adc_status == 2);
 }
 

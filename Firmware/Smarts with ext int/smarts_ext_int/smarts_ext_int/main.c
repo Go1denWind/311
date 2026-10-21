@@ -110,31 +110,6 @@ int main(void)
 				// Convert ADC sample to temperature and store result
 				temperature = vin_to_tsc(adc_to_vin(count));
 				
-				// Change ADC channel to measure voltage
-				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
-				ADMUX |= (1 << MUX1);
-				
-			} else if (voltage_next()) { // Proteus: 145 us if calculating SOC
-				
-				// Send signal to isolate supercap if temperature outside safe range
-				if ((count < 154) || (count > 870)) {
-					PORTC |= (1 << PORTC5);
-					} else {
-					PORTC &= ~(1 << PORTC5);
-				}
-				
-				// Convert ADC sample to voltage and store result
-				voltage = vin_to_vsc(adc_to_vin(count));
-				
-				// If MCU is starting up or no load is connected, calculate SOC from voltage
-				if ((soc_startup == 0) || (no_load == 1)) {
-					capacity = vsc_to_soc(voltage);
-					soc_startup = 1;
-				}
-				
-				// TODO: what happens if load is connected in between previous current scan and this voltage scan?
-				// reading current then voltage within the cycle is better, but ponder further possible improvements?
-				
 				// Change ADC channel to measure current
 				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 				ADMUX |= (1 << MUX1) | (1 << MUX0);
@@ -158,12 +133,35 @@ int main(void)
 					// Otherwise, calculate new SOC from current sample (Coulumb counting)
 					no_load = 0;
 					capacity = isc_to_soc(current, capacity);
-					
-					// TODO: account for extra-long pause between last sample in one ADC cycle and first sample in next ADC cycle.
 				}
 				
+				// Change ADC channel to measure voltage
+				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX0);
+				ADMUX |= (1 << MUX1);
+				
+			} else if (voltage_next()) { // Proteus: 145 us if calculating SOC
+				
+				// Send signal to isolate supercap if temperature outside safe range
+				if ((count < 154) || (count > 870)) {
+					PORTC |= (1 << PORTC5);
+					} else {
+					PORTC &= ~(1 << PORTC5);
+				}
+				
+				// Convert ADC sample to voltage and store result
+				voltage = vin_to_vsc(adc_to_vin(count));
+				
+				// If MCU is starting up or no load is connected, calculate SOC from voltage
+				if ((soc_startup == 0) || (no_load == 1)) {
+					capacity = vsc_to_soc(voltage);
+					soc_startup = 1;
+				}
+				
+				// TODO: what happens if load is connected in between previous current scan and this voltage scan?
+				// reading current then voltage within the cycle is better, but ponder further possible improvements?
+				
 				// Change ADC channel to measure temperature
-				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1);
+				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
 				ADMUX |= (1 << MUX0);
 				
 				// Temporarily disable ADC interrupts (clear trigger source)
@@ -177,11 +175,8 @@ int main(void)
 				
 			}
 			
-			// NOTE: maybe have touch as its own stage within a cycle like before, but use external interrupts instead of ADC?
-			
 			// Don't do calculations until next sample is received
-			dsp_stop(); 
-			
+			dsp_stop();
 		}
     }
 }
