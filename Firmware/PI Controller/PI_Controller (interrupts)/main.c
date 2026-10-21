@@ -41,7 +41,7 @@ int main(void)
 			uint16_t ADC_buffer = ADC_VALUE;
 			adc_ready = 0; //Ready to sample again
 			sei();
-			OCR0B = pi_mapped(ADC_buffer, V_REF); //Map error as a PWM
+			OCR0B = 512; //Map error as a PWM
 			if (tx_ready == 1){
 				voltage_to_digits(ADC_buffer); //convert ADC value to mv
 				sprintf(tx_buffer, "Voltage = %d.%d%d%d V\r\n", digits[0], digits[1], digits[2], digits[3]);
