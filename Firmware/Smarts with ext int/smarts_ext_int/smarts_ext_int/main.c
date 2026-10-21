@@ -11,6 +11,8 @@
 
 #define F_CPU 16000000UL
 
+#define DIFF_THRES 50 // mV
+
 #include "uart.h"
 #include "timer0.h"
 #include "timer1.h"
@@ -20,6 +22,9 @@
 volatile int8_t temperature = 0;
 volatile uint16_t voltage = 0;
 volatile int16_t current = 0;
+
+volatile uint16_t voltage_prev = 0;
+volatile int16_t current_prev = 0;
 
 volatile float capacity = 0; // % * 10
 // TODO: calculate capacity in terms of SOE instead of SOC?
@@ -151,14 +156,22 @@ int main(void)
 				// Convert ADC sample to voltage and store result
 				voltage = vin_to_vsc(adc_to_vin(count));
 				
+				// If supercapacitor voltage has changed suddenly, load has been connected. Calculate SOC from previous current sample instead of this voltage sample.
+				int16_t voltage_diff = (int16_t)voltage - voltage_prev;
+				
+				if ((voltage_diff > DIFF_THRES) || (voltage_diff < -DIFF_THRES)) {
+					no_load = 0;
+					capacity = isc_to_soc(current, capacity);
+				}
+				
 				// If MCU is starting up or no load is connected, calculate SOC from voltage
-				if ((soc_startup == 0) || (no_load == 1)) {
+				else if ((soc_startup == 0) || (no_load == 1)) {
 					capacity = vsc_to_soc(voltage);
 					soc_startup = 1;
 				}
 				
-				// TODO: what happens if load is connected in between previous current scan and this voltage scan?
-				// reading current then voltage within the cycle is better, but ponder further possible improvements?
+				// Store present voltage value to compare with next voltage sample
+				voltage_prev = voltage;
 				
 				// Change ADC channel to measure temperature
 				ADMUX &= ~(1 << MUX3) & ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);
