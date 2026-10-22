@@ -1,11 +1,11 @@
 %% OVP_PWM_analysis.m
 % Boost converter bench captures: OVP test + PWM chain (PWM -> RC filter, duty out)
 % Figures produced:
-%   1  OVP test (full capture + zoom on the rising edge with 10-90 % rise-time cursors)
-%   2  PWM       - ATmega generated PWM
-%   3  PWM_FILT  - PWM after the RC filter
-%   4  DUTY      - gate drive into the boost MOSFET
-%   5  Overlay of PWM / PWM_FILT / DUTY on a common time axis
+%   1      OVP test (full capture + zoom on the rising edge with 10-90 % rise-time cursors)
+%   2-4    PWM / PWM_FILT / DUTY at the first input voltage in 'sets'  (3.5 V)
+%   5-7    PWM / PWM_FILT / DUTY at the second input voltage in 'sets' (2.5 V)
+%   8      Comparison: PWM / PWM_FILT / DUTY with every input voltage on the same axes
+%          (one extra trio of figures is made for each entry added to 'sets')
 clear; clc; close all;
 
 %% ---- Settings (edit these) ----
@@ -13,18 +13,17 @@ dataDir  = 'C:\Users\tytom\Documents\GitHub\311\Oscilloscope\Output Generator\Cl
 outDir   = dataDir;      % where the PNG figures are saved
 
 ovpFile  = fullfile(dataDir, 'OVP.CSV');
-pwmFile  = fullfile(dataDir, 'PWM2.CSV');
-filtFile = fullfile(dataDir, 'PWM_FILT.CSV');
-dutyFile = fullfile(dataDir, 'DUTY2.CSV');
-
-Vin      = 3.5;      % input voltage [V]   (PWM/duty captures)
+% PWM-chain captures: one entry per input voltage (same load for all)
+sets = struct( ...
+    'Vin',  {3.5, 2.5}, ...
+    'pwm',  {fullfile(dataDir, 'PWM2.CSV'),     fullfile(dataDir, 'PWM2V5.CSV')}, ...
+    'filt', {fullfile(dataDir, 'PWM_FILT.CSV'), fullfile(dataDir, 'PWMF2V5.CSV')}, ...
+    'duty', {fullfile(dataDir, 'DUTY2.CSV'),    fullfile(dataDir, 'DUTY2V5.CSV')});
 Rload    = 10;       % load resistance [ohm]
 ovpSmoothN    = 11;      % smoothing window for the OVP trace (samples)
 ovpZoomMargin = 1.0;     % OVP zoom = rising edge +/- (this x the rise time) either side
 pwmZoom  = [-10 20];     % PWM zoom window [us]  (about 3 cycles at 100 kHz)
 saveFigs = true;         % save every figure as a PNG
-
-condStr = sprintf('V_{in} = %.1f V, %g \\Omega load', Vin, Rload);
 
 %% =====================================================================
 %  1) OVP TEST   (time axis shifted so the capture starts at 0 ns)
@@ -91,75 +90,112 @@ styleAx([ax1 ax2]);
 lgd = legend(ax1); lgd.TextColor = 'k'; lgd.Color = 'w'; lgd.EdgeColor = 'k';
 
 %% =====================================================================
-%  2) PWM CHAIN  (PWM, PWM_FILT, DUTY)
+%  2) PWM CHAIN  (PWM, PWM_FILT, DUTY) at each input voltage
 %  =====================================================================
-[tP, vP] = loadScope(pwmFile);
-[tF, vF] = loadScope(filtFile);
-[tD, vD] = loadScope(dutyFile);
-
-mP = pwmStats(tP, vP);
-mD = pwmStats(tD, vD);
-
-sF       = sort(vF); nF = numel(sF);
-VF_mean  = mean(vF);
-VF_hi    = sF(round(0.99*nF));                                % robust upper ripple bound
-VF_lo    = sF(max(1, round(0.01*nF)));                        % robust lower ripple bound
-VF_pp    = VF_hi - VF_lo;                                     % ripple p-p
-
-fprintf('\n===== PWM chain  (%s) =====\n', strrep(condStr, '\', ''));
-fprintf('PWM      : f = %.2f kHz, duty(high) = %.1f %%, high = %.2f V, low = %.2f V, mean = %.3f V\n', ...
-        mP.freq/1e3, mP.duty*100, mP.vhigh, mP.vlow, mean(vP));
-fprintf('PWM_FILT : mean = %.3f V, ripple p-p = %.0f mV\n', VF_mean, VF_pp*1e3);
-fprintf('DUTY     : f = %.2f kHz, duty = %.1f %%, high = %.2f V, low = %.2f V\n', ...
-        mD.freq/1e3, mD.duty*100, mD.vhigh, mD.vlow);
-fprintf('Check    : mean(PWM) = %.3f V vs PWM_FILT mean = %.3f V\n', mean(vP), VF_mean);
-% DUTY is the gate drive straight into the boost MOSFET, so its high-time is the on-time duty D
-Don = mD.duty;
-fprintf('Gate duty D = %.1f %%  ->  ideal boost Vout = Vin/(1-D) = %.2f V\n', ...
-        Don*100, Vin/(1-Don));
-
 colPWM  = [0.00 0.35 0.75];
 colFilt = [0.85 0.33 0.10];
 colDuty = [0.10 0.55 0.20];
 
-% Figure 2: PWM
-plotSignal(2, tP, vP, ['PWM (ATmega PWM) - ' condStr], colPWM, pwmZoom, ...
-    { mP.vhigh, sprintf('High %.2f V', mP.vhigh), ':k'; ...
-      mP.vlow,  sprintf('Low %.2f V',  mP.vlow),  ':k' }, ...
-    dutyMarker(mP, pwmZoom, sprintf('Duty = %.1f %%', mP.duty*100)), []);
+nSets = numel(sets);
+for k = 1:nSets
+    Vin     = sets(k).Vin;
+    condStr = sprintf('V_{in} = %.1f V, %g \\Omega load', Vin, Rload);
+    fig0    = 2 + 3*(k-1);                     % first figure number for this input voltage
 
-% Figure 3: PWM_FILT  (horizontal cursors: mean + ripple bounds)
-plotSignal(3, tF, vF, ['PWM after RC filter - ' condStr], colFilt, pwmZoom, ...
-    { VF_mean, sprintf('Mean = %.3f V', VF_mean), '-k'; ...
-      VF_hi,   sprintf('Max = %.3f V',  VF_hi),   '--k'; ...
-      VF_lo,   sprintf('Min = %.3f V',  VF_lo),   '--k' }, ...
-    [], struct('lo', VF_lo, 'hi', VF_hi, ...
-               'label', sprintf('Ripple = %.0f mV p-p', VF_pp*1e3)));
+    [tP, vP] = loadScope(sets(k).pwm);
+    [tF, vF] = loadScope(sets(k).filt);
+    [tD, vD] = loadScope(sets(k).duty);
 
-% Figure 4: DUTY
-plotSignal(4, tD, vD, ['DUTY (MOSFET gate drive) - ' condStr], colDuty, pwmZoom, ...
-    { mD.vhigh, sprintf('High %.2f V', mD.vhigh), ':k'; ...
-      mD.vlow,  sprintf('Low %.2f V',  mD.vlow),  ':k' }, ...
-    dutyMarker(mD, pwmZoom, sprintf('Duty = %.1f %%', mD.duty*100)), []);
+    mP = pwmStats(tP, vP);
+    mD = pwmStats(tD, vD);
 
-% Figure 5: overlay (stacked, shared time axis)
-figure(5); set(gcf, 'Color', 'w', 'Position', [100 100 1000 800]);
-a1 = subplot(3,1,1); plot(tP*1e6, vP, 'Color', colPWM,  'LineWidth', 1.2);
-ylabel('PWM (V)');     title(['Signal Chain Comparison - ' condStr]);
-a2 = subplot(3,1,2); plot(tF*1e6, vF, 'Color', colFilt, 'LineWidth', 1.2);
-ylabel('PWM filtered (V)');
-a3 = subplot(3,1,3); plot(tD*1e6, vD, 'Color', colDuty, 'LineWidth', 1.2);
-ylabel('DUTY (V)');    xlabel('Time (\mus)');
-for a = [a1 a2 a3]
-    grid(a, 'on'); box(a, 'on'); xlim(a, pwmZoom);
+    sF       = sort(vF); nF = numel(sF);
+    VF_mean  = mean(vF);
+    VF_hi    = sF(round(0.99*nF));                            % robust upper ripple bound
+    VF_lo    = sF(max(1, round(0.01*nF)));                    % robust lower ripple bound
+    VF_pp    = VF_hi - VF_lo;                                 % ripple p-p
+
+    fprintf('\n===== PWM chain  (Vin = %.1f V, %g ohm load) =====\n', Vin, Rload);
+    fprintf('PWM      : f = %.2f kHz, duty(high) = %.1f %%, high = %.2f V, low = %.2f V, mean = %.3f V\n', ...
+            mP.freq/1e3, mP.duty*100, mP.vhigh, mP.vlow, mean(vP));
+    fprintf('PWM_FILT : mean = %.3f V, ripple p-p = %.0f mV\n', VF_mean, VF_pp*1e3);
+    fprintf('DUTY     : f = %.2f kHz, duty = %.1f %%, high = %.2f V, low = %.2f V\n', ...
+            mD.freq/1e3, mD.duty*100, mD.vhigh, mD.vlow);
+    fprintf('Check    : mean(PWM) = %.3f V vs PWM_FILT mean = %.3f V\n', mean(vP), VF_mean);
+    % DUTY is the gate drive straight into the boost MOSFET, so its high-time is the on-time duty D
+    Don = mD.duty;
+    fprintf('Gate duty D = %.1f %%  ->  ideal boost Vout = Vin/(1-D) = %.2f V\n', ...
+            Don*100, Vin/(1-Don));
+
+    % PWM
+    plotSignal(fig0, tP, vP, ['PWM (ATmega PWM) - ' condStr], colPWM, pwmZoom, ...
+        { mP.vhigh, sprintf('High %.2f V', mP.vhigh), ':k'; ...
+          mP.vlow,  sprintf('Low %.2f V',  mP.vlow),  ':k' }, ...
+        dutyMarker(mP, pwmZoom, sprintf('Duty = %.1f %%', mP.duty*100)), []);
+
+    % PWM_FILT  (horizontal cursors: mean + ripple bounds)
+    plotSignal(fig0+1, tF, vF, ['PWM after RC filter - ' condStr], colFilt, pwmZoom, ...
+        { VF_mean, sprintf('Mean = %.3f V', VF_mean), '-k'; ...
+          VF_hi,   sprintf('Max = %.3f V',  VF_hi),   '--k'; ...
+          VF_lo,   sprintf('Min = %.3f V',  VF_lo),   '--k' }, ...
+        [], struct('lo', VF_lo, 'hi', VF_hi, ...
+                   'label', sprintf('Ripple = %.0f mV p-p', VF_pp*1e3)));
+
+    % DUTY
+    plotSignal(fig0+2, tD, vD, ['DUTY (MOSFET gate drive) - ' condStr], colDuty, pwmZoom, ...
+        { mD.vhigh, sprintf('High %.2f V', mD.vhigh), ':k'; ...
+          mD.vlow,  sprintf('Low %.2f V',  mD.vlow),  ':k' }, ...
+        dutyMarker(mD, pwmZoom, sprintf('Duty = %.1f %%', mD.duty*100)), []);
+
+    % keep the waveforms for the comparison figure
+    S(k).Vin = Vin;
+    S(k).tP = tP;  S(k).vP = vP;
+    S(k).tF = tF;  S(k).vF = vF;
+    S(k).tD = tD;  S(k).vD = vD;
 end
-linkaxes([a1 a2 a3], 'x');
-styleAx([a1 a2 a3]);
+
+%% =====================================================================
+%  3) COMPARISON  - every input voltage on the same axes
+%  =====================================================================
+figOv  = 2 + 3*nSets;
+setCol = [0.00 0.25 0.75;     % 1st input voltage  (blue)
+          0.85 0.15 0.10;     % 2nd input voltage  (red)
+          0.10 0.55 0.20;     % 3rd (if you add more sets)
+          0.50 0.20 0.65];
+sigKey  = {'P', 'F', 'D'};
+sigName = {'PWM (V)', 'PWM filtered (V)', 'DUTY (V)'};
+
+figure(figOv); set(gcf, 'Color', 'w', 'Position', [100 100 1000 800]);
+axOv = gobjects(1, 3);
+for r = 1:3
+    axOv(r) = subplot(3,1,r); hold on; grid on; box on;
+    for k = 1:nSets
+        plot(S(k).(['t' sigKey{r}]) * 1e6, S(k).(['v' sigKey{r}]), ...
+             'Color', setCol(k,:), 'LineWidth', 1.2, ...
+             'DisplayName', sprintf('V_{in} = %.1f V', S(k).Vin));
+    end
+    ylabel(sigName{r});
+    xlim(pwmZoom);
+end
+xlabel(axOv(3), 'Time (\mus)');
+vinList = strjoin(compose('%.1f V', [S.Vin]), ' vs ');
+title(axOv(1), sprintf('Signal Chain Comparison - %s V_{in}, %g \\Omega load', vinList, Rload));
+linkaxes(axOv, 'x');
+styleAx(axOv);
+for r = 1:3
+    lg = legend(axOv(r), 'Location', 'best');
+    lg.TextColor = 'k'; lg.Color = 'w'; lg.EdgeColor = 'k';
+end
 
 %% ---- Save figures ----
 if saveFigs
-    names = {'OVP_plot', 'PWM_plot', 'PWM_FILT_plot', 'DUTY_plot', 'signal_chain_plot'};
-    for k = 1:5
+    names = {'OVP_plot'};
+    for k = 1:nSets
+        tag   = strrep(sprintf('%gV', sets(k).Vin), '.', 'p');     % e.g. 3p5V
+        names = [names, {['PWM_plot_' tag], ['PWM_FILT_plot_' tag], ['DUTY_plot_' tag]}]; %#ok<AGROW>
+    end
+    names{end+1} = 'signal_chain_comparison';
+    for k = 1:numel(names)
         exportgraphics(figure(k), fullfile(outDir, [names{k} '.png']), 'Resolution', 200);
     end
 end
