@@ -1,7 +1,7 @@
 %% OVP_PWM_analysis.m
 % Boost converter bench captures: OVP test + PWM chain (PWM -> RC filter, duty out)
 % Figures produced:
-%   1  OVP test (full capture + zoom on the event)
+%   1  OVP test (full capture + zoom on the rising edge with 10-90 % rise-time cursors)
 %   2  PWM       - ATmega generated PWM
 %   3  PWM_FILT  - PWM after the RC filter
 %   4  DUTY      - gate drive into the boost MOSFET
@@ -9,82 +9,82 @@
 clear; clc; close all;
 
 %% ---- Settings (edit these) ----
-dataDir  = 'C:\Users\tytom\OneDrive\Documents\GitHub\311\Oscilloscope\Output Generator\Closed Loop Testing';
+dataDir  = 'C:\Users\tytom\Documents\GitHub\311\Oscilloscope\Output Generator\Closed Loop Testing';
 outDir   = dataDir;      % where the PNG figures are saved
 
-ovpFile  = fullfile(dataDir, 'OVP_5V5.CSV');
+ovpFile  = fullfile(dataDir, 'OVP.CSV');
 pwmFile  = fullfile(dataDir, 'PWM2.CSV');
 filtFile = fullfile(dataDir, 'PWM_FILT.CSV');
 dutyFile = fullfile(dataDir, 'DUTY2.CSV');
 
 Vin      = 3.5;      % input voltage [V]   (PWM/duty captures)
 Rload    = 10;       % load resistance [ohm]
-Vthresh  = 5.5;      % OVP threshold line [V]
-smoothN  = 101;      % smoothing window for OVP trace (samples)
-ovpZoom  = [-0.2 1.0];   % OVP zoom window [ms]
+ovpSmoothN    = 11;      % smoothing window for the OVP trace (samples)
+ovpZoomMargin = 1.0;     % OVP zoom = rising edge +/- (this x the rise time) either side
 pwmZoom  = [-10 20];     % PWM zoom window [us]  (about 3 cycles at 100 kHz)
 saveFigs = true;         % save every figure as a PNG
 
 condStr = sprintf('V_{in} = %.1f V, %g \\Omega load', Vin, Rload);
 
 %% =====================================================================
-%  1) OVP TEST
+%  1) OVP TEST   (time axis shifted so the capture starts at 0 ns)
 %  =====================================================================
 [t, v] = loadScope(ovpFile);
-vs  = movmean(v, smoothN);
-tms = t * 1e3;
+tns = (t - t(1)) * 1e9;                    % time [ns], relative to first sample
+vs  = movmean(v, ovpSmoothN);              % lightly smoothed copy
+nS  = numel(v);
 
-Vbase  = median(v(t < -0.5e-3));
-Vfinal = mean(v(t > 0.8*t(end)));
+Vbase  = median(v(1:round(0.05*nS)));      % pre-event level (first 5 % of samples)
+Vfinal = mean(v(round(0.8*nS):end));       % settled level   (last 20 % of samples)
 [Vpk, iPk] = max(v);
 overshoot  = Vpk - Vfinal;
 
-iStart = find(vs > Vbase + 0.5, 1, 'first');
-lvl10  = Vbase + 0.1*(Vfinal - Vbase);
-lvl90  = Vbase + 0.9*(Vfinal - Vbase);
-i10    = find(vs >= lvl10, 1, 'first');
-i90    = find(vs >= lvl90, 1, 'first');
-tRise  = t(i90) - t(i10);
-iThr   = find(vs >= Vthresh, 1, 'first');
+lvl10 = Vbase + 0.1*(Vfinal - Vbase);
+lvl90 = Vbase + 0.9*(Vfinal - Vbase);
+t10   = crossTime(tns, vs, lvl10);         % time the edge crosses 10 % [ns]
+t90   = crossTime(tns, vs, lvl90);         % time the edge crosses 90 % [ns]
+tRise = t90 - t10;                         % 10-90 % rise time [ns]
 
 fprintf('===== OVP test =====\n');
 fprintf('Baseline level     : %.3f V\n', Vbase);
 fprintf('Settled level      : %.3f V\n', Vfinal);
-fprintf('Peak voltage       : %.3f V at t = %.1f us\n', Vpk, t(iPk)*1e6);
+fprintf('Peak voltage       : %.3f V at t = %.1f ns\n', Vpk, tns(iPk));
 fprintf('Overshoot vs final : %.3f V\n', overshoot);
-fprintf('Event start        : %.1f us\n', t(iStart)*1e6);
-fprintf('10-90%% rise time   : %.1f us\n', tRise*1e6);
-if ~isempty(iThr)
-    fprintf('Threshold (%.2f V) crossed at t = %.1f us\n', Vthresh, t(iThr)*1e6);
-end
+fprintf('10%% crossing       : %.1f ns\n', t10);
+fprintf('90%% crossing       : %.1f ns\n', t90);
+fprintf('10-90%% rise time   : %.1f ns\n', tRise);
+
+rawCol = [0.75 0.85 1.0];
+smCol  = [0 0.25 0.75];
+yArrow = 0.5 * (Vbase + lvl10);            % height of the rise-time dimension arrow
 
 figure(1); set(gcf, 'Color', 'w', 'Position', [100 100 1000 750]);
 
+% Full capture
 ax1 = subplot(2,1,1); hold on; grid on; box on;
-plot(tms, v,  'Color', [0.75 0.85 1.0], 'LineWidth', 0.5, 'DisplayName', 'Raw');
-plot(tms, vs, 'Color', [0 0.25 0.75],   'LineWidth', 1.5, 'DisplayName', 'Smoothed');
-yline(Vthresh, '--r', sprintf('OVP threshold = %.1f V', Vthresh), ...
-      'LineWidth', 1.5, 'LabelHorizontalAlignment', 'left', 'HandleVisibility', 'off');
-plot(tms(iPk), Vpk, 'kv', 'MarkerFaceColor', 'k', ...
+plot(tns, v,  'Color', rawCol, 'LineWidth', 0.5, 'DisplayName', 'Raw');
+plot(tns, vs, 'Color', smCol,  'LineWidth', 1.5, 'DisplayName', 'Smoothed');
+plot(tns(iPk), Vpk, 'kv', 'MarkerFaceColor', 'k', ...
      'DisplayName', sprintf('Peak = %.2f V', Vpk));
-xlabel('Time (ms)'); ylabel('Voltage (V)');
+xlabel('Time (ns)'); ylabel('Voltage (V)');
 title('Over-Voltage Protection Test - Full Capture');
+xlim([tns(1) tns(end)]);
+addRiseCursors(t10, t90, tRise, yArrow, false);
 legend('Location', 'southeast');
-xlim([tms(1) tms(end)]);
 
+% Zoom on the rising edge
 ax2 = subplot(2,1,2); hold on; grid on; box on;
-plot(tms, v,  'Color', [0.75 0.85 1.0], 'LineWidth', 0.5);
-plot(tms, vs, 'Color', [0 0.25 0.75],   'LineWidth', 1.5);
-yline(Vthresh, '--r', 'LineWidth', 1.5);
-yline(Vbase,  ':k', sprintf('Baseline %.2f V', Vbase), 'LabelHorizontalAlignment', 'left');
-yline(Vfinal, ':k', sprintf('Settled %.2f V', Vfinal), 'LabelHorizontalAlignment', 'left');
-if ~isempty(iThr)
-    xline(t(iThr)*1e3, '--', sprintf('Crosses threshold: %.0f us', t(iThr)*1e6), ...
-          'Color', [0.8 0 0], 'LabelVerticalAlignment', 'bottom');
-end
-xlabel('Time (ms)'); ylabel('Voltage (V)');
-title(sprintf('Zoom on Event  (10-90%% rise time = %.0f \\mus)', tRise*1e6));
-xlim(ovpZoom);
+plot(tns, v,  'Color', rawCol, 'LineWidth', 0.5);
+plot(tns, vs, 'Color', smCol,  'LineWidth', 1.5);
+yline(Vbase,  ':k', sprintf('Baseline %.2f V', Vbase), ...
+      'LabelHorizontalAlignment', 'left', 'FontWeight', 'bold');
+yline(Vfinal, ':k', sprintf('Settled %.2f V', Vfinal), ...
+      'LabelHorizontalAlignment', 'left', 'FontWeight', 'bold');
+xlabel('Time (ns)'); ylabel('Voltage (V)');
+title(sprintf('Zoom on Rising Edge  (10-90%% rise time = %.0f ns)', tRise));
+xlim([max(tns(1),   t10 - ovpZoomMargin*tRise), ...
+      min(tns(end), t90 + ovpZoomMargin*tRise)]);
+addRiseCursors(t10, t90, tRise, yArrow, true);
 linkaxes([ax1 ax2], 'y');
 
 styleAx([ax1 ax2]);
@@ -167,6 +167,35 @@ end
 %% =====================================================================
 %  Local functions
 %  =====================================================================
+function tc = crossTime(t, v, lvl)
+    % Time at which v first reaches lvl (linear interpolation between samples)
+    i = find(v >= lvl, 1, 'first');
+    if isempty(i),  tc = NaN;  return;  end
+    if i == 1,      tc = t(1); return;  end
+    tc = interp1(v(i-1:i), t(i-1:i), lvl);
+end
+
+function addRiseCursors(t10, t90, tRise, yArrow, showDim)
+    % Vertical cursors at the 10 % and 90 % crossings (+ dimension arrow if showDim)
+    xline(t10, '-k', '10 %', 'LineWidth', 1.2, 'FontWeight', 'bold', ...
+          'LabelHorizontalAlignment', 'left', 'LabelVerticalAlignment', 'top', ...
+          'HandleVisibility', 'off');
+    xline(t90, '-k', '90 %', 'LineWidth', 1.2, 'FontWeight', 'bold', ...
+          'LabelHorizontalAlignment', 'left', 'LabelVerticalAlignment', 'top', ...
+          'HandleVisibility', 'off');
+    if showDim
+        xl = xlim;
+        plot([t10 t90], [yArrow yArrow], '-k', 'LineWidth', 1.2);
+        plot(t10, yArrow, '<k', 'MarkerFaceColor', 'k', 'MarkerSize', 6);
+        plot(t90, yArrow, '>k', 'MarkerFaceColor', 'k', 'MarkerSize', 6);
+        text(t90 + 0.02*diff(xl), yArrow, ...
+             sprintf('10-90%% rise time = %.0f ns', tRise), ...
+             'HorizontalAlignment', 'left', 'VerticalAlignment', 'middle', ...
+             'FontWeight', 'bold', 'FontSize', 12, 'Color', 'k', ...
+             'BackgroundColor', 'w', 'EdgeColor', 'k', 'Margin', 3);
+    end
+end
+
 function [t, v] = loadScope(fname)
     % Scope CSV: col 1 = time [s], col 2 = voltage [V]
     T = readtable(fname, 'VariableNamingRule', 'preserve');
